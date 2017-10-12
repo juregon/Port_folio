@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Max Moive World</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/star.css" rel="stylesheet">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+
+<body>
+  <style>
+  .colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  }
+  </style>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li><a href="/book-1">예매</a></li>
+          <li><a href="/movie">영화</a></li>
+          <li class="active"><a href="/theater">영화관</a></li>
+          <li><a href="/store">스토어</a></li>
+          <li><a href="/customer">고객센터</a></li>
+          <li><a href="/mypage">My page</a></li>
+          <% if(loginsignal2[0].login == 0){ %>
+          <li><a href="#" data-target="#login" data-toggle="modal">로그인</a></li>
+          <% } %>
+          <% if(loginsignal2[0].login == 1){ %>
+          <li><a href="#" data-target="#logout" data-toggle="modal">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <% if(loginsignal2[0].login == 1){ %>
+        <form class="navbar-form navbar-right">
+          <font color=white size=4 fact=궁서> <%= loginsignal[0].name%>님 환영 합니다 </font>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+    <div class="modal fade" id="login" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h3 style="text-align:center;" class="modal-title">로그인</h3>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                  <input type="hidden" name="logout_signal" value="0"/>
+                      <div class="form-group">
+                          <label for="username-email">아이디</label>
+                          <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                          <label for="password">비밀번호</label>
+                          <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Login</button>
+
+                      </div>
+
+                      <input id="check" type="hidden" value="<%=loginsignal.length%>" />
+
+                      <input id="cc" type="hidden" value="<%=loginsignal%>" />
+
+                      <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm"><%=loginsignal[0].id%></a></span>
+                      <div class="form-group">
+                          <a href="/join" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                      </div>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="logout" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 style="text-align:center;" class="modal-title">로그아웃 하시겠습니까?</h4>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Yes</button>
+                          <input type="hidden" name="logout_signal" value="1"/>
+                          <input type="hidden" name="logout_id" value="<%=loginsignal[0].id%>"/>
+                  </form>
+
+                  <form action="/" accept-charset="UTF-8" role="form" method="get" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Logout">No</button>
+                          <input type="hidden" name="logout_signal" value="0"/>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="myCarousel" class="carousel">
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="fill" style="background-image:url('img/theater.jpg');">
+        </div>
+        <div class="carousel-caption" style="text-align:left">
+          <h2>영화관</h2>
+          <h4>Theater</h4>
+        </div>
+      </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="box">
+        <div class="col-lg-12">
+          <hr class="colorgraph">
+          <h2 class="intro-text text-center">Max Movie
+            <strong>영화관</strong>
+          </h2>
+          <hr class="colorgraph">
+        </div>
+        <div class="col-md-4">
+          <hr>
+          <ul class="nav nav-tabs nav-stacked">
+            <li class="active"><a href="#area_A" data-toggle="tab" aria-expanded="true" class="active">서울</a></li>
+            <li><a href="#area_B" data-toggle="tab" aria-expanded="true" class="active">경기</a></li>
+            <li><a href="#area_C" data-toggle="tab" aria-expanded="true" class="active">인천</a></li>
+            <li><a href="#area_D">강원/대전/충청</a></li>
+            <li><a href="#area_E">대구/울산/부산</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-8">
+          <div class="tab-content">
+            <div class="tab-pane fade active in" id="area_A">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1_A" data-toggle="tab">강남</a></li>
+                <li><a href="#tab2_A" data-toggle="tab">명동</a></li>
+                <li><a href="#tab3_A" data-toggle="tab">불광</a></li>
+                <li><a href="#tab4_A" data-toggle="tab">압구정</a></li>
+                <li><a href="#tab5_A" data-toggle="tab">홍대</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab1_A">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1176.5407449808101!2d127.02592351007051!3d37.50152616763929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158f52f0673%3A0x7e2247a87da80045!2zQ0dW6rCV64Ko!5e0!3m2!1sko!2skr!4v1495634087644"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>주소</label>
+                        <h5>서울특별시 강남구 강남대로 438</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>간선버스: 140, 144, 145, 471, 408, 462, 360</h5>
+                        <h5>좌석버스: 1005-1, 1005-2, 6800, 5500-2, 1500</h5>
+                        <h5>광역버스: 9404, 9408</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5>2호선 | 강남역 11번 출구</h5>
+                        <h5>9호선 | 신논현역 5번 출구</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0001</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="tab2_A">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.6937362834387!2d126.98191175148058!3d37.562278829699736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f1b8410dc5%3A0x7b21cb8a9860b212!2zQ0dWIOuqheuPmQ!5e0!3m2!1sko!2skr!4v1495637564041"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>간선버스: 103, 105, 143, 151, 152, 163, 262, 300, 401</h5>
+                        <h5>지선버스: 0014, 0015, 7015, 7017, 7020, 7021, 7023</h5>
+                        <h5>광역버스: 9301, 9400, 9401, 9402, 9710</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5>2호선 | 을지로 입구역 6번 출구</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0002</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="tab3_A">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3160.6820531113112!2d126.92661045148175!3d37.60964127969082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9820e6db7731%3A0x43937039efa067d3!2zQ0dWIOu2iOq0kQ!5e0!3m2!1sko!2skr!4v1495637331611"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>일반버스: 730, 567</h5>
+                        <h5>간선버스: 471, 701, 703, 704, 720, 706</h5>
+                        <h5>지선버스: 7023, 7211, 7720, 7731, 7733</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5>3,6호선 | 불광역 6번 출구</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0003</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="tab4_A">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.3056831073186!2d127.02718835152433!3d37.52429087970684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca392046e65f5%3A0xbabf5b677ea78ae!2zQ0dWIOyVleq1rOygleyLoOq0gA!5e0!3m2!1sko!2skr!4v1495637784777"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>간선버스: 147, 148, 240, 143, 301, 342, 440, 472</h5>
+                        <h5>지선버스: 2411, 4011, 4318, 4412, 4419</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5>3호선 | 압구정역 3번 출구</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0004</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="tab5_A">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.94156605971!2d126.92041635148044!3d37.556440479700605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98c327c9f5e1%3A0x651b01b7c53a428a!2zQ0dWIO2ZjeuMgOygkA!5e0!3m2!1sko!2skr!4v1495638109253"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>간선버스: 271, 273, 602, 603, 604, 760</h5>
+                        <h5>지선버스: 7016, 7711, 7737, 5712, 5714, 7739</h5>
+                        <h5>광역버스: 1000, 1001, 1100, 1101, 1200, 1300</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5>2호선 | 홍대입구역 1번 출구</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0005</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="area_B">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1_B" data-toggle="tab">구리</a></li>
+                <li><a href="#tab2_B" data-toggle="tab">김포</a></li>
+                <li><a href="#tab3_B" data-toggle="tab">수원</a></li>
+                <li><a href="#tab4_B" data-toggle="tab">일산</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab1_B">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.0170527462624!2d127.13990655148156!3d37.60175767969228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cb0b6cd073b9d%3A0x9b3450bcd2c8f9ed!2zQ0dW6rWs66as!5e0!3m2!1sko!2skr!4v1495638229458"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>좌석버스: 1115-6, 1330-1, 1330-2, 1133</h5>
+                        <h5>마을버스: 2, 2-1, 5, 6, 7</h5>
+                        <h5>일반버스: 1-4, 9, 9-1, 23, 93, 95</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5>경의중앙선 | 구리역 3번 출구</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0006</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="tab2_B">
+                  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25277.765648478962!2d126.68629022543409!3d37.63225699991979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c847371e12e77%3A0xfa60963b0a9d2b64!2zQ0dWIOq5gO2PrA!5e0!3m2!1sko!2skr!4v1495638380903"></iframe>
+                  <hr>
+                  <h2 class="intro-text text-center">영화관
+                    <strong>Information</strong>
+                  </h2>
+                  <hr>
+                  <form role="form">
+                    <div class="row">
+                      <div class="form-group col-lg-8">
+                        <label>버스</label>
+                        <h5>지선버스: 6641</h5>
+                        <h5>마을버스: 1A, 1B, 1-3A, 10</h5>
+                        <h5>일반버스: 53, 95, 96, 60-1, 60-2</h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>지하철</label>
+                        <h5></h5>
+                      </div>
+                      <div class="form-group col-lg-8">
+                        <label>전화번호</label>
+                        <h5>0000-0007</h5>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="tab3_B">
+                  <p>section3 </p>
+                </div>
+                <div class="tab-pane" id="tab4_B">
+                  <p>section4 </p>
+                </div>
+                <div class="tab-pane" id="tab5_B">
+                  <p>section5 </p>
+                </div>
+              </div>
+            </div>
+          <div class="clearfix"></div>
+          <div class="tab-pane fade" id="area_C">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab1_C" data-toggle="tab">부평</a></li>
+              <li><a href="#tab2_C" data-toggle="tab">인천</a></li>
+              <li><a href="#tab3_C" data-toggle="tab">인천터미널</a></li>
+              <li><a href="#tab4_C" data-toggle="tab">주안</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab1_C">
+                <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.4119503727134!2d126.70144245147969!3d37.52178537970726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b7ddb9cfde731%3A0xd7a2ac2c661dae5a!2zQ0dWIOu2gO2PiQ!5e0!3m2!1sko!2skr!4v1495638854576"></iframe>
+                <hr>
+                <h2 class="intro-text text-center">영화관
+                  <strong>Information</strong>
+                </h2>
+                <hr>
+                <form role="form">
+                  <div class="row">
+                    <div class="form-group col-lg-8">
+                      <label>버스</label>
+                      <h5>광역버스: 1200, 9510</h5>
+                      <h5>지선버스: 586, 563, 551, 585, 588</h5>
+                      <h5>간선버스: 2, 14-1, 721, 103-1, 760, 760-1, 80</h5>
+                    </div>
+                    <div class="form-group col-lg-8">
+                      <label>지하철</label>
+                      <h5>7호선 | 부평구청역 8번 출구</h5>
+                      <h5>인천지하철 1호선 | 갈산역 4번 출구</h5>
+                    </div>
+                    <div class="form-group col-lg-8">
+                      <label>전화번호</label>
+                      <h5>0000-0010</h5>
+                    </div>
+                    <div class="clearfix"></div>
+                    </div>
+                </form>
+              </div>
+              <div class="tab-pane" id="tab2_C">
+                <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101261.21064273466!2d126.63341468667633!3d37.5217645788757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b7bddce529ac7%3A0x1a4a6b466050f5fd!2zQ0dWIOyduOyynA!5e0!3m2!1sko!2skr!4v1495639119123"></iframe>
+                <hr>
+                <h2 class="intro-text text-center">영화관
+                  <strong>Information</strong>
+                </h2>
+                <hr>
+                <form role="form">
+                  <div class="row">
+                    <div class="form-group col-lg-8">
+                      <label>버스</label>
+                      <h5>시내버스: 21, 36, 45</h5>
+                    </div>
+                    <div class="form-group col-lg-8">
+                      <label>지하철</label>
+                      <h5>인천지하철 1호선 | 예술회관역 1번 출구</h5>
+                    </div>
+                    <div class="form-group col-lg-8">
+                      <label>전화번호</label>
+                      <h5>0000-0011</h5>
+                    </div>
+                    <div class="clearfix"></div>
+                    </div>
+                </form>
+              </div>
+              <div class="tab-pane" id="tab3_C">
+                <p>section3 </p>
+              </div>
+              <div class="tab-pane" id="tab4_C">
+                <p>section4 </p>
+              </div>
+              <div class="tab-pane" id="tab5_C">
+                <p>section5 </p>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page Features -->
+
+</body>
+</html>

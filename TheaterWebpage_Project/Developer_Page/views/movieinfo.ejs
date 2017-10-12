@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Clientinfo</title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link href="css/half-slider.css" rel="stylesheet">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/movieinfo">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li><a href="/clientinfo" class="active">고객 관리</a></li>
+          <li><a href="/movieinfo">영화 관리</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <br>
+
+  <h1>영화 정보 데이터베이스</h1>
+  
+  <!--수정 요망-->
+  <a href="/movieinfo_write">영화 추가</a>
+  <br>
+  <br>
+  <table style="text-align: center;" border="1">
+    <tr>
+      <td><strong>번호</strong></td>
+      <td><strong>영화 제목</strong></td>
+      <td><strong>장르</strong></td>
+      <td><strong>감독</strong></td>
+      <td><strong>배우</strong></td>
+      <td><strong>러닝타임</strong></td>
+      <td><strong>상영시작일</strong></td>
+      <td></td>
+    </tr>
+<%
+    for(var i=0; i<rows.length; i++)
+    {
+      var oneItem = rows[i];
+%>
+    <tr>
+      <td><%=i+1%></td>
+      <td><a name="title" value="<%=oneItem.title%>" href="/movieinfo_read/<%=oneItem.title%>">&nbsp&nbsp<%=oneItem.title%>&nbsp&nbsp</a></td>
+      <td>&nbsp&nbsp<%=oneItem.genre%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.director%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.actor%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.time%>분&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.openday%>&nbsp&nbsp</td>
+      <form action="/movieinfo" accept-charset="UTF-8" role="form" method="post" action="">
+      <input type="hidden" name="title" value="<%=oneItem.title%>"/>
+      <td><button type="submit">&nbsp&nbsp영화 삭제&nbsp&nbsp</button></td>
+      </form>
+    </tr>
+<%
+    }
+%>
+  </table>
+</body>
+</html>

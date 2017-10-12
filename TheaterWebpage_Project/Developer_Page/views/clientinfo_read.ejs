@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="/javascripts/jquery-3.2.1.min.js"></script>
+  <title>Movieinfo_read</title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+  <h1>구매 목록</h1>
+  <br>
+  <br>
+  <h3>영화 티켓</h3>
+  <table style="text-align: center;" border="1">
+    <tr>
+      <td><strong>번호</strong></td>
+      <td><strong>영화 제목</strong></td>
+      <td><strong>대지역</strong></td>
+      <td><strong>소지역</strong></td>
+      <td><strong>관</strong></td>
+      <td><strong>상영 시간</strong></td>
+      <td><strong>수량</strong></td>
+    </tr>
+<%
+    for(var i=0; i<row.length; i++)
+    {
+      var oneItem = row[i];
+%>
+    <tr>
+      <td><%=i+1%></td>
+      <td>&nbsp&nbsp<%=oneItem.title%>&nbsp&nbsp</a></td>
+      <td>&nbsp&nbsp<%=oneItem.area1%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.area2%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.theaternum%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.time%>&nbsp&nbsp</td>
+      <td>&nbsp&nbsp<%=oneItem.amount%>&nbsp&nbsp</td>
+      <form action="/movieinfo_read/<%=oneItem.title%>" accept-charset="UTF-8" role="form" method="post" action="">
+      <input type="hidden" name="title" value="<%=oneItem.title%>"/>
+      <input type="hidden" name="area1" value="<%=oneItem.area1%>"/>
+      <input type="hidden" name="area2" value="<%=oneItem.area2%>"/>
+      <input type="hidden" name="theaternum" value="<%=oneItem.theaternum%>"/>
+      </form>
+    </tr>
+<%
+    }
+%>
+  </table>
+
+  <br>
+  <br>
+  <h3>스토어 상품</h3>
+  <table style="text-align: center;" border="1">
+    <tr>
+      <td><strong>번호</strong></td>
+      <td><strong>상품명</strong></td>
+      <td><strong>수량</strong></td>
+    </tr>
+<%
+    for(var i=0; i<row2.length; i++)
+    {
+      var oneItem = row2[i];
+%>
+    <tr>
+      <td><%=i+1%></td>
+      <td>&nbsp&nbsp<%=oneItem.name%>&nbsp&nbsp</a></td>
+      <td>&nbsp&nbsp<%=oneItem.amount%>&nbsp&nbsp</td>
+      <form action="/movieinfo_read/<%=oneItem.title%>" accept-charset="UTF-8" role="form" method="post" action="">
+      <input type="hidden" name="title" value="<%=oneItem.title%>"/>
+      <input type="hidden" name="area1" value="<%=oneItem.area1%>"/>
+      <input type="hidden" name="area2" value="<%=oneItem.area2%>"/>
+      <input type="hidden" name="theaternum" value="<%=oneItem.theaternum%>"/>
+      </form>
+    </tr>
+<%
+    }
+%>
+  </table>
+
+
+
+</body>
+</html>

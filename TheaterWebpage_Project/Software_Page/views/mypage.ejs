@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Max Moive World</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/star.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li><a href="/book-1">예매</a></li>
+          <li><a href="/movie">영화</a></li>
+          <li><a href="/theater">영화관</a></li>
+          <li><a href="/store">스토어</a></li>
+          <li><a href="/customer">고객센터</a></li>
+          <li class="active"><a href="/mypage">My page</a></li>
+          <% if(loginsignal2[0].login == 0){ %>
+          <li><a href="#" data-target="#login" data-toggle="modal">로그인</a></li>
+          <% } %>
+          <% if(loginsignal2[0].login == 1){ %>
+          <li><a href="#" data-target="#logout" data-toggle="modal">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <% if(loginsignal2[0].login == 1){ %>
+        <form class="navbar-form navbar-right">
+          <font color=white size=4 fact=궁서> <%= loginsignal[0].name%>님 환영 합니다 </font>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+    <div class="modal fade" id="login" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h3 style="text-align:center;" class="modal-title">로그인</h3>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                  <input type="hidden" name="logout_signal" value="0"/>
+                      <div class="form-group">
+                          <label for="username-email">아이디</label>
+                          <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                          <label for="password">비밀번호</label>
+                          <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Login</button>
+
+                      </div>
+
+                      <input id="check" type="hidden" value="<%=loginsignal.length%>" />
+
+                      <input id="cc" type="hidden" value="<%=loginsignal%>" />
+
+                      <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm"><%=loginsignal[0].id%></a></span>
+                      <hr />
+                      <div class="form-group">
+                          <a href="/join" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                      </div>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="logout" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 style="text-align:center;" class="modal-title">로그아웃 하시겠습니까?</h4>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Yes</button>
+                          <input type="hidden" name="logout_signal" value="1"/>
+                          <input type="hidden" name="logout_id" value="<%=loginsignal[0].id%>"/>
+
+                  </form>
+
+                  <form action="/" accept-charset="UTF-8" role="form" method="get" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Logout">No</button>
+                          <input type="hidden" name="logout_signal" value="0"/>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  $(function(){
+    $("#myinform").click(function(){
+        $("#myinform").removeClass("active");
+        $("#myinform").addClass("active");
+        $("#revise").removeClass("active");
+        $("#passwd").removeClass("active");
+        $("#store").removeClass("active");
+        $("#inform").show();
+        $("#passwdchange").hide();
+        $("#reviseform").hide();
+        $("#storeform").hide();
+        $("#basketform").hide();
+    });
+  });
+  </script>
+
+  <script type="text/javascript">
+  $(function(){
+    $("#store").click(function(){
+        $("#store").addClass("active");
+        $("#passwd").removeClass("active");
+        $("#myinform").removeClass("active");
+        $("#revise").removeClass("active");
+        $("#basket").removeClass("active");
+        $("#storeform").show();
+        $("#passwdchange").hide();
+        $("#inform").hide();
+        $("#reviseform").hide();
+        $("#basketform").hide();
+    });
+  });
+  </script>
+
+  <script type="text/javascript">
+  $(function(){
+    $("#revise").click(function(){
+        $("#revise").addClass("active");
+        $("#store").removeClass("active");
+        $("#myinform").removeClass("active");
+        $("#passwd").removeClass("active");
+        $("#basket").removeClass("active");
+        $("#inform").hide();
+        $("#reviseform").show();
+        $("#passwdchange").hide();
+        $("#storeform").hide();
+        $("#basketform").hide();
+    });
+  });
+  </script>
+
+  <script type="text/javascript">
+  $(function(){
+    $("#passwd").click(function(){
+        $("#revise").removeClass("active");
+        $("#myinform").removeClass("active");
+        $("#passwd").addClass("active");
+        $("#store").removeClass("active");
+        $("#basket").removeClass("active");
+        $("#inform").hide();
+        $("#reviseform").hide();
+        $("#passwdchange").show();
+        $("#storeform").hide();
+        $("#basketform").hide();
+    });
+  });
+  </script>
+  <script type="text/javascript">
+  $(function(){
+    $("#basket").click(function(){
+        $("#basket").addClass("active");
+        $("#revise").removeClass("active");
+        $("#myinform").removeClass("active");
+        $("#passwd").removeClass("active");
+        $("#store").removeClass("active");
+        $("#inform").hide();
+        $("#reviseform").hide();
+        $("#passwdchange").hide();
+        $("#storeform").hide();
+        $("#basketform").show();
+    });
+  });
+
+  </script>
+  <header id="myCarousel" class="carousel">
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="fill" style="background-image:url('img/mypage.jpg');">
+        </div>
+        <div class="carousel-caption" style="text-align:left">
+          <h2>마이페이지</h2>
+          <h4>MyPage</h4>
+        </div>
+      </div>
+  </header>
+  <div class="container">
+
+  <div style="margin:40px;">
+    <div style="float:left;">
+      <button id="myinform" href="#inform" class="btn btn-default active" style="padding:15px">회원 정보</button>
+      <button id="passwd" href="#passwdchange" class="btn btn-default" style="padding:15px">비밀번호 변경</button>
+      <button id="revise" href="#reviseform" class="btn btn-default" style="padding:15px">정보 수정</button>
+      <button id="store" href="#storeform" class="btn btn-default" style="padding:15px">구매 목록</button>
+      <button id="basket" href="#basketform" class="btn btn-default" style="padding:15px">장바구니</button>
+    </div>
+  </div>
+  <div style="clear:left;"></div>
+
+  <div id="inform" class="container">
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <h2>회원 정보</h2>
+      </thead>
+      <br>
+      <tbody>
+        <tr>
+          <th>이름</th>
+          <td><%=loginsignal[0].name%></td>
+        </tr>
+        <tr>
+          <th>연락처</th>
+          <td><%=loginsignal[0].phone%></td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td><%=loginsignal[0].email%></td>
+        </tr>
+        <tr>
+          <th>생년월일</th>
+          <td><%=loginsignal[0].birth%></td>
+        </tr>
+        <tr>
+          <th>마일리지</th>
+          <td><%=loginsignal[0].mileage%></td>
+        </tr>
+
+        <tr>
+          <th>등급</th>
+          <% if (loginsignal[0].hit >= 50) {%>
+          <td>VIP</td>
+          <% } %>
+          <% if (loginsignal[0].hit >= 30) {%>
+          <td>골드</td>
+          <% } %>
+          <% if (loginsignal[0].hit >= 10) {%>
+          <td>실버</td>
+          <% } %>
+          <% if (loginsignal[0].hit < 10) {%>
+          <td>일반</td>
+          <% } %>
+        </tr>
+          <tr>
+            <td colspan="2">
+              <button class="btn btn-danger" style="padding:10px; float:right" data-target="#withdrawal" data-toggle='modal'>회원 탈퇴</button>
+            </td>
+            <form action="/mypage" accept-charset="UTF-8" role="form" method="post" action="">
+              <input type="hidden" name="user_id" value="<%=loginsignal[0].id%>"/>
+              <input type="hidden" name="password" value="<%=loginsignal[0].passwd%>" />
+            <div class="modal fade" id="withdrawal" >
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <!-- header -->
+                  <div class="modal-header">
+                    <!-- 닫기(x) 버튼 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <!-- header title -->
+                    <h5 style="text-align:center;" class="modal-title">정말로 회원 탈퇴를 하시겠습니까?</h5>
+                    </div>
+                    <!-- body -->
+                    <div class="box">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="login-box well">
+                              <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                                <input type="hidden" name="logout_signal" value="0"/>
+                                  <div class="form-group">
+                                      <label for="curpasswd">비밀번호 입력</label>
+                                      <input name="curpasswd" id="curpasswd" type="text" class="form-control" />
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="curpasswdagain">비밀번호 재입력</label>
+                                      <input name="curpasswdagain" id="curpasswdagain" type="password" class="form-control" />
+                                  </div>
+
+                                  <div class="form-group">
+
+                                      <button name="button" value="withdrawal" type="submit" class="btn btn-default btn-block m-t-md" value="Login"><strong>회원 탈퇴</strong></button>
+                                  </div>
+
+                                      <button type="submit" class="btn btn-default btn-block m-t-md" value="Login"><strong>회원 탈퇴</strong></button>
+                                  </div>
+
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div style="clear:right;"></div>
+
+  <div style="display:none" id="passwdchange" class="container">
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <h2>비밀번호 변경</h2>
+      </thead>
+      <br>
+      <tbody>
+        <form action="/mypage" accept-charset="UTF-8" role="form" method="post" action="">
+          <input type="hidden" name="user_id" value="<%=loginsignal[0].id%>"/>
+          <input type="hidden" name="password" value="<%=loginsignal[0].passwd%>" />
+          <tr>
+            <th>현재 비밀번호</th>
+            <td><input type="text" name="curpasswd" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>새로운 비밀번호</th>
+            <td><input type="text" name="newpasswd" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>새로운 비밀번호 재입력</th>
+            <td><input type="text" name="newpasswdagain" class="form-control"/></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button name="button" value="passwd" type="submit" class="btn btn-primary" style="padding:10px; float:right">비밀번호 변경</button>
+            </td>
+          </tr>
+        </form>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="clear:right;"></div>
+
+  <div style="display:none" id="reviseform" class="container">
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <h2>정보 수정</h2>
+      </thead>
+      <br>
+      <tbody>
+        <form action="/mypage" accept-charset="UTF-8" role="form" method="post" action="">
+          <input type="hidden" name="user_id" value="<%=loginsignal[0].id%>"/>
+          <tr>
+            <th>이름</th>
+            <td><input type="text" placeholder="<%=loginsignal[0].name%>" name="name" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>연락처</th>
+            <td><input type="text" placeholder="<%=loginsignal[0].phone%>" name="phone" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>이메일</th>
+            <td><input type="text" placeholder="<%=loginsignal[0].email%>" name="email" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>생년월일</th>
+            <td><input type="text" placeholder="<%=loginsignal[0].birth%>" name="birth" class="form-control"/></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button name="button" value="info" type="submit" class="btn btn-primary" style="padding:10px; float:right">정보 수정</button>
+            </td>
+          </tr>
+        </form>
+      </tbody>
+    </table>
+  </div>
+  <div style="clear:right;"></div>
+
+  <div class="container" id="storeform" style="margin: 0 auto; display:none">
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <h2>구매 목록</h2>
+        <br>
+        <tr>
+          <th style="text-align:center">날짜</th>
+          <th style="text-align:center">상품</th>
+          <th style="text-align:center">수량</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2017.05.22</td>
+          <td>나쵸콤보</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>2017.05.23</td>
+          <td>맥스콤보</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>2017.05.24</td>
+          <td>오징어콤보</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" id="basketform" style="margin: 0 auto; display:none">
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <h2>장바구니</h2>
+        <br>
+        <tr>
+          <th style="text-align:center">상품</th>
+          <th style="text-align:center">가격</th>
+          <th style="text-align:center">수량</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%
+          for(var i=0; i<basket.length; i++)
+          {
+            var oneItem = basket[i];
+      %>
+        <tr>
+          <td><%=oneItem.name%></td>
+          <td><%=oneItem.price%></td>
+          <td><%=oneItem.amount%></td>
+        </tr>
+      <%
+          }
+      %>
+      </tbody>
+    </table>
+    <span style="float:right"><button type="submit" class="btn btn-default" style="padding:10px">구입</button></span>
+  </div>
+
+</div>
+  <!-- Page Features -->
+
+</body>
+</html>

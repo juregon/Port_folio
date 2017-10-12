@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <sctipt src="/javascripts/jquery-3.2.1.min.js"></script>
+  <title>Movieinfo_write</title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+  <h1>영화 추가</h1>
+
+  <!-- 수정 요망 -->
+  <form action="/movieinfo_write" accept-charset="UTF-8" role="form" method="post" action="">
+    <table border="1">
+      <tr>
+        <td>제목</td>
+        <td><input type="text" name="title" id="title" required/></td>
+      </tr>
+      <tr>
+        <td>등급</td>
+        <td><input type="text" name="grade" id="grade" required/></td>
+      </tr>
+      <tr>
+        <td>장르</td>
+        <td><input type="text" name="genre" id="genre" required/></td>
+      </tr>
+      <tr>
+        <td>개봉일</td>
+        <td><input type="text" name="openday" id="openday" required/></td>
+      </tr>
+      <tr>
+        <td>감독</td>
+        <td><input type="text" name="director" id="director" required/></td>
+      </tr>
+      <tr>
+        <td>출연진</td>
+        <td><input type="text" name="actor" id="actor" required/></td>
+      </tr>
+      <tr>
+        <td>러닝타임</td>
+        <td><input type="text" name="time" id="time" required/></td>
+      </tr>
+      <tr>
+        <td>상영여부</td>
+        <td><input type="text" name="ing" id="ing" required/></td>
+      </tr>
+      <tr>
+        <td>이미지</td>
+        <td><input type="text" name="image" id="image" required/></td>
+      </tr>
+      <tr>
+        <td>이미지2</td>
+        <td><input type="text" name="image2" id="image2" required/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit">추가</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <script>
+    function onWriteSubmit() {
+      if($("#title").val().trim() == "" )
+      {
+          var message = "제목을 입력해 주세요";
+          #("#title").val("");
+          $("#title").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#grade").val().trim() == "" )
+      {
+          var message = "등급을 입력해 주세요";
+          #("#grade").val("");
+          $("#grade").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#genre").val().trim() == "" )
+      {
+          var message = "장르를 입력해 주세요";
+          #("#genre").val("");
+          $("#genre").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#openday").val().trim() == "" )
+      {
+          var message = "개봉입을 입력해 주세요";
+          #("#openday").val("");
+          $("#openday").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#director").val().trim() == "" )
+      {
+          var message = "감독을 입력해 주세요";
+          #("#passwd").val("");
+          $("#passwd").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#actor").val().trim() == "" )
+      {
+          var message = "배우를 입력해 주세요";
+          #("#actor").val("");
+          $("#actor").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#time").val().trim() == "" )
+      {
+          var message = "러닝타임을 입력해 주세요";
+          #("#time").val("");
+          $("#time").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#ing").val().trim() == "" )
+      {
+          var message = "상영여부를 입력해 주세요";
+          #("#ing").val("");
+          $("#ing").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#image").val().trim() == "" )
+      {
+          var message = "이미지를 입력해 주세요";
+          #("#image").val("");
+          $("#image").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#image2").val().trim() == "" )
+      {
+          var message = "이미지를 입력해 주세요";
+          #("#image2").val("");
+          $("#image2").focus();
+          alert(message);
+          return false;
+      }
+
+    }
+  </script>
+</body>
+</html>

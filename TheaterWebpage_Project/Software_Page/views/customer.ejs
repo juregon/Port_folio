@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Max Moive World</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/star.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li><a href="/book-1">예매</a></li>
+          <li><a href="/movie">영화</a></li>
+          <li><a href="/theater">영화관</a></li>
+          <li><a href="/store">스토어</a></li>
+          <li class="active"><a href="/customer">고객센터</a></li>
+          <li><a href="/mypage">My page</a></li>
+          <% if(loginsignal2[0].login == 0){ %>
+          <li><a href="#" data-target="#login" data-toggle="modal">로그인</a></li>
+          <% } %>
+          <% if(loginsignal2[0].login == 1){ %>
+          <li><a href="#" data-target="#logout" data-toggle="modal">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <% if(loginsignal2[0].login == 1){ %>
+        <form class="navbar-form navbar-right">
+          <font color=white size=4 fact=궁서> <%= loginsignal[0].name%>님 환영 합니다 </font>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+    <div class="modal fade" id="login" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h3 style="text-align:center;" class="modal-title">로그인</h3>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                  <input type="hidden" name="logout_signal" value="0"/>
+                      <div class="form-group">
+                          <label for="username-email">아이디</label>
+                          <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                          <label for="password">비밀번호</label>
+                          <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Login</button>
+
+                      </div>
+
+                      <input id="check" type="hidden" value="<%=loginsignal.length%>" />
+
+                      <input id="cc" type="hidden" value="<%=loginsignal%>" />
+
+                      <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm"><%=loginsignal[0].id%></a></span>
+                      <hr />
+
+                      <div class="form-group">
+                          <a href="/join" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                      </div>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="logout" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 style="text-align:center;" class="modal-title">로그아웃 하시겠습니까?</h4>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Yes</button>
+                          <input type="hidden" name="logout_signal" value="1"/>
+                          <input type="hidden" name="logout_id" value="<%=loginsignal[0].id%>"/>
+
+                  </form>
+
+                  <form action="/" accept-charset="UTF-8" role="form" method="get" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Logout">No</button>
+                          <input type="hidden" name="logout_signal" value="0"/>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <script type="text/javascript">
+    $(function(){
+      $("#notice").click(function(){
+          $("#notice").removeClass("active");
+          $("#notice").addClass("active");
+          $("#onetoone").removeClass("active");
+          $("#noticetable").show();
+          $("#onetooneform").hide();
+      });
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(function(){
+      $("#onetoone").click(function(){
+          $("#onetoone").addClass("active");
+          $("#notice").removeClass("active");
+          $("#noticetable").hide();
+          $("#onetooneform").show();
+      });
+    });
+    </script>
+    <header id="myCarousel" class="carousel">
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="fill" style="background-image:url('img/customer_main.jpg');">
+          </div>
+          <div class="carousel-caption" style="text-align:left">
+            <h2>고객센터</h2>
+            <h4>Customer Center</h4>
+          </div>
+        </div>
+    </header>
+  <div class="container">
+
+  <h2 style="background-color:grey; margin:40px; padding:20px"><font color="white">MaxMovie 고객센터 Dream Center / 1234-5678</font></h2>
+  <div style="margin:40px;">
+    <div style="float:left;">
+      <button id="notice" href="#noticetable" class="btn btn-default active" style="padding:20px">공지사항</button>
+      <button id="onetoone" href="#onetooneform" class="btn btn-default" style="padding:20px">1:1 문의</button>
+    </div>
+  </div>
+  <div style="clear:left;"></div>
+
+  <div class="container" id="noticetable" style="margin: 0 auto">
+    <br>
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>날짜</th>
+          <th>조회수</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>맥스무비입니다</td>
+          <td>맥스</td>
+          <td>2017.05.23</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <ul class="pagination">
+          <li><a href="#">1</a><li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display:none" id="onetooneform" class="container">
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <h2>1:1 문의</h2>
+      </thead>
+      <br>
+      <tbody>
+        <form action="/customer" accept-charset="UTF-8" role="form" method="post" action="">
+          <tr>
+            <th>이름</th>
+            <td><input type="text" placeholder="이름을 입력하세요" name="name" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>연락처</th>
+            <td><input type="text" placeholder="연락처를 입력하세요" name="phone" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>이메일</th>
+            <td><input type="text" placeholder="이메일을 입력하세요" name="email" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>제목</th>
+            <td><input type="text" placeholder="제목을 입력하세요" name="title" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea style="resize:none; height:200px" placeholder="내용을 입력하세요" name="content" class="form-control"/></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="submit" class="btn btn-default" style="padding:10px">제출</button>
+            </td>
+          </tr>
+        </form>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <!-- Page Features -->
+
+</body>
+</html>

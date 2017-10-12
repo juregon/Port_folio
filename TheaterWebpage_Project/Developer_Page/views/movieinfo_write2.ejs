@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <sctipt src="/javascripts/jquery-3.2.1.min.js"></script>
+  <title>Movieinfo_write</title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+  <h1>상영 추가</h1>
+
+  <!-- 수정 요망 -->
+  <form action="/movieinfo_write2" accept-charset="UTF-8" role="form" method="post" action="">
+    <table border="1">
+      <tr>
+        <td>제목</td>
+        <td><input type="text" name="title" id="title" required/></td>
+      </tr>
+      <tr>
+        <td>대지역</td>
+        <td><input type="text" name="area1" id="area1" required/></td>
+      </tr>
+      <tr>
+        <td>소지역</td>
+        <td><input type="text" name="area2" id="area2" required/></td>
+      </tr>
+      <tr>
+        <td>관</td>
+        <td><input type="text" name="theaternum" id="theaternum" required/></td>
+      </tr>
+      <tr>
+        <td>상영 시간</td>
+        <td><input type="text" name="time" id="time" required/></td>
+      </tr>
+        <td colspan="2">
+          <button type="submit">추가</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <script>
+    function onWriteSubmit() {
+      if($("#title").val().trim() == "" )
+      {
+          var message = "제목을 입력해 주세요";
+          #("#title").val("");
+          $("#title").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#grade").val().trim() == "" )
+      {
+          var message = "등급을 입력해 주세요";
+          #("#grade").val("");
+          $("#grade").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#genre").val().trim() == "" )
+      {
+          var message = "장르를 입력해 주세요";
+          #("#genre").val("");
+          $("#genre").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#openday").val().trim() == "" )
+      {
+          var message = "개봉입을 입력해 주세요";
+          #("#openday").val("");
+          $("#openday").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#director").val().trim() == "" )
+      {
+          var message = "감독을 입력해 주세요";
+          #("#passwd").val("");
+          $("#passwd").focus();
+          alert(message);
+          return false;
+      }
+    }
+  </script>
+</body>
+</html>

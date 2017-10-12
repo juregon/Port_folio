@@ -1,0 +1,8 @@
+.grade {
+	MARGIN-TOP:1px; DISPLAY:inline; BACKGROUND:url(star.png) repeat-x; FLOAT:left; OVERFLOW: hidden;
+	WIDTH: 100px; HEIGHT: 20px;
+}
+
+.grade SPAN {
+	BACKGROUND: url(star2.png) repeat-x; FLOAT: left; HEIGHT: 20px;
+}

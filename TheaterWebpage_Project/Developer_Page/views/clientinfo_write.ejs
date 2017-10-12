@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <sctipt src="/javascripts/jquery-3.2.1.min.js"></script>
+  <title>Clientinfo_write</title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+  <h1>클라이언트 정보 데이터베이스 입력</h1>
+
+  <!--수정 요망-->
+  <form action="/clientinfo_write" method="post" onsubmit="return onWriteSubmit()">
+    <table border="1">
+      <tr>
+        <td>ID</td>
+        <td><input type="text" name="creator_id" id="creator_id" required/></td>
+      </tr>
+      <tr>
+        <td>PASSWD</td>
+        <td><input type="text" name="title" id="title" required/></td>
+      </tr>
+      <tr>
+        <td>로그인 여부</td>
+        <td><textarea name="content" id="content" cols="30" rows="10" required><%=row.content%></textarea></td>
+      </tr>
+      <tr>
+        <td>이름</td>
+        <td><input type="file" name="image" id="image" required/></td>
+      </tr>
+      <tr>
+        <td>생년월일</td>
+        <td><input type="file" name="image" id="image" required/></td>
+      </tr>
+      <tr>
+        <td>VIP</td>
+        <td><input type="file" name="image" id="image" required/></td>
+      </tr>
+      <tr>
+        <td>히트</td>
+        <td><input type="file" name="image" id="image" required/></td>
+      </tr>
+      <tr>
+        <td>마일리지</td>
+        <td><input type="file" name="image" id="image" required/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit">글쓰기</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <script>
+    function onWriteSubmit() {
+      if($("#creator_id").val().trim() == "" )
+      {
+          var message = "아이디를 입력해 주세요";
+          #("#creator_id").val("");
+          $("#creator_id").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#title").val().trim() == "" )
+      {
+          var message = "제목을 입력해 주세요";
+          #("#title").val("");
+          $("#title").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#content").val().trim() == "" )
+      {
+          var message = "본문 내용을 입력해 주세요";
+          #("#content").val("");
+          $("#content").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#image").val().trim() == "" )
+      {
+          var message = "이미지를 입력해 주세요";
+          #("#image").val("");
+          $("#image").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#passwd").val().trim() == "" )
+      {
+          var message = "패스워드를 입력해 주세요";
+          #("#passwd").val("");
+          $("#passwd").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#creator_id").val().trim() == "" )
+      {
+          var message = "아이디를 입력해 주세요";
+          #("#creator_id").val("");
+          $("#creator_id").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#title").val().trim() == "" )
+      {
+          var message = "제목을 입력해 주세요";
+          #("#title").val("");
+          $("#title").focus();
+          alert(message);
+          return false;
+      }
+
+      if($("#content").val().trim() == "" )
+      {
+          var message = "본문 내용을 입력해 주세요";
+          #("#content").val("");
+          $("#content").focus();
+          alert(message);
+          return false;
+      }
+
+    }
+  </script>
+</body>
+</html>

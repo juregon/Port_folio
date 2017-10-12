@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Max Moive World</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/star.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <style>
+        .line {
+            overflow: hidden;
+        }
+
+        .seat {
+            margin: 2px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+        }
+
+        .enable {
+            background: gray;
+        }
+
+        .enable:hover {
+            background: black;
+        }
+
+        .disable {
+            background: red;
+        }
+   </style>
+   <script type="text/javascript">
+        $(document).ready(function () {
+            // 변수를 선언합니다.
+            var onClickSeat = function () {
+
+                var addcount;
+                if($(this).attr('id') < 16)
+                  subcount = 5;
+                else if($(this).attr('id') < 25)
+                  subcount = 6;
+                else if($(this).attr('id') < 30)
+                  subcount = 7;
+                else if($(this).attr('id') < 39)
+                  subcount = 8;
+                else if($(this).attr('id') < 44)
+                  subcount = 9;
+                else if($(this).attr('id') < 53)
+                  subcount = 10;
+                else if($(this).attr('id') < 58)
+                  subcount = 11;
+                else if($(this).attr('id') < 67)
+                  subcount = 12;
+                else if($(this).attr('id') < 72)
+                  subcount = 13;
+                else if($(this).attr('id') < 81)
+                  subcount = 14;
+                else if($(this).attr('id') < 86)
+                  subcount = 15;
+                else if($(this).attr('id') < 95)
+                  subcount = 16;
+                else if($(this).attr('id') < 100)
+                  subcount = 17;
+                else if($(this).attr('id') < 109)
+                  subcount = 18;
+                else if($(this).attr('id') < 114)
+                  subcount = 19;
+                else if($(this).attr('id') < 123)
+                  subcount = 20;
+                else if($(this).attr('id') < 128)
+                  subcount = 21;
+                else if($(this).attr('id') < 137)
+                  subcount = 22;
+                else if($(this).attr('id') < 142)
+                  subcount = 23;
+                else if($(this).attr('id') < 151)
+                  subcount = 24;
+                else if($(this).attr('id') < 156)
+                  subcount = 25;
+                else if($(this).attr('id') < 165)
+                  subcount = 26;
+                else
+                  subcount = 27;
+
+                var x = $(this).attr('value');
+                alert($(this).attr('id'));
+                if($(this).attr('data-y') == 0){
+                  alert("A열");
+                  if($(this).attr('id') == 0)
+                    alert("1번좌석");
+                  else if($(this).attr('id') == 1)
+                    alert("2번좌석");
+                  else if($(this).attr('id') == 3)
+                    alert("3번좌석");
+                  else if($(this).attr('id') == 4)
+                    alert("4번좌석");
+                  else if($(this).attr('id') == 9)
+                    alert("5번좌석");
+                  else if($(this).attr('id') == 10)
+                    alert("6번좌석");
+                  else if($(this).attr('id') == 12)
+                    alert("7번좌석");
+                  else($(this).attr('id') == 13)
+                    alert("8번좌석");
+                }
+                else if($(this).attr('data-y') == 1){
+                  addcount = 2;
+                  alert("B열");
+                }
+                else if($(this).attr('data-y') == 2){
+                  addcount = 3;
+                  alert("C열");
+                }
+                else if($(this).attr('data-y') == 3){
+                  addcount = 4;
+                  alert("D열");
+                }
+                else if($(this).attr('data-y') == 4){
+                  addcount = 5;
+                  alert("E열");
+                }
+                else if($(this).attr('data-y') == 5){
+                  addcount = 6;
+                  alert("F열");
+                }
+                else if($(this).attr('data-y') == 6){
+                  addcount = 7;
+                  alert("G열");
+                }
+                else if($(this).attr('data-y') == 7){
+                  addcount = 8;
+                  alert("H열");
+                }
+                else if($(this).attr('data-y') == 8){
+                  addcount = 9;
+                  alert("I열");
+                }
+                else if($(this).attr('data-y') == 9){
+                  addcount = 10;
+                  alert("J열");
+                }
+                else if($(this).attr('data-y') == 10){
+                  addcount = 11;
+                  alert("K열");
+                }
+                else{
+                  addcount = 12;
+                  alert("L열");
+                }
+                alert($(this).attr('id')-subcount+"번좌석");
+
+                var y = $(this).attr('data-y');
+                if (confirm('좌석을 예약하시겠습니까?')) {
+                    $(this).off('click');
+                    socket.emit('reserve', {
+                        x: x,
+                        y: y
+                    });
+                } else {
+                    alert('취소되었습니다.');
+                }
+            };
+
+
+
+
+
+
+
+
+
+
+       function set_seat(){
+              if($('#0').attr('value') == 1){
+                $("#0").addClass('enable').on('click', onClickSeat);
+              }
+              else if($('#0').attr('value') == 2){
+                $("#0").addClass('disable');
+              }
+
+              if($('#1').attr('value') == 1){
+                $("#1").addClass('enable').on('click', onClickSeat);
+              }
+              else if($('#1').attr('value') == 2){
+                $("#1").addClass('disable');
+              }
+
+              if($('#2').attr('value') == 1){
+                $("#2").addClass('enable').on('click', onClickSeat);
+              }
+              else if($('#2').attr('value') == 2){
+                $("#2").addClass('disable');
+              }
+
+              if($('#3').attr('value') == 1){
+                $("#3").addClass('enable').on('click', onClickSeat);
+              }
+              else if($('#3').attr('value') == 2){
+                $("#3").addClass('disable');
+              }
+
+              if($('#4').attr('value') == 1){
+                $("#4").addClass('enable').on('click', onClickSeat);
+              }
+              else if($('#4').attr('value') == 2){
+                $("#4").addClass('disable');
+              }
+
+                if($('#5').attr('value') == 1){
+                              $("#5").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#5').attr('value') == 2){
+                              $("#5").addClass('disable');
+                            }
+                if($('#6').attr('value') == 1){
+                              $("#6").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#6').attr('value') == 2){
+                              $("#6").addClass('disable');
+                            }
+              if($('#7').attr('value') == 1){
+                              $("#7").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#7').attr('value') == 2){
+                              $("#7").addClass('disable');
+                            }
+              if($('#8').attr('value') == 1){
+                              $("#8").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#8').attr('value') == 2){
+                              $("#8").addClass('disable');
+                            }
+              if($('#9').attr('value') == 1){
+                              $("#9").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#9').attr('value') == 2){
+                              $("#9").addClass('disable');
+                            }
+              if($('#10').attr('value') == 1){
+                              $("#10").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#10').attr('value') == 2){
+                              $("#10").addClass('disable');
+                            }
+              if($('#11').attr('value') == 1){
+                              $("#11").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#11').attr('value') == 2){
+                              $("#11").addClass('disable');
+                            }
+              if($('#12').attr('value') == 1){
+                              $("#12").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#12').attr('value') == 2){
+                              $("#12").addClass('disable');
+                            }
+              if($('#13').attr('value') == 1){
+                              $("#13").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#13').attr('value') == 2){
+                              $("#13").addClass('disable');
+                            }
+              if($('#14').attr('value') == 1){
+                              $("#14").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#14').attr('value') == 2){
+                              $("#14").addClass('disable');
+                            }
+              if($('#15').attr('value') == 1){
+                              $("#15").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#15').attr('value') == 2){
+                              $("#15").addClass('disable');
+                            }
+              if($('#16').attr('value') == 1){
+                              $("#16").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#16').attr('value') == 2){
+                              $("#16").addClass('disable');
+                            }
+              if($('#17').attr('value') == 1){
+                              $("#17").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#17').attr('value') == 2){
+                              $("#17").addClass('disable');
+                            }
+              if($('#18').attr('value') == 1){
+                              $("#18").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#18').attr('value') == 2){
+                              $("#18").addClass('disable');
+                            }
+              if($('#19').attr('value') == 1){
+                              $("#19").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#19').attr('value') == 2){
+                              $("#19").addClass('disable');
+                            }
+              if($('#20').attr('value') == 1){
+                              $("#20").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#20').attr('value') == 2){
+                              $("#20").addClass('disable');
+                            }
+              if($('#21').attr('value') == 1){
+                              $("#21").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#21').attr('value') == 2){
+                              $("#21").addClass('disable');
+                            }
+              if($('#22').attr('value') == 1){
+                              $("#22").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#22').attr('value') == 2){
+                              $("#22").addClass('disable');
+                            }
+              if($('#23').attr('value') == 1){
+                              $("#23").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#23').attr('value') == 2){
+                              $("#23").addClass('disable');
+                            }
+              if($('#24').attr('value') == 1){
+                              $("#24").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#24').attr('value') == 2){
+                              $("#24").addClass('disable');
+                            }
+              if($('#25').attr('value') == 1){
+                              $("#25").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#25').attr('value') == 2){
+                              $("#25").addClass('disable');
+                            }
+              if($('#26').attr('value') == 1){
+                              $("#26").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#26').attr('value') == 2){
+                              $("#26").addClass('disable');
+                            }
+              if($('#27').attr('value') == 1){
+                              $("#27").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#27').attr('value') == 2){
+                              $("#27").addClass('disable');
+                            }
+              if($('#28').attr('value') == 1){
+                              $("#28").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#28').attr('value') == 2){
+                              $("#28").addClass('disable');
+                            }
+              if($('#29').attr('value') == 1){
+                              $("#29").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#29').attr('value') == 2){
+                              $("#29").addClass('disable');
+                            }
+              if($('#30').attr('value') == 1){
+                              $("#30").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#30').attr('value') == 2){
+                              $("#30").addClass('disable');
+                            }
+              if($('#31').attr('value') == 1){
+                              $("#31").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#31').attr('value') == 2){
+                              $("#31").addClass('disable');
+                            }
+              if($('#32').attr('value') == 1){
+                              $("#32").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#32').attr('value') == 2){
+                              $("#32").addClass('disable');
+                            }
+              if($('#33').attr('value') == 1){
+                              $("#33").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#33').attr('value') == 2){
+                              $("#33").addClass('disable');
+                            }
+              if($('#34').attr('value') == 1){
+                              $("#34").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#34').attr('value') == 2){
+                              $("#34").addClass('disable');
+                            }
+              if($('#35').attr('value') == 1){
+                              $("#35").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#35').attr('value') == 2){
+                              $("#35").addClass('disable');
+                            }
+              if($('#36').attr('value') == 1){
+                              $("#36").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#36').attr('value') == 2){
+                              $("#36").addClass('disable');
+                            }
+              if($('#37').attr('value') == 1){
+                              $("#37").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#37').attr('value') == 2){
+                              $("#37").addClass('disable');
+                            }
+              if($('#38').attr('value') == 1){
+                              $("#38").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#38').attr('value') == 2){
+                              $("#38").addClass('disable');
+                            }
+              if($('#39').attr('value') == 1){
+                              $("#39").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#39').attr('value') == 2){
+                              $("#39").addClass('disable');
+                            }
+              if($('#40').attr('value') == 1){
+                              $("#40").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#40').attr('value') == 2){
+                              $("#40").addClass('disable');
+                            }
+              if($('#41').attr('value') == 1){
+                              $("#41").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#41').attr('value') == 2){
+                              $("#41").addClass('disable');
+                            }
+              if($('#42').attr('value') == 1){
+                              $("#42").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#42').attr('value') == 2){
+                              $("#42").addClass('disable');
+                            }
+              if($('#43').attr('value') == 1){
+                              $("#43").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#43').attr('value') == 2){
+                              $("#43").addClass('disable');
+                            }
+              if($('#44').attr('value') == 1){
+                              $("#44").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#44').attr('value') == 2){
+                              $("#44").addClass('disable');
+                            }
+              if($('#45').attr('value') == 1){
+                              $("#45").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#45').attr('value') == 2){
+                              $("#45").addClass('disable');
+                            }
+              if($('#46').attr('value') == 1){
+                              $("#46").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#46').attr('value') == 2){
+                              $("#46").addClass('disable');
+                            }
+              if($('#47').attr('value') == 1){
+                              $("#47").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#47').attr('value') == 2){
+                              $("#47").addClass('disable');
+                            }
+              if($('#48').attr('value') == 1){
+                              $("#48").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#48').attr('value') == 2){
+                              $("#48").addClass('disable');
+                            }
+              if($('#49').attr('value') == 1){
+                              $("#49").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#49').attr('value') == 2){
+                              $("#49").addClass('disable');
+                            }
+              if($('#50').attr('value') == 1){
+                              $("#50").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#50').attr('value') == 2){
+                              $("#50").addClass('disable');
+                            }
+              if($('#51').attr('value') == 1){
+                              $("#51").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#51').attr('value') == 2){
+                              $("#51").addClass('disable');
+                            }
+              if($('#52').attr('value') == 1){
+                              $("#52").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#52').attr('value') == 2){
+                              $("#52").addClass('disable');
+                            }
+              if($('#53').attr('value') == 1){
+                              $("#53").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#53').attr('value') == 2){
+                              $("#53").addClass('disable');
+                            }
+              if($('#54').attr('value') == 1){
+                              $("#54").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#54').attr('value') == 2){
+                              $("#54").addClass('disable');
+                            }
+              if($('#55').attr('value') == 1){
+                              $("#55").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#55').attr('value') == 2){
+                              $("#55").addClass('disable');
+                            }
+              if($('#56').attr('value') == 1){
+                              $("#56").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#56').attr('value') == 2){
+                              $("#56").addClass('disable');
+                            }
+              if($('#57').attr('value') == 1){
+                              $("#57").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#57').attr('value') == 2){
+                              $("#57").addClass('disable');
+                            }
+              if($('#58').attr('value') == 1){
+                              $("#58").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#58').attr('value') == 2){
+                              $("#58").addClass('disable');
+                            }
+              if($('#59').attr('value') == 1){
+                              $("#59").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#59').attr('value') == 2){
+                              $("#59").addClass('disable');
+                            }
+              if($('#60').attr('value') == 1){
+                              $("#60").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#60').attr('value') == 2){
+                              $("#60").addClass('disable');
+                            }
+              if($('#61').attr('value') == 1){
+                              $("#61").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#61').attr('value') == 2){
+                              $("#61").addClass('disable');
+                            }
+              if($('#62').attr('value') == 1){
+                              $("#62").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#62').attr('value') == 2){
+                              $("#62").addClass('disable');
+                            }
+              if($('#63').attr('value') == 1){
+                              $("#63").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#63').attr('value') == 2){
+                              $("#63").addClass('disable');
+                            }
+              if($('#64').attr('value') == 1){
+                              $("#64").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#64').attr('value') == 2){
+                              $("#64").addClass('disable');
+                            }
+              if($('#65').attr('value') == 1){
+                              $("#65").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#65').attr('value') == 2){
+                              $("#65").addClass('disable');
+                            }
+              if($('#66').attr('value') == 1){
+                              $("#66").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#66').attr('value') == 2){
+                              $("#66").addClass('disable');
+                            }
+              if($('#67').attr('value') == 1){
+                              $("#67").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#67').attr('value') == 2){
+                              $("#67").addClass('disable');
+                            }
+              if($('#68').attr('value') == 1){
+                              $("#68").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#68').attr('value') == 2){
+                              $("#68").addClass('disable');
+                            }
+              if($('#69').attr('value') == 1){
+                              $("#69").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#69').attr('value') == 2){
+                              $("#69").addClass('disable');
+                            }
+              if($('#70').attr('value') == 1){
+                              $("#70").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#70').attr('value') == 2){
+                              $("#70").addClass('disable');
+                            }
+              if($('#71').attr('value') == 1){
+                              $("#71").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#71').attr('value') == 2){
+                              $("#71").addClass('disable');
+                            }
+              if($('#72').attr('value') == 1){
+                              $("#72").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#72').attr('value') == 2){
+                              $("#72").addClass('disable');
+                            }
+              if($('#73').attr('value') == 1){
+                              $("#73").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#73').attr('value') == 2){
+                              $("#73").addClass('disable');
+                            }
+              if($('#74').attr('value') == 1){
+                              $("#74").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#74').attr('value') == 2){
+                              $("#74").addClass('disable');
+                            }
+              if($('#75').attr('value') == 1){
+                              $("#75").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#75').attr('value') == 2){
+                              $("#75").addClass('disable');
+                            }
+              if($('#76').attr('value') == 1){
+                              $("#76").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#76').attr('value') == 2){
+                              $("#76").addClass('disable');
+                            }
+              if($('#77').attr('value') == 1){
+                              $("#77").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#77').attr('value') == 2){
+                              $("#77").addClass('disable');
+                            }
+              if($('#78').attr('value') == 1){
+                              $("#78").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#78').attr('value') == 2){
+                              $("#78").addClass('disable');
+                            }
+              if($('#79').attr('value') == 1){
+                              $("#79").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#79').attr('value') == 2){
+                              $("#79").addClass('disable');
+                            }
+              if($('#80').attr('value') == 1){
+                              $("#80").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#80').attr('value') == 2){
+                              $("#80").addClass('disable');
+                            }
+
+              if($('#81').attr('value') == 1){
+                              $("#81").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#81').attr('value') == 2){
+                              $("#81").addClass('disable');
+                            }
+
+              if($('#82').attr('value') == 1){
+                              $("#82").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#82').attr('value') == 2){
+                              $("#82").addClass('disable');
+                            }
+
+              if($('#83').attr('value') == 1){
+                              $("#83").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#83').attr('value') == 2){
+                              $("#83").addClass('disable');
+                            }
+
+              if($('#84').attr('value') == 1){
+                              $("#84").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#84').attr('value') == 2){
+                              $("#84").addClass('disable');
+                            }
+
+              if($('#85').attr('value') == 1){
+                              $("#85").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#85').attr('value') == 2){
+                              $("#85").addClass('disable');
+                            }
+
+              if($('#86').attr('value') == 1){
+                              $("#86").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#86').attr('value') == 2){
+                              $("#86").addClass('disable');
+                            }
+
+              if($('#87').attr('value') == 1){
+                              $("#87").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#87').attr('value') == 2){
+                              $("#87").addClass('disable');
+                            }
+
+              if($('#88').attr('value') == 1){
+                              $("#88").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#88').attr('value') == 2){
+                              $("#88").addClass('disable');
+                            }
+
+              if($('#89').attr('value') == 1){
+                              $("#89").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#89').attr('value') == 2){
+                              $("#89").addClass('disable');
+                            }
+
+              if($('#90').attr('value') == 1){
+                              $("#90").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#90').attr('value') == 2){
+                              $("#90").addClass('disable');
+                            }
+
+              if($('#91').attr('value') == 1){
+                              $("#91").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#91').attr('value') == 2){
+                              $("#91").addClass('disable');
+                            }
+
+              if($('#92').attr('value') == 1){
+                              $("#92").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#92').attr('value') == 2){
+                              $("#92").addClass('disable');
+                            }
+
+              if($('#93').attr('value') == 1){
+                              $("#93").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#93').attr('value') == 2){
+                              $("#93").addClass('disable');
+                            }
+
+              if($('#94').attr('value') == 1){
+                              $("#94").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#94').attr('value') == 2){
+                              $("#94").addClass('disable');
+                            }
+
+              if($('#95').attr('value') == 1){
+                              $("#95").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#95').attr('value') == 2){
+                              $("#95").addClass('disable');
+                            }
+
+              if($('#96').attr('value') == 1){
+                              $("#96").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#96').attr('value') == 2){
+                              $("#96").addClass('disable');
+                            }
+
+              if($('#97').attr('value') == 1){
+                              $("#97").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#97').attr('value') == 2){
+                              $("#97").addClass('disable');
+                            }
+
+              if($('#98').attr('value') == 1){
+                              $("#98").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#98').attr('value') == 2){
+                              $("#98").addClass('disable');
+                            }
+
+              if($('#99').attr('value') == 1){
+                              $("#99").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#99').attr('value') == 2){
+                              $("#99").addClass('disable');
+                            }
+
+              if($('#100').attr('value') == 1){
+                              $("#100").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#100').attr('value') == 2){
+                              $("#100").addClass('disable');
+                            }
+
+
+              if($('#101').attr('value') == 1){
+                              $("#101").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#101').attr('value') == 2){
+                              $("#101").addClass('disable');
+                            }
+
+
+              if($('#102').attr('value') == 1){
+                              $("#102").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#102').attr('value') == 2){
+                              $("#102").addClass('disable');
+                            }
+
+              if($('#103').attr('value') == 1){
+                              $("#103").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#103').attr('value') == 2){
+                              $("#103").addClass('disable');
+                            }
+
+              if($('#104').attr('value') == 1){
+                              $("#104").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#104').attr('value') == 2){
+                              $("#104").addClass('disable');
+                            }
+
+              if($('#105').attr('value') == 1){
+                              $("#105").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#105').attr('value') == 2){
+                              $("#105").addClass('disable');
+                            }
+
+              if($('#106').attr('value') == 1){
+                              $("#106").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#106').attr('value') == 2){
+                              $("#106").addClass('disable');
+                            }
+
+              if($('#107').attr('value') == 1){
+                              $("#107").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#107').attr('value') == 2){
+                              $("#107").addClass('disable');
+                            }
+
+              if($('#108').attr('value') == 1){
+                              $("#108").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#108').attr('value') == 2){
+                              $("#108").addClass('disable');
+                            }
+
+
+              if($('#109').attr('value') == 1){
+                              $("#109").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#109').attr('value') == 2){
+                              $("#109").addClass('disable');
+                            }
+
+              if($('#110').attr('value') == 1){
+                              $("#110").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#110').attr('value') == 2){
+                              $("#110").addClass('disable');
+                            }
+
+
+              if($('#111').attr('value') == 1){
+                              $("#111").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#111').attr('value') == 2){
+                              $("#111").addClass('disable');
+                            }
+
+
+              if($('#112').attr('value') == 1){
+                              $("#112").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#112').attr('value') == 2){
+                              $("#112").addClass('disable');
+                            }
+
+
+              if($('#113').attr('value') == 1){
+                              $("#113").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#113').attr('value') == 2){
+                              $("#113").addClass('disable');
+                            }
+
+
+              if($('#114').attr('value') == 1){
+                              $("#114").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#114').attr('value') == 2){
+                              $("#114").addClass('disable');
+                            }
+
+
+              if($('#115').attr('value') == 1){
+                              $("#115").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#115').attr('value') == 2){
+                              $("#115").addClass('disable');
+                            }
+
+
+              if($('#116').attr('value') == 1){
+                              $("#116").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#116').attr('value') == 2){
+                              $("#116").addClass('disable');
+                            }
+
+
+              if($('#117').attr('value') == 1){
+                              $("#117").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#117').attr('value') == 2){
+                              $("#117").addClass('disable');
+                            }
+
+
+              if($('#118').attr('value') == 1){
+                              $("#118").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#118').attr('value') == 2){
+                              $("#118").addClass('disable');
+                            }
+
+
+              if($('#119').attr('value') == 1){
+                              $("#119").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#119').attr('value') == 2){
+                              $("#119").addClass('disable');
+                            }
+
+
+              if($('#120').attr('value') == 1){
+                              $("#120").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#120').attr('value') == 2){
+                              $("#120").addClass('disable');
+                            }
+
+              if($('#121').attr('value') == 1){
+                              $("#121").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#121').attr('value') == 2){
+                              $("#121").addClass('disable');
+                            }
+
+              if($('#122').attr('value') == 1){
+                              $("#122").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#122').attr('value') == 2){
+                              $("#122").addClass('disable');
+                            }
+
+              if($('#123').attr('value') == 1){
+                              $("#123").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#123').attr('value') == 2){
+                              $("#123").addClass('disable');
+                            }
+
+              if($('#124').attr('value') == 1){
+                              $("#124").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#124').attr('value') == 2){
+                              $("#124").addClass('disable');
+                            }
+
+              if($('#125').attr('value') == 1){
+                              $("#125").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#125').attr('value') == 2){
+                              $("#125").addClass('disable');
+                            }
+
+              if($('#126').attr('value') == 1){
+                              $("#126").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#126').attr('value') == 2){
+                              $("#126").addClass('disable');
+                            }
+
+
+              if($('#127').attr('value') == 1){
+                              $("#127").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#127').attr('value') == 2){
+                              $("#127").addClass('disable');
+                            }
+
+              if($('#128').attr('value') == 1){
+                              $("#128").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#128').attr('value') == 2){
+                              $("#128").addClass('disable');
+                            }
+
+              if($('#129').attr('value') == 1){
+                              $("#129").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#129').attr('value') == 2){
+                              $("#129").addClass('disable');
+                            }
+
+              if($('#130').attr('value') == 1){
+                              $("#130").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#130').attr('value') == 2){
+                              $("#130").addClass('disable');
+                            }
+
+              if($('#131').attr('value') == 1){
+                              $("#131").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#131').attr('value') == 2){
+                              $("#131").addClass('disable');
+                            }
+              if($('#132').attr('value') == 1){
+                              $("#132").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#132').attr('value') == 2){
+                              $("#132").addClass('disable');
+                            }
+              if($('#133').attr('value') == 1){
+                              $("#133").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#133').attr('value') == 2){
+                              $("#133").addClass('disable');
+                            }
+              if($('#134').attr('value') == 1){
+                              $("#134").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#131').attr('value') == 2){
+                              $("#134").addClass('disable');
+                            }
+              if($('#135').attr('value') == 1){
+                              $("#135").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#135').attr('value') == 2){
+                              $("#13%").addClass('disable');
+                            }
+              if($('#136').attr('value') == 1){
+                              $("#136").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#136').attr('value') == 2){
+                              $("#136").addClass('disable');
+                            }
+              if($('#137').attr('value') == 1){
+                              $("#137").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#137').attr('value') == 2){
+                              $("#137").addClass('disable');
+                            }
+              if($('#138').attr('value') == 1){
+                              $("#138").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#138').attr('value') == 2){
+                              $("#138").addClass('disable');
+                            }
+              if($('#139').attr('value') == 1){
+                              $("#139").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#139').attr('value') == 2){
+                              $("#139").addClass('disable');
+                            }
+              if($('#140').attr('value') == 1){
+                              $("#140").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#140').attr('value') == 2){
+                              $("#140").addClass('disable');
+                            }
+              if($('#141').attr('value') == 1){
+                              $("#141").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#141').attr('value') == 2){
+                              $("#141").addClass('disable');
+                            }
+              if($('#142').attr('value') == 1){
+                              $("#142").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#142').attr('value') == 2){
+                              $("#142").addClass('disable');
+                            }
+              if($('#143').attr('value') == 1){
+                              $("#143").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#143').attr('value') == 2){
+                              $("#143").addClass('disable');
+                            }
+              if($('#144').attr('value') == 1){
+                              $("#144").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#144').attr('value') == 2){
+                              $("#144").addClass('disable');
+                            }
+              if($('#145').attr('value') == 1){
+                              $("#145").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#145').attr('value') == 2){
+                              $("#145").addClass('disable');
+                            }
+              if($('#146').attr('value') == 1){
+                              $("#146").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#146').attr('value') == 2){
+                              $("#146").addClass('disable');
+                            }
+              if($('#147').attr('value') == 1){
+                              $("#147").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#147').attr('value') == 2){
+                              $("#147").addClass('disable');
+                            }
+              if($('#148').attr('value') == 1){
+                              $("#148").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#148').attr('value') == 2){
+                              $("#148").addClass('disable');
+                            }
+              if($('#149').attr('value') == 1){
+                              $("#149").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#149').attr('value') == 2){
+                              $("#149").addClass('disable');
+                            }
+              if($('#150').attr('value') == 1){
+                              $("#150").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#150').attr('value') == 2){
+                              $("#150").addClass('disable');
+                            }
+              if($('#151').attr('value') == 1){
+                              $("#151").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#151').attr('value') == 2){
+                              $("#151").addClass('disable');
+                            }
+              if($('#152').attr('value') == 1){
+                              $("#152").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#152').attr('value') == 2){
+                              $("#152").addClass('disable');
+                            }
+              if($('#153').attr('value') == 1){
+                              $("#153").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#153').attr('value') == 2){
+                              $("#153").addClass('disable');
+                            }
+              if($('#154').attr('value') == 1){
+                              $("#154").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#154').attr('value') == 2){
+                              $("#154").addClass('disable');
+                            }
+              if($('#155').attr('value') == 1){
+                              $("#155").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#155').attr('value') == 2){
+                              $("#155").addClass('disable');
+                            }
+              if($('#156').attr('value') == 1){
+                              $("#156").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#156').attr('value') == 2){
+                              $("#156").addClass('disable');
+                            }
+              if($('#157').attr('value') == 1){
+                              $("#157").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#157').attr('value') == 2){
+                              $("#157").addClass('disable');
+                            }
+              if($('#158').attr('value') == 1){
+                              $("#158").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#158').attr('value') == 2){
+                              $("#158").addClass('disable');
+                            }
+              if($('#159').attr('value') == 1){
+                              $("#159").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#159').attr('value') == 2){
+                              $("#159").addClass('disable');
+                            }
+              if($('#160').attr('value') == 1){
+                              $("#160").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#160').attr('value') == 2){
+                              $("#160").addClass('disable');
+                            }
+              if($('#161').attr('value') == 1){
+                              $("#161").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#161').attr('value') == 2){
+                              $("#161").addClass('disable');
+                            }
+              if($('#162').attr('value') == 1){
+                              $("#162").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#162').attr('value') == 2){
+                              $("#162").addClass('disable');
+                            }
+              if($('#163').attr('value') == 1){
+                              $("#163").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#163').attr('value') == 2){
+                              $("#163").addClass('disable');
+                            }
+              if($('#164').attr('value') == 1){
+                              $("#164").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#164').attr('value') == 2){
+                              $("#164").addClass('disable');
+                            }
+              if($('#165').attr('value') == 1){
+                              $("#165").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#165').attr('value') == 2){
+                              $("#165").addClass('disable');
+                            }
+              if($('#166').attr('value') == 1){
+                              $("#166").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#166').attr('value') == 2){
+                              $("#166").addClass('disable');
+                            }
+              if($('#167').attr('value') == 1){
+                              $("#167").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#167').attr('value') == 2){
+                              $("#167").addClass('disable');
+                            }
+
+              }
+
+              set_seat();
+
+              window.onload = function(){
+
+            }
+
+                        })
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/book-1">예매</a></li>
+          <li><a href="/movie">영화</a></li>
+          <li><a href="/theater">영화관</a></li>
+          <li><a href="/store">스토어</a></li>
+          <li><a href="/customer">고객센터</a></li>
+          <li><a href="/mypage">My page</a></li>
+          <% if(loginsignal2[0].login == 0){ %>
+          <li><a href="#" data-target="#login" data-toggle="modal">로그인</a></li>
+          <% } %>
+          <% if(loginsignal2[0].login == 1){ %>
+          <li><a href="#" data-target="#logout" data-toggle="modal">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <% if(loginsignal2[0].login == 1){ %>
+        <form class="navbar-form navbar-right">
+          <font color=white size=4 fact=궁서> <%= loginsignal[0].name%>님 환영 합니다 </font>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+    <div class="modal fade" id="login" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h3 style="text-align:center;" class="modal-title">로그인</h3>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                  <input type="hidden" name="logout_signal" value="0"/>
+                      <div class="form-group">
+                          <label for="username-email">아이디</label>
+                          <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                          <label for="password">비밀번호</label>
+                          <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Login</button>
+
+                      </div>
+                      <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm"><%=loginsignal[0].id%></a></span>
+                      <hr />
+                      <div class="form-group">
+                          <a href="/join" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                      </div>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="logout" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 style="text-align:center;" class="modal-title">로그아웃 하시겠습니까?</h4>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Yes</button>
+                          <input type="hidden" name="logout_signal" value="1"/>
+                          <input type="hidden" name="logout_id" value="<%=loginsignal[0].id%>"/>
+
+                  </form>
+
+                  <form action="/book" accept-charset="UTF-8" role="form" method="get" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Logout">No</button>
+                          <input type="hidden" name="logout_signal" value="0"/>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="myCarousel" class="carousel">
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="fill" style="background-image:url('img/book_image.jpg');">
+        </div>
+        <div class="carousel-caption" style="text-align:left">
+          <h2>예매</h2>
+          <h4>Ticketing</h4>
+        </div>
+      </div>
+  </header>
+  <hr>
+
+  <div class="container">
+      <br><br>
+        <ol class="myprogress">
+          <li class="is-complete" data-step="1"> <!-- is-active / is-complete / myprogress__last!-->
+            <br><h4>영화 선택</h4>
+          </li>
+          <li class="is-complete" data-step="2">
+            <br><h4>날짜 선택</h4>
+          </li>
+          <li class="is-active" data-step="3">
+            <br><h4>영화관 선택</h4>
+          </li>
+          <li class="" data-step="4">
+            <br><h4>좌석 선택</h4>
+          </li>
+          <li class="" data-step="5">
+            <br><h4>결제</h4>
+          </li>
+        </ol>
+  </div>
+
+  <div class="container">
+    <div class="tab-content">
+      <div class="tab-pane active" id="theaterselect">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">영화관을 선택하세요</h3>
+            </div>
+
+            <div class="col-lg-12">
+              <ul class="nav nav-tabs nav-stacked">
+                <li class="active"><a href="#area_A" data-toggle="tab" aria-expanded="true" class="active">서울</a></li>
+                <li><a href="#area_B" data-toggle="tab" aria-expanded="false" class="active">경기</a></li>
+                <li><a href="#area_C" data-toggle="tab" aria-expanded="false" class="active">인천</a></li>
+                <li><a href="#area_D">강원/대전/충청</a></li>
+                <li><a href="#area_E">대구/울산/부산</a></li>
+              </ul>
+            </div>
+
+            <div class="col-md-12">
+              <div class="tab-content active">
+                <div class="tab-pane fade active in" id="area_A">
+                  <hr>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">강남</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="/book-4"   id="theater1_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="/book-4"   id="theater1_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="/book-4"   id="theater1_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="/book-4"   id="theater1_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">명동</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="/book-4"   id="theater2_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="/book-4"   id="theater2_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="/book-4"   id="theater2_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="/book-4"   id="theater2_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">불광</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="/book-4"   id="theater3_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="/book-4"   id="theater3_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="/book-4"   id="theater3_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="/book-4"   id="theater3_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">압구정</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="/book-4"   id="theater4_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="/book-4"   id="theater4_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="/book-4"   id="theater4_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="/book-4"   id="theater4_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">홍대</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="/book-4"   id="theater5_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="/book-4"   id="theater5_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="/book-4"   id="theater5_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="/book-4"   id="theater5_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="area_B">
+                  <hr>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">구리</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="/book-4"  >09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="/book-4"  >09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="/book-4"  >10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="/book-4"  >10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">김포</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td>09:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td>09:30</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td>10:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td>10:30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+
+                  </div>
+                  <div class="col-sm-6">
+
+                  </div>
+                  <div class="col-sm-6">
+
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="area_C">
+                  <hr>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">부평</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td>09:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td>09:30</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td>10:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td>10:30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">인천</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td>09:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td>09:30</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td>10:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td>10:30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                </div>
+              </div> <!--tab content !-->
+            </div>
+        </div>
+        <hr>
+      </div> <!-- tab pane - 2!-->
+
+    </div>
+  </div>
+
+
+</body>
+</html>
+</html>

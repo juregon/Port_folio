@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Max Moive World</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/star.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <style>
+        .line {
+            overflow: hidden;
+        }
+
+        .seat {
+            margin: 2px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+        }
+
+        .enable {
+            background: gray;
+        }
+
+        .enable:hover {
+            background: black;
+        }
+
+        .disable {
+            background: red;
+        }
+   </style>
+
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/book">예매</a></li>
+          <li><a href="/movie">영화</a></li>
+          <li><a href="/theater">영화관</a></li>
+          <li><a href="/store">스토어</a></li>
+          <li><a href="/customer">고객센터</a></li>
+          <li><a href="/mypage">My page</a></li>
+          <% if(loginsignal2[0].login == 0){ %>
+          <li><a href="#" data-target="#login" data-toggle="modal">로그인</a></li>
+          <% } %>
+          <% if(loginsignal2[0].login == 1){ %>
+          <li><a href="#" data-target="#logout" data-toggle="modal">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <form class="navbar-form navbar-right" role="search">
+          <input type="text" class="form-control" placeholder="Search">
+        </form>
+      </div>
+    </div>
+  </nav>
+
+    <div class="modal fade" id="login" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h3 style="text-align:center;" class="modal-title">로그인</h3>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                  <input type="hidden" name="logout_signal" value="0"/>
+                      <div class="form-group">
+                          <label for="username-email">아이디</label>
+                          <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                          <label for="password">비밀번호</label>
+                          <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Login</button>
+
+                      </div>
+                      <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm"><%=loginsignal[0].id%></a></span>
+                      <hr />
+                      <div class="form-group">
+                          <a href="" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                      </div>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="logout" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 style="text-align:center;" class="modal-title">로그아웃 하시겠습니까?</h4>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Yes</button>
+                          <input type="hidden" name="logout_signal" value="1"/>
+                          <input type="hidden" name="logout_id" value="<%=loginsignal[0].id%>"/>
+
+                  </form>
+
+                  <form action="/book" accept-charset="UTF-8" role="form" method="get" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Logout">No</button>
+                          <input type="hidden" name="logout_signal" value="0"/>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="myCarousel" class="carousel">
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="fill" style="background-image:url('img/book_image.jpg');">
+        </div>
+        <div class="carousel-caption" style="text-align:left">
+          <h2>예매</h2>
+          <h4>Ticketing</h4>
+        </div>
+      </div>
+  </header>
+  <hr>
+
+  <script type="text/javascript">
+  $(function(){
+    $("#movie_1").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_2").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_3").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_4").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_5").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_6").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_7").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_8").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_9").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_10").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_11").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+    $("#movie_12").click(function(){
+      $("#step1_bt").removeClass("active");
+      $("#step1_bt").addClass("complete");
+      $("#step2_bt").removeClass("disabled");
+      $("#step2_bt").addClass("active");
+    });
+  });
+  </script>
+
+  <script type="text/javascript">
+  $(function(){
+    $("#theater1_1").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater1_2").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater1_3").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater1_4").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater2_1").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater2_2").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater2_3").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater2_4").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater3_1").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater3_2").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater3_3").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater3_4").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater4_1").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater4_2").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater4_3").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater4_4").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater5_1").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater5_2").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater5_3").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+    $("#theater5_4").click(function(){
+      $("#step2_bt").removeClass("active");
+      $("#step2_bt").addClass("complete");
+      $("#step3_bt").removeClass("disabled");
+      $("#step3_bt").addClass("active");
+    });
+  });
+  </script>
+
+<<<<<<< Updated upstream
+=======
+ <script type="text/javascript">
+        $(document).ready(function () {
+            // 변수를 선언합니다.
+            var onClickSeat = function () {
+                var x = $(this).attr('data-x');
+                var y = $(this).attr('data-y');
+                if (confirm('좌석을 예약하시겠습니까?')) {
+                    $(this).off('click');
+                    socket.emit('reserve', {
+                        x: x,
+                        y: y
+                    });
+                } else {
+                    alert('취소되었습니다.');
+                }
+            };
+
+
+            var seatss = [
+                            [1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1]
+                        
+                           ]; 
+            /*                
+            console.log("askdjalsdjalskdjalksdj lkjaslkdj :: " + seatss);
+                // 좌석을 생성합니다.
+                $.each($("#seatseat").val().trim(), function (indexY, line) {
+                    // 문서 객체를 생성합니다.
+                    var $line = $('<div></div>').addClass('line');
+                    $.each(line, function (indexX, seat) {
+                        // 문서 객체를 생성하고 변수 $line에 추가합니다.
+                        var $output = $('<div></div>', {
+                            'class': 'seat',
+                            'data-x': 'indexX',
+                            'data-y': 'indexY'
+                        }).appendTo($line);
+                        if (seat == 1) {
+                            // 좌석이 비어 있으면 enable 클래스와 click 리스너를 추가합니다.
+                            $output.addClass('enable').on('click', onClickSeat);
+                        } else if (seat == 2) {
+                            // 좌석이 사용 불가능하면 disable 클래스를 추가합니다.
+                            $output.addClass('disable');
+                        }
+                    });
+                    // 문서 객체를 추가합니다.
+                    $line.appendTo('.seat_book');
+                });*/
+            
+         }); 
+
+
+    </script>
+
+>>>>>>> Stashed changes
+  <div class="container">
+    <div class="alert alert-info">
+      <div class="container">
+		      <div class="row bs-wizard" style="border-bottom:0;">
+            <div class="col-xs-3 bs-wizard-step active" id="step1_bt">
+              <div class="text-center bs-wizard-stepnum">
+                Step 1
+              </div>
+              <div class="progress">
+                <div class="progress-bar">
+                </div>
+              </div>
+              <a href="#movieselect" data-toggle="tab" aria-expanded="true" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center">
+                <h4>영화 선택</h4>
+              </div>
+            </div>
+
+            <div class="col-xs-3 bs-wizard-step disabled" id="step2_bt"><!-- complete / active / disabled -->
+              <div class="text-center bs-wizard-stepnum">
+                Step 2
+              </div>
+              <div class="progress">
+                <div class="progress-bar">
+                </div>
+              </div>
+              <a href="#theaterselect" data-toggle="tab" aria-expanded="false" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center">
+                <h4>영화관 선택</h4>
+              </div>
+            </div>
+
+            <div class="col-xs-3 bs-wizard-step disabled" id="step3_bt"><!-- disabled -->
+              <div class="text-center bs-wizard-stepnum">
+                Step 3
+              </div>
+              <div class="progress">
+                <div class="progress-bar">
+                </div>
+              </div>
+              <a href="#seat" data-toggle="tab" aria-expanded="false" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center">
+                <h4>좌석 선택</h4>
+              </div>
+            </div>
+
+            <div class="col-xs-3 bs-wizard-step disabled"  id="step4_bt"><!-- disabled -->
+              <div class="text-center bs-wizard-stepnum">
+                Step 4
+              </div>
+              <div class="progress">
+                <div class="progress-bar">
+                </div>
+              </div>
+              <a href="#payment" data-toggle="tab" aria-expanded="false" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center">
+                <h4>결제</h4>
+              </div>
+            </div>
+          </div>
+      	</div>
+        <!-- progress bar !-->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="tab-content">
+      <div class="tab-pane active" id="movieselect">
+        <div class="row">
+            <div class="col-lg-12">
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_2" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    영화1
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_2" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[1].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_3" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[2].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_4" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[3].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_5" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[4].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_6" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[5].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_7" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[6].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_8" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <%=rows[7].title%>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_9" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    영화9
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_10" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    영화10
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_11" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    영화11
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#theaterselect" id="movie_12" data-toggle="tab" aria-expanded="false">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    영화12
+                </a>
+            </div>
+        </div>
+        <hr>
+      </div>
+      <div class="tab-pane" id="theaterselect">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">영화관</h1>
+            </div>
+            <div class="col-lg-12">
+              <ul class="nav nav-tabs nav-stacked">
+                <li class="active"><a href="#area_A" data-toggle="tab" aria-expanded="true" class="active">서울</a></li>
+                <li><a href="#area_B" data-toggle="tab" aria-expanded="false" class="active">경기</a></li>
+                <li><a href="#area_C" data-toggle="tab" aria-expanded="false" class="active">인천</a></li>
+                <li><a href="#area_D">강원/대전/충청</a></li>
+                <li><a href="#area_E">대구/울산/부산</a></li>
+              </ul>
+            </div>
+
+            <div class="col-md-12">
+              <div class="tab-content">
+                <div class="tab-pane fade active in" id="area_A">
+                  <hr>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">강남</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater1_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater1_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater1_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater1_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">명동</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater2_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater2_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater2_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater2_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">불광</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater3_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater3_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater3_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater3_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">압구정</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater4_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater4_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater4_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater4_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">홍대</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater5_1">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater5_2">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater5_3">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true" id="theater5_4">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="area_B">
+                  <hr>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">구리</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true">09:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true">09:30</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true">10:00</a></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td><a href="#seat" data-toggle="tab" aria-expanded="true">10:30</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">김포</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td>09:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td>09:30</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td>10:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td>10:30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+
+                  </div>
+                  <div class="col-sm-6">
+
+                  </div>
+                  <div class="col-sm-6">
+
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="area_C">
+                  <hr>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">부평</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td>09:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td>09:30</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td>10:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td>10:30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                  <div class="col-sm-6">
+                    <section class="panel">
+                      <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th rowspan="6" class="success">인천</th>
+                            <th>상영관</th>
+                            <th>상영시간</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>1관</td>
+                            <td>09:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>2관</td>
+                            <td>09:30</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td >3관</td>
+                            <td>10:00</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>4관</td>
+                            <td>10:30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                </div>
+              </div> <!--tab content !-->
+            </div>
+        </div>
+        <hr>
+      </div> <!-- tab pane - 2!-->
+      <div class="tab-pane" id="seat">
+        <hr>
+        <div class="row">
+          <br>
+          <br>
+
+          좌석선택하시라오~
+
+
+         <--좌석선택하시라오~--> 
+          <div class="seat_book">
+            <div class="line">
+
+               <% for(var i=0; i<12; i++) %>
+               <%{%>
+                  <%for(var j=0; j<14; j++)%>
+                  <%{%>
+                     <%var val = seats[i][j];%>
+                     
+                     <%if(val == 1)%>
+                     <%{%>
+
+                        <div class="seat enable" data-x="<%=j%>" data-y="<%=i%>" onclick="onClickSeat">
+                        </div>
+       
+                     <%}%>   
+                     <%if(val == 2)%>
+                     <%{%>
+                        <div class="seat disable" data-x="<%=j%>" data-y="<%=i%>" onclick="onClickSeat">
+                       </div>
+                     <%}%>
+                  <%}%>
+               <%}%>
+ 
+            <!--<div class="line">
+               <div class="seat enable" data-x="0" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="1" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="2" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="3" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="4" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="5" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="6" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="7" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="8" data-y="0">      
+               </div>
+               <div class="seat enable" data-x="9" data-y="0">      
+               </div>   
+            </div>-->
+          </div>
+>>>>>>> Stashed changes
+        </div>
+        <hr>
+      </div> <!-- tab pane -3 !-->
+      <div class="tab-pane" id="payment">
+        <hr>
+        <dis class="container"><div class="alert alert-success">
+        <div class="row">
+          <section class="">
+              <header class="panel-heading">
+                예매 정보
+              </header>
+              <div class="panel-body">
+                <div class="alert alert-warning fade in">
+                      <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"></i>
+                      </button>
+                      <strong>영화 - </strong> 캐리비안의 해적: 죽은 자는 말이 없다
+                  </div>
+                  <div class="alert alert-warning fade in">
+                      <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"></i>
+                      </button>
+                      <strong>영화관 - </strong> 서울 - 불광 - 1관 - 09:00 ~ 11:00
+                  </div>
+                  <div class="alert alert-warning fade in">
+                      <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"></i>
+                      </button>
+                      <strong>좌석 - </strong> A - 12, A - 13
+                  </div>
+                  <div class="alert alert-warning fade in">
+                      <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"></i>
+                      </button>
+                      <strong>가격 - </strong> 일반 2명: 18000원
+                  </div>
+              </div>
+              <center>
+                <a class="btn btn-default" href="/book" id="cancel" >취소</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-default" href="" id="admit">결제</a>
+              </center>
+          </section>
+        </div></div></div>
+        <hr>
+      </div> <!-- tab pane -4 !-->
+
+    </div>
+  </div>
+
+
+</body>
+</html>

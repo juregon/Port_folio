@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Max Moive World</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/star.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <style>
+        .line {
+            overflow: hidden;
+        }
+        .seat {
+            margin: 2px;
+            float: left;
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+        }
+        .enable {
+            background: gray;
+        }
+        .enable:hover {
+            background: black;
+        }
+        .disable {
+            background: red;
+        }
+   </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // 변수를 선언합니다.
+            var onClickSeat = function () {
+                var x = $(this).attr('data-x');
+                var y = $(this).attr('data-y');
+                if (confirm('좌석을 예약하시겠습니까?')) {
+                    $(this).off('click');
+                    socket.emit('reserve', {
+                        x: x,
+                        y: y
+                    });
+                } else {
+                    alert('취소되었습니다.');
+                }
+            };
+            function set_seat(){
+              if($('#0').attr('value') == 1){
+                $("#0").addClass('enable').on('click', onClickSeat);
+              }
+              else if($('#0').attr('value') == 2){
+                $("#0").addClass('disable');
+              }
+              if($('#1').attr('value') == 1){
+                              $("#1").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#1').attr('value') == 2){
+                              $("#1").addClass('disable');
+                            }
+              if($('#2').attr('value') == 1){
+                              $("#2").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#2').attr('value') == 2){
+                              $("#2").addClass('disable');
+                            }
+              if($('#3').attr('value') == 1){
+                              $("#3").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#3').attr('value') == 2){
+                              $("#3").addClass('disable');
+                            }
+              if($('#4').attr('value') == 1){
+                              $("#4").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#4').attr('value') == 2){
+                              $("#4").addClass('disable');
+                            }
+                if($('#5').attr('value') == 1){
+                              $("#5").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#5').attr('value') == 2){
+                              $("#5").addClass('disable');
+                            }
+                if($('#6').attr('value') == 1){
+                              $("#6").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#6').attr('value') == 2){
+                              $("#6").addClass('disable');
+                            }
+              if($('#7').attr('value') == 1){
+                              $("#7").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#7').attr('value') == 2){
+                              $("#7").addClass('disable');
+                            }
+              if($('#8').attr('value') == 1){
+                              $("#8").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#8').attr('value') == 2){
+                              $("#8").addClass('disable');
+                            }
+              if($('#9').attr('value') == 1){
+                              $("#9").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#9').attr('value') == 2){
+                              $("#9").addClass('disable');
+                            }
+              if($('#10').attr('value') == 1){
+                              $("#10").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#10').attr('value') == 2){
+                              $("#10").addClass('disable');
+                            }
+              if($('#11').attr('value') == 1){
+                              $("#11").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#11').attr('value') == 2){
+                              $("#11").addClass('disable');
+                            }
+              if($('#12').attr('value') == 1){
+                              $("#12").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#12').attr('value') == 2){
+                              $("#12").addClass('disable');
+                            }
+              if($('#13').attr('value') == 1){
+                              $("#13").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#13').attr('value') == 2){
+                              $("#13").addClass('disable');
+                            }
+              if($('#14').attr('value') == 1){
+                              $("#14").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#14').attr('value') == 2){
+                              $("#14").addClass('disable');
+                            }
+              if($('#15').attr('value') == 1){
+                              $("#15").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#15').attr('value') == 2){
+                              $("#15").addClass('disable');
+                            }
+              if($('#16').attr('value') == 1){
+                              $("#16").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#16').attr('value') == 2){
+                              $("#16").addClass('disable');
+                            }
+              if($('#17').attr('value') == 1){
+                              $("#17").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#17').attr('value') == 2){
+                              $("#17").addClass('disable');
+                            }
+              if($('#18').attr('value') == 1){
+                              $("#18").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#18').attr('value') == 2){
+                              $("#18").addClass('disable');
+                            }
+              if($('#19').attr('value') == 1){
+                              $("#19").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#19').attr('value') == 2){
+                              $("#19").addClass('disable');
+                            }
+              if($('#20').attr('value') == 1){
+                              $("#20").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#20').attr('value') == 2){
+                              $("#20").addClass('disable');
+                            }
+              if($('#21').attr('value') == 1){
+                              $("#21").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#21').attr('value') == 2){
+                              $("#21").addClass('disable');
+                            }
+              if($('#22').attr('value') == 1){
+                              $("#22").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#22').attr('value') == 2){
+                              $("#22").addClass('disable');
+                            }
+              if($('#23').attr('value') == 1){
+                              $("#23").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#23').attr('value') == 2){
+                              $("#23").addClass('disable');
+                            }
+              if($('#24').attr('value') == 1){
+                              $("#24").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#24').attr('value') == 2){
+                              $("#24").addClass('disable');
+                            }
+              if($('#25').attr('value') == 1){
+                              $("#25").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#25').attr('value') == 2){
+                              $("#25").addClass('disable');
+                            }
+              if($('#26').attr('value') == 1){
+                              $("#26").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#26').attr('value') == 2){
+                              $("#26").addClass('disable');
+                            }
+              if($('#27').attr('value') == 1){
+                              $("#27").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#27').attr('value') == 2){
+                              $("#27").addClass('disable');
+                            }
+              if($('#28').attr('value') == 1){
+                              $("#28").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#28').attr('value') == 2){
+                              $("#28").addClass('disable');
+                            }
+              if($('#29').attr('value') == 1){
+                              $("#29").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#29').attr('value') == 2){
+                              $("#29").addClass('disable');
+                            }
+              if($('#30').attr('value') == 1){
+                              $("#30").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#30').attr('value') == 2){
+                              $("#30").addClass('disable');
+                            }
+              if($('#31').attr('value') == 1){
+                              $("#31").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#31').attr('value') == 2){
+                              $("#31").addClass('disable');
+                            }
+              if($('#32').attr('value') == 1){
+                              $("#32").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#32').attr('value') == 2){
+                              $("#32").addClass('disable');
+                            }
+              if($('#33').attr('value') == 1){
+                              $("#33").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#33').attr('value') == 2){
+                              $("#33").addClass('disable');
+                            }
+              if($('#34').attr('value') == 1){
+                              $("#34").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#34').attr('value') == 2){
+                              $("#34").addClass('disable');
+                            }
+              if($('#35').attr('value') == 1){
+                              $("#35").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#35').attr('value') == 2){
+                              $("#35").addClass('disable');
+                            }
+              if($('#36').attr('value') == 1){
+                              $("#36").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#36').attr('value') == 2){
+                              $("#36").addClass('disable');
+                            }
+              if($('#37').attr('value') == 1){
+                              $("#37").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#37').attr('value') == 2){
+                              $("#37").addClass('disable');
+                            }
+              if($('#38').attr('value') == 1){
+                              $("#38").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#38').attr('value') == 2){
+                              $("#38").addClass('disable');
+                            }
+              if($('#39').attr('value') == 1){
+                              $("#39").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#39').attr('value') == 2){
+                              $("#39").addClass('disable');
+                            }
+              if($('#40').attr('value') == 1){
+                              $("#40").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#40').attr('value') == 2){
+                              $("#40").addClass('disable');
+                            }
+              if($('#41').attr('value') == 1){
+                              $("#41").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#41').attr('value') == 2){
+                              $("#41").addClass('disable');
+                            }
+              if($('#42').attr('value') == 1){
+                              $("#42").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#42').attr('value') == 2){
+                              $("#42").addClass('disable');
+                            }
+              if($('#43').attr('value') == 1){
+                              $("#43").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#43').attr('value') == 2){
+                              $("#43").addClass('disable');
+                            }
+              if($('#44').attr('value') == 1){
+                              $("#44").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#44').attr('value') == 2){
+                              $("#44").addClass('disable');
+                            }
+              if($('#45').attr('value') == 1){
+                              $("#45").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#45').attr('value') == 2){
+                              $("#45").addClass('disable');
+                            }
+              if($('#46').attr('value') == 1){
+                              $("#46").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#46').attr('value') == 2){
+                              $("#46").addClass('disable');
+                            }
+              if($('#47').attr('value') == 1){
+                              $("#47").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#47').attr('value') == 2){
+                              $("#47").addClass('disable');
+                            }
+              if($('#48').attr('value') == 1){
+                              $("#48").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#48').attr('value') == 2){
+                              $("#48").addClass('disable');
+                            }
+              if($('#49').attr('value') == 1){
+                              $("#49").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#49').attr('value') == 2){
+                              $("#49").addClass('disable');
+                            }
+              if($('#50').attr('value') == 1){
+                              $("#50").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#50').attr('value') == 2){
+                              $("#50").addClass('disable');
+                            }
+              if($('#51').attr('value') == 1){
+                              $("#51").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#51').attr('value') == 2){
+                              $("#51").addClass('disable');
+                            }
+              if($('#52').attr('value') == 1){
+                              $("#52").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#52').attr('value') == 2){
+                              $("#52").addClass('disable');
+                            }
+              if($('#53').attr('value') == 1){
+                              $("#53").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#53').attr('value') == 2){
+                              $("#53").addClass('disable');
+                            }
+              if($('#54').attr('value') == 1){
+                              $("#54").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#54').attr('value') == 2){
+                              $("#54").addClass('disable');
+                            }
+              if($('#55').attr('value') == 1){
+                              $("#55").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#55').attr('value') == 2){
+                              $("#55").addClass('disable');
+                            }
+              if($('#56').attr('value') == 1){
+                              $("#56").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#56').attr('value') == 2){
+                              $("#56").addClass('disable');
+                            }
+              if($('#57').attr('value') == 1){
+                              $("#57").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#57').attr('value') == 2){
+                              $("#57").addClass('disable');
+                            }
+              if($('#58').attr('value') == 1){
+                              $("#58").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#58').attr('value') == 2){
+                              $("#58").addClass('disable');
+                            }
+              if($('#59').attr('value') == 1){
+                              $("#59").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#59').attr('value') == 2){
+                              $("#59").addClass('disable');
+                            }
+              if($('#60').attr('value') == 1){
+                              $("#60").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#60').attr('value') == 2){
+                              $("#60").addClass('disable');
+                            }
+              if($('#61').attr('value') == 1){
+                              $("#61").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#61').attr('value') == 2){
+                              $("#61").addClass('disable');
+                            }
+              if($('#62').attr('value') == 1){
+                              $("#62").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#62').attr('value') == 2){
+                              $("#62").addClass('disable');
+                            }
+              if($('#63').attr('value') == 1){
+                              $("#63").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#63').attr('value') == 2){
+                              $("#63").addClass('disable');
+                            }
+              if($('#64').attr('value') == 1){
+                              $("#64").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#64').attr('value') == 2){
+                              $("#64").addClass('disable');
+                            }
+              if($('#65').attr('value') == 1){
+                              $("#65").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#65').attr('value') == 2){
+                              $("#65").addClass('disable');
+                            }
+              if($('#66').attr('value') == 1){
+                              $("#66").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#66').attr('value') == 2){
+                              $("#66").addClass('disable');
+                            }
+              if($('#67').attr('value') == 1){
+                              $("#67").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#67').attr('value') == 2){
+                              $("#67").addClass('disable');
+                            }
+              if($('#68').attr('value') == 1){
+                              $("#68").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#68').attr('value') == 2){
+                              $("#68").addClass('disable');
+                            }
+              if($('#69').attr('value') == 1){
+                              $("#69").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#69').attr('value') == 2){
+                              $("#69").addClass('disable');
+                            }
+              if($('#70').attr('value') == 1){
+                              $("#70").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#70').attr('value') == 2){
+                              $("#70").addClass('disable');
+                            }
+              if($('#71').attr('value') == 1){
+                              $("#71").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#71').attr('value') == 2){
+                              $("#71").addClass('disable');
+                            }
+              if($('#72').attr('value') == 1){
+                              $("#72").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#72').attr('value') == 2){
+                              $("#72").addClass('disable');
+                            }
+              if($('#73').attr('value') == 1){
+                              $("#73").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#73').attr('value') == 2){
+                              $("#73").addClass('disable');
+                            }
+              if($('#74').attr('value') == 1){
+                              $("#74").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#74').attr('value') == 2){
+                              $("#74").addClass('disable');
+                            }
+              if($('#75').attr('value') == 1){
+                              $("#75").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#75').attr('value') == 2){
+                              $("#75").addClass('disable');
+                            }
+              if($('#76').attr('value') == 1){
+                              $("#76").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#76').attr('value') == 2){
+                              $("#76").addClass('disable');
+                            }
+              if($('#77').attr('value') == 1){
+                              $("#77").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#77').attr('value') == 2){
+                              $("#77").addClass('disable');
+                            }
+              if($('#78').attr('value') == 1){
+                              $("#78").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#78').attr('value') == 2){
+                              $("#78").addClass('disable');
+                            }
+              if($('#79').attr('value') == 1){
+                              $("#79").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#79').attr('value') == 2){
+                              $("#79").addClass('disable');
+                            }
+              if($('#80').attr('value') == 1){
+                              $("#80").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#80').attr('value') == 2){
+                              $("#80").addClass('disable');
+                            }
+
+              if($('#81').attr('value') == 1){
+                              $("#81").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#81').attr('value') == 2){
+                              $("#81").addClass('disable');
+                            }
+
+              if($('#82').attr('value') == 1){
+                              $("#82").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#82').attr('value') == 2){
+                              $("#82").addClass('disable');
+                            }
+
+              if($('#83').attr('value') == 1){
+                              $("#83").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#83').attr('value') == 2){
+                              $("#83").addClass('disable');
+                            }
+
+              if($('#84').attr('value') == 1){
+                              $("#84").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#84').attr('value') == 2){
+                              $("#84").addClass('disable');
+                            }
+
+              if($('#85').attr('value') == 1){
+                              $("#85").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#85').attr('value') == 2){
+                              $("#85").addClass('disable');
+                            }
+
+              if($('#86').attr('value') == 1){
+                              $("#86").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#86').attr('value') == 2){
+                              $("#86").addClass('disable');
+                            }
+
+              if($('#87').attr('value') == 1){
+                              $("#87").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#87').attr('value') == 2){
+                              $("#87").addClass('disable');
+                            }
+
+              if($('#88').attr('value') == 1){
+                              $("#88").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#88').attr('value') == 2){
+                              $("#88").addClass('disable');
+                            }
+
+              if($('#89').attr('value') == 1){
+                              $("#89").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#89').attr('value') == 2){
+                              $("#89").addClass('disable');
+                            }
+
+              if($('#90').attr('value') == 1){
+                              $("#90").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#90').attr('value') == 2){
+                              $("#90").addClass('disable');
+                            }
+
+              if($('#91').attr('value') == 1){
+                              $("#91").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#91').attr('value') == 2){
+                              $("#91").addClass('disable');
+                            }
+
+              if($('#92').attr('value') == 1){
+                              $("#92").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#92').attr('value') == 2){
+                              $("#92").addClass('disable');
+                            }
+
+              if($('#93').attr('value') == 1){
+                              $("#93").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#93').attr('value') == 2){
+                              $("#93").addClass('disable');
+                            }
+
+              if($('#94').attr('value') == 1){
+                              $("#94").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#94').attr('value') == 2){
+                              $("#94").addClass('disable');
+                            }
+
+              if($('#95').attr('value') == 1){
+                              $("#95").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#95').attr('value') == 2){
+                              $("#95").addClass('disable');
+                            }
+
+              if($('#96').attr('value') == 1){
+                              $("#96").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#96').attr('value') == 2){
+                              $("#96").addClass('disable');
+                            }
+
+              if($('#97').attr('value') == 1){
+                              $("#97").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#97').attr('value') == 2){
+                              $("#97").addClass('disable');
+                            }
+
+              if($('#98').attr('value') == 1){
+                              $("#98").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#98').attr('value') == 2){
+                              $("#98").addClass('disable');
+                            }
+
+              if($('#99').attr('value') == 1){
+                              $("#99").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#99').attr('value') == 2){
+                              $("#99").addClass('disable');
+                            }
+
+              if($('#100').attr('value') == 1){
+                              $("#100").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#100').attr('value') == 2){
+                              $("#100").addClass('disable');
+                            }
+
+
+              if($('#101').attr('value') == 1){
+                              $("#101").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#101').attr('value') == 2){
+                              $("#101").addClass('disable');
+                            }
+
+
+              if($('#102').attr('value') == 1){
+                              $("#102").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#102').attr('value') == 2){
+                              $("#102").addClass('disable');
+                            }
+
+              if($('#103').attr('value') == 1){
+                              $("#103").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#103').attr('value') == 2){
+                              $("#103").addClass('disable');
+                            }
+
+              if($('#104').attr('value') == 1){
+                              $("#104").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#104').attr('value') == 2){
+                              $("#104").addClass('disable');
+                            }
+
+              if($('#105').attr('value') == 1){
+                              $("#105").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#105').attr('value') == 2){
+                              $("#105").addClass('disable');
+                            }
+
+              if($('#106').attr('value') == 1){
+                              $("#106").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#106').attr('value') == 2){
+                              $("#106").addClass('disable');
+                            }
+
+              if($('#107').attr('value') == 1){
+                              $("#107").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#107').attr('value') == 2){
+                              $("#107").addClass('disable');
+                            }
+
+              if($('#108').attr('value') == 1){
+                              $("#108").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#108').attr('value') == 2){
+                              $("#108").addClass('disable');
+                            }
+
+
+              if($('#109').attr('value') == 1){
+                              $("#109").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#109').attr('value') == 2){
+                              $("#109").addClass('disable');
+                            }
+
+              if($('#110').attr('value') == 1){
+                              $("#110").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#110').attr('value') == 2){
+                              $("#110").addClass('disable');
+                            }
+
+
+              if($('#111').attr('value') == 1){
+                              $("#111").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#111').attr('value') == 2){
+                              $("#111").addClass('disable');
+                            }
+
+
+              if($('#112').attr('value') == 1){
+                              $("#112").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#112').attr('value') == 2){
+                              $("#112").addClass('disable');
+                            }
+
+
+              if($('#113').attr('value') == 1){
+                              $("#113").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#113').attr('value') == 2){
+                              $("#113").addClass('disable');
+                            }
+
+
+              if($('#114').attr('value') == 1){
+                              $("#114").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#114').attr('value') == 2){
+                              $("#114").addClass('disable');
+                            }
+
+
+              if($('#115').attr('value') == 1){
+                              $("#115").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#115').attr('value') == 2){
+                              $("#115").addClass('disable');
+                            }
+
+
+              if($('#116').attr('value') == 1){
+                              $("#116").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#116').attr('value') == 2){
+                              $("#116").addClass('disable');
+                            }
+
+
+              if($('#117').attr('value') == 1){
+                              $("#117").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#117').attr('value') == 2){
+                              $("#117").addClass('disable');
+                            }
+
+
+              if($('#118').attr('value') == 1){
+                              $("#118").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#118').attr('value') == 2){
+                              $("#118").addClass('disable');
+                            }
+
+
+              if($('#119').attr('value') == 1){
+                              $("#119").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#119').attr('value') == 2){
+                              $("#119").addClass('disable');
+                            }
+
+
+              if($('#120').attr('value') == 1){
+                              $("#120").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#120').attr('value') == 2){
+                              $("#120").addClass('disable');
+                            }
+
+              if($('#121').attr('value') == 1){
+                              $("#121").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#121').attr('value') == 2){
+                              $("#121").addClass('disable');
+                            }
+
+              if($('#122').attr('value') == 1){
+                              $("#122").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#122').attr('value') == 2){
+                              $("#122").addClass('disable');
+                            }
+
+              if($('#123').attr('value') == 1){
+                              $("#123").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#123').attr('value') == 2){
+                              $("#123").addClass('disable');
+                            }
+
+              if($('#124').attr('value') == 1){
+                              $("#124").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#124').attr('value') == 2){
+                              $("#124").addClass('disable');
+                            }
+
+              if($('#125').attr('value') == 1){
+                              $("#125").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#125').attr('value') == 2){
+                              $("#125").addClass('disable');
+                            }
+
+              if($('#126').attr('value') == 1){
+                              $("#126").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#126').attr('value') == 2){
+                              $("#126").addClass('disable');
+                            }
+
+
+              if($('#127').attr('value') == 1){
+                              $("#127").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#127').attr('value') == 2){
+                              $("#127").addClass('disable');
+                            }
+
+              if($('#128').attr('value') == 1){
+                              $("#128").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#128').attr('value') == 2){
+                              $("#128").addClass('disable');
+                            }
+
+              if($('#129').attr('value') == 1){
+                              $("#129").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#129').attr('value') == 2){
+                              $("#129").addClass('disable');
+                            }
+
+              if($('#130').attr('value') == 1){
+                              $("#130").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#130').attr('value') == 2){
+                              $("#130").addClass('disable');
+                            }
+
+              if($('#131').attr('value') == 1){
+                              $("#131").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#131').attr('value') == 2){
+                              $("#131").addClass('disable');
+                            }
+              if($('#132').attr('value') == 1){
+                              $("#132").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#132').attr('value') == 2){
+                              $("#132").addClass('disable');
+                            }
+              if($('#133').attr('value') == 1){
+                              $("#133").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#133').attr('value') == 2){
+                              $("#133").addClass('disable');
+                            }
+              if($('#134').attr('value') == 1){
+                              $("#134").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#131').attr('value') == 2){
+                              $("#134").addClass('disable');
+                            }
+              if($('#135').attr('value') == 1){
+                              $("#135").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#135').attr('value') == 2){
+                              $("#13%").addClass('disable');
+                            }
+              if($('#136').attr('value') == 1){
+                              $("#136").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#136').attr('value') == 2){
+                              $("#136").addClass('disable');
+                            }
+              if($('#137').attr('value') == 1){
+                              $("#137").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#137').attr('value') == 2){
+                              $("#137").addClass('disable');
+                            }
+              if($('#138').attr('value') == 1){
+                              $("#138").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#138').attr('value') == 2){
+                              $("#138").addClass('disable');
+                            }
+              if($('#139').attr('value') == 1){
+                              $("#139").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#139').attr('value') == 2){
+                              $("#139").addClass('disable');
+                            }
+              if($('#140').attr('value') == 1){
+                              $("#140").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#140').attr('value') == 2){
+                              $("#140").addClass('disable');
+                            }
+              if($('#141').attr('value') == 1){
+                              $("#141").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#141').attr('value') == 2){
+                              $("#141").addClass('disable');
+                            }
+              if($('#142').attr('value') == 1){
+                              $("#142").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#142').attr('value') == 2){
+                              $("#142").addClass('disable');
+                            }
+              if($('#143').attr('value') == 1){
+                              $("#143").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#143').attr('value') == 2){
+                              $("#143").addClass('disable');
+                            }
+              if($('#144').attr('value') == 1){
+                              $("#144").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#144').attr('value') == 2){
+                              $("#144").addClass('disable');
+                            }
+              if($('#145').attr('value') == 1){
+                              $("#145").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#145').attr('value') == 2){
+                              $("#145").addClass('disable');
+                            }
+              if($('#146').attr('value') == 1){
+                              $("#146").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#146').attr('value') == 2){
+                              $("#146").addClass('disable');
+                            }
+              if($('#147').attr('value') == 1){
+                              $("#147").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#147').attr('value') == 2){
+                              $("#147").addClass('disable');
+                            }
+              if($('#148').attr('value') == 1){
+                              $("#148").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#148').attr('value') == 2){
+                              $("#148").addClass('disable');
+                            }
+              if($('#149').attr('value') == 1){
+                              $("#149").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#149').attr('value') == 2){
+                              $("#149").addClass('disable');
+                            }
+              if($('#150').attr('value') == 1){
+                              $("#150").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#150').attr('value') == 2){
+                              $("#150").addClass('disable');
+                            }
+              if($('#151').attr('value') == 1){
+                              $("#151").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#151').attr('value') == 2){
+                              $("#151").addClass('disable');
+                            }
+              if($('#152').attr('value') == 1){
+                              $("#152").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#152').attr('value') == 2){
+                              $("#152").addClass('disable');
+                            }
+              if($('#153').attr('value') == 1){
+                              $("#153").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#153').attr('value') == 2){
+                              $("#153").addClass('disable');
+                            }
+              if($('#154').attr('value') == 1){
+                              $("#154").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#154').attr('value') == 2){
+                              $("#154").addClass('disable');
+                            }
+              if($('#155').attr('value') == 1){
+                              $("#155").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#155').attr('value') == 2){
+                              $("#155").addClass('disable');
+                            }
+              if($('#156').attr('value') == 1){
+                              $("#156").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#156').attr('value') == 2){
+                              $("#156").addClass('disable');
+                            }
+              if($('#157').attr('value') == 1){
+                              $("#157").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#157').attr('value') == 2){
+                              $("#157").addClass('disable');
+                            }
+              if($('#158').attr('value') == 1){
+                              $("#158").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#158').attr('value') == 2){
+                              $("#158").addClass('disable');
+                            }
+              if($('#159').attr('value') == 1){
+                              $("#159").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#159').attr('value') == 2){
+                              $("#159").addClass('disable');
+                            }
+              if($('#160').attr('value') == 1){
+                              $("#160").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#160').attr('value') == 2){
+                              $("#160").addClass('disable');
+                            }
+              if($('#161').attr('value') == 1){
+                              $("#161").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#161').attr('value') == 2){
+                              $("#161").addClass('disable');
+                            }
+              if($('#162').attr('value') == 1){
+                              $("#162").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#162').attr('value') == 2){
+                              $("#162").addClass('disable');
+                            }
+              if($('#163').attr('value') == 1){
+                              $("#163").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#163').attr('value') == 2){
+                              $("#163").addClass('disable');
+                            }
+              if($('#164').attr('value') == 1){
+                              $("#164").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#164').attr('value') == 2){
+                              $("#164").addClass('disable');
+                            }
+              if($('#165').attr('value') == 1){
+                              $("#165").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#165').attr('value') == 2){
+                              $("#165").addClass('disable');
+                            }
+              if($('#166').attr('value') == 1){
+                              $("#166").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#166').attr('value') == 2){
+                              $("#166").addClass('disable');
+                            }
+              if($('#167').attr('value') == 1){
+                              $("#167").addClass('enable').on('click', onClickSeat);
+                            }
+                            else if($('#167').attr('value') == 2){
+                              $("#167").addClass('disable');
+                            }
+              }
+              set_seat();
+
+              window.onload = function(){
+              }
+          });
+    </script>
+
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+         data-target="#nav-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Max Movie</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/book-1">예매</a></li>
+          <li><a href="/movie">영화</a></li>
+          <li><a href="/theater">영화관</a></li>
+          <li><a href="/store">스토어</a></li>
+          <li><a href="/customer">고객센터</a></li>
+          <li><a href="/mypage">My page</a></li>
+          <% if(loginsignal2[0].login == 0){ %>
+          <li><a href="#" data-target="#login" data-toggle="modal">로그인</a></li>
+          <% } %>
+          <% if(loginsignal2[0].login == 1){ %>
+          <li><a href="#" data-target="#logout" data-toggle="modal">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <% if(loginsignal2[0].login == 1){ %>
+        <form class="navbar-form navbar-right">
+          <font color=white size=4 fact=궁서> <%= loginsignal[0].name%>님 환영 합니다 </font>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+    <div class="modal fade" id="login" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h3 style="text-align:center;" class="modal-title">로그인</h3>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                  <input type="hidden" name="logout_signal" value="0"/>
+                      <div class="form-group">
+                          <label for="username-email">아이디</label>
+                          <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                          <label for="password">비밀번호</label>
+                          <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Login</button>
+
+                      </div>
+                      <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm"><%=loginsignal[0].id%></a></span>
+                      <hr />
+                      <div class="form-group">
+                          <a href="/join" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                      </div>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="logout" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- header -->
+          <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 style="text-align:center;" class="modal-title">로그아웃 하시겠습니까?</h4>
+            </div>
+            <!-- body -->
+            <div class="box">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="login-box well">
+                  <form action="/" accept-charset="UTF-8" role="form" method="post" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Login">Yes</button>
+                          <input type="hidden" name="logout_signal" value="1"/>
+                          <input type="hidden" name="logout_id" value="<%=loginsignal[0].id%>"/>
+
+                  </form>
+
+                  <form action="/book" accept-charset="UTF-8" role="form" method="get" action="">
+                          <button type="submit" class="btn btn-default btn-block m-t-md" value="Logout">No</button>
+                          <input type="hidden" name="logout_signal" value="0"/>
+                  </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="myCarousel" class="carousel">
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="fill" style="background-image:url('img/book_image.jpg');">
+        </div>
+        <div class="carousel-caption" style="text-align:left">
+          <h2>예매</h2>
+          <h4>Ticketing</h4>
+        </div>
+      </div>
+  </header>
+  <hr>
+
+  <div class="container">
+      <br><br>
+        <ol class="myprogress">
+          <li class="is-complete" data-step="1"> <!-- is-active / is-complete / myprogress__last!-->
+            <br><h4>영화 선택</h4>
+          </li>
+          <li class="is-complete" data-step="2">
+            <br><h4>날짜 선택</h4>
+          </li>
+          <li class="is-complete" data-step="3">
+            <br><h4>영화관 선택</h4>
+          </li>
+          <li class="is-active" data-step="4">
+            <br><h4>좌석 선택</h4>
+          </li>
+          <li class="" data-step="5">
+            <br><h4>결제</h4>
+          </li>
+        </ol>
+  </div>
+
+  <!-- !-->
+   <script type="text/javascript">
+      var adult = 0;
+      var child = 0;
+      var total = 0;
+      $(function(){
+       $("#adult0").change(function(){
+         $("#adult_num").text(0);
+         $("#adult_price").text(0);
+         adult = 0;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#adult1").change(function(){
+         $("#adult_num").text(1);
+         $("#adult_price").text(10000);
+         adult = 10000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#adult2").change(function(){
+         $("#adult_num").text(2);
+         $("#adult_price").text(20000);
+         adult = 20000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#adult3").change(function(){
+         $("#adult_num").text(3);
+         $("#adult_price").text(30000);
+         adult = 30000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#adult4").change(function(){
+         $("#adult_num").text(4);
+         $("#adult_price").text(40000);
+         adult = 40000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#adult5").change(function(){
+         $("#adult_num").text(5);
+         $("#adult_price").text(50000);
+         adult = 50000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#adult6").change(function(){
+         $("#adult_num").text(6);
+         $("#adult_price").text(60000);
+         adult = 60000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid0").change(function(){
+         $("#kid_num").text(0);
+         $("#kid_price").text(0);
+         child = 0;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid1").change(function(){
+         $("#kid_num").text(1);
+         $("#kid_price").text(8000);
+         child = 8000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid2").change(function(){
+         $("#kid_num").text(2);
+         $("#kid_price").text(16000);
+         child = 16000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid3").change(function(){
+         $("#kid_num").text(3);
+         $("#kid_price").text(24000);
+         child = 24000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid4").change(function(){
+         $("#kid_num").text(4);
+         $("#kid_price").text(32000);
+         child = 32000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid5").change(function(){
+         $("#kid_num").text(5);
+         $("#kid_price").text(40000);
+         child = 40000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+       $("#kid6").change(function(){
+         $("#kid_num").text(6);
+         $("#kid_price").text(48000);
+         child = 48000;
+         total = adult + child;
+         $("#total_value").text(total);
+       });
+     });
+   </script>
+   <!-- !-->
+
+  <div class="container">
+    <hr class="colorgraph">
+      <div class="btn-row" style="text-align:left" id="adult_bt">
+        <strong>성&nbsp;인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default active">
+            <input type="radio" name="options" id="adult0"> 0
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="adult1"> 1
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="adult2"> 2
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="adult3"> 3
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="adult4"> 4
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="adult5"> 5
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="adult6"> 6
+          </label>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><span id="adult_num">0</span></strong>
+        <strong> 명 : </strong>
+        <strong><span id="adult_price" value="0">0</span><strong>
+        <strong> 원 </strong></span>
+      </div>
+      <div class="btn-row">&nbsp;</div>
+
+      <div class="btn-row" style="text-align:left" id="kid_bt">
+        <strong>청소년&nbsp;&nbsp;</strong>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default active">
+            <input type="radio" name="options" id="kid0"> 0
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="kid1"> 1
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="kid2"> 2
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="kid3"> 3
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="kid4"> 4
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="kid5"> 5
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="kid6"> 6
+          </label>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span id="kid_num">0</span></strong>
+        <strong> 명 : </strong>
+        <strong><span id="kid_price" value="0">0</span></strong>
+        <strong> 원 </strong></span>
+        <h4 style="text-align:right">총 결제 금액 :
+          <span id="total_value" value="0">0</span>
+          원
+        &nbsp;&nbsp;&nbsp;
+        <span style="float:right">
+        <button type="button" class="btn btn-labeled btn-success">
+          선택 완료
+        </button>
+        </span>
+        </h4>
+      </div>
+
+        <hr class="colorgraph">
+        <style>
+        .myjumbotron {
+          padding-top: 20px;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          margin-left: 180px;
+          margin-right: 180px;
+          color: inherit;
+          background-color: #eee;
+        }
+        </style>
+
+        <div class="myjumbotron">
+          <h4>screen</h4>
+        </div>
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>A&nbsp;&nbsp;</strong></div>
+          <div id="0" name="0" class="seat" data-x="0" data-y="0" value="<%=seat[0].seat[0]%>">
+          </div>
+          <div id="1" class="seat" data-x="1" data-y="0" value="<%=seat[0].seat[1]%>">
+          </div>
+          <div id="2" class="seat" data-x="2" data-y="0" value="<%=seat[0].seat[2]%>">
+          </div>
+          <div id="3" class="seat" data-x="3" data-y="0" value="<%=seat[0].seat[3]%>">
+          </div>
+          <div id="4" class="seat" data-x="4" data-y="0" value="<%=seat[0].seat[4]%>">
+          </div>
+          <div id="5" class="seat" data-x="5" data-y="0" value="<%=seat[0].seat[5]%>">
+          </div>
+          <div id="6" class="seat" data-x="6" data-y="0" value="<%=seat[0].seat[6]%>">
+          </div>
+          <div id="7" class="seat" data-x="7" data-y="0" value="<%=seat[0].seat[7]%>">
+          </div>
+          <div id="8" class="seat" data-x="8" data-y="0" value="<%=seat[0].seat[8]%>">
+          </div>
+          <div id="9" class="seat" data-x="9" data-y="0" value="<%=seat[0].seat[9]%>">
+          </div>
+          <div id="10" class="seat" data-x="10" data-y="0" value="<%=seat[0].seat[10]%>">
+          </div>
+          <div id="11" class="seat" data-x="11" data-y="0" value="<%=seat[0].seat[11]%>">
+          </div>
+          <div id="12" class="seat" data-x="12" data-y="0" value="<%=seat[0].seat[12]%>">
+          </div>
+          <div id="13" class="seat" data-x="13" data-y="0" value="<%=seat[0].seat[13]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>B&nbsp;&nbsp;</strong></div>
+          <div id="14" class="seat" data-x="0" data-y="1"  value="<%=seat[0].seat[14]%>">
+          </div>
+          <div id="15" class="seat" data-x="1" data-y="1" value="<%=seat[0].seat[15]%>">
+          </div>
+          <div id="16" class="seat" data-x="2" data-y="1" value="<%=seat[0].seat[16]%>">
+          </div>
+          <div id="17" class="seat" data-x="3" data-y="1" value="<%=seat[0].seat[17]%>">
+          </div>
+          <div id="18" class="seat" data-x="3" data-y="1" value="<%=seat[0].seat[18]%>">
+          </div>
+          <div id="19" class="seat" data-x="4" data-y="1" value="<%=seat[0].seat[19]%>">
+          </div>
+          <div id="20" class="seat" data-x="5" data-y="1" value="<%=seat[0].seat[20]%>">
+          </div>
+          <div id="21" class="seat" data-x="6" data-y="1" value="<%=seat[0].seat[21]%>">
+          </div>
+          <div id="22" class="seat" data-x="7" data-y="1" value="<%=seat[0].seat[22]%>">
+          </div>
+          <div id="23" class="seat" data-x="8" data-y="1" value="<%=seat[0].seat[23]%>">
+          </div>
+          <div id="24" class="seat" data-x="9" data-y="1" value="<%=seat[0].seat[24]%>">
+          </div>
+          <div id="25" class="seat" data-x="10" data-y="1" value="<%=seat[0].seat[25]%>">
+          </div>
+          <div id="26" class="seat" data-x="11" data-y="1" value="<%=seat[0].seat[26]%>">
+          </div>
+          <div id="27" class="seat" data-x="12" data-y="1" value="<%=seat[0].seat[27]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>C&nbsp;&nbsp;</strong></div>
+          <div id="28" class="seat" data-x="0" data-y="2" value="<%=seat[0].seat[28]%>">
+          </div>
+          <div id="29" class="seat" data-x="1" data-y="2" value="<%=seat[0].seat[29]%>">
+          </div>
+          <div id="30" class="seat" data-x="2" data-y="2" value="<%=seat[0].seat[30]%>">
+          </div>
+          <div id="31" class="seat" data-x="3" data-y="2" value="<%=seat[0].seat[31]%>">
+          </div>
+          <div id="32" class="seat" data-x="4" data-y="2" value="<%=seat[0].seat[32]%>">
+          </div>
+          <div id="33" class="seat" data-x="5" data-y="2" value="<%=seat[0].seat[33]%>">
+          </div>
+          <div id="34" class="seat" data-x="6" data-y="2" value="<%=seat[0].seat[34]%>">
+          </div>
+          <div id="35" class="seat" data-x="7" data-y="2" value="<%=seat[0].seat[35]%>">
+          </div>
+          <div id="36" class="seat" data-x="8" data-y="2" value="<%=seat[0].seat[36]%>">
+          </div>
+          <div id="37" class="seat" data-x="9" data-y="2" value="<%=seat[0].seat[37]%>">
+          </div>
+          <div id="38" class="seat" data-x="10" data-y="2" value="<%=seat[0].seat[38]%>">
+          </div>
+          <div id="39" class="seat" data-x="11" data-y="2" value="<%=seat[0].seat[39]%>">
+          </div>
+          <div id="40" class="seat" data-x="12" data-y="2" value="<%=seat[0].seat[40]%>">
+          </div>
+          <div id="41" class="seat" data-x="13" data-y="2" value="<%=seat[0].seat[41]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>D&nbsp;&nbsp;</strong></div>
+          <div id="42" class="seat" data-x="0" data-y="3" value="<%=seat[0].seat[42]%>">
+          </div>
+          <div id="43" class="seat" data-x="1" data-y="3" value="<%=seat[0].seat[43]%>">
+          </div>
+          <div id="44" class="seat" data-x="2" data-y="3" value="<%=seat[0].seat[44]%>">
+          </div>
+          <div id="45" class="seat" data-x="3" data-y="3" value="<%=seat[0].seat[45]%>">
+          </div>
+          <div id="46" class="seat" data-x="4" data-y="3" value="<%=seat[0].seat[46]%>">
+          </div>
+          <div id="47" class="seat" data-x="5" data-y="3" value="<%=seat[0].seat[47]%>">
+          </div>
+          <div id="48" class="seat" data-x="6" data-y="3" value="<%=seat[0].seat[48]%>">
+          </div>
+          <div id="49" class="seat" data-x="7" data-y="3" value="<%=seat[0].seat[49]%>">
+          </div>
+          <div id="50" class="seat" data-x="8" data-y="3" value="<%=seat[0].seat[50]%>">
+          </div>
+          <div id="51" class="seat" data-x="9" data-y="3" value="<%=seat[0].seat[51]%>">
+          </div>
+          <div id="52" class="seat" data-x="10" data-y="3" value="<%=seat[0].seat[52]%>">
+          </div>
+          <div id="53" class="seat" data-x="11" data-y="3" value="<%=seat[0].seat[53]%>">
+          </div>
+          <div id="54" class="seat" data-x="12" data-y="3" value="<%=seat[0].seat[54]%>">
+          </div>
+          <div id="55" class="seat" data-x="13" data-y="3" value="<%=seat[0].seat[55]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>E&nbsp;&nbsp;</strong></div>
+          <div id="56" class="seat" data-x="0" data-y="4" value="<%=seat[0].seat[56]%>">
+          </div>
+          <div id="57" class="seat" data-x="1" data-y="4" value="<%=seat[0].seat[57]%>">
+          </div>
+          <div id="58" class="seat" data-x="2" data-y="4" value="<%=seat[0].seat[58]%>">
+          </div>
+          <div id="59" class="seat" data-x="3" data-y="4" value="<%=seat[0].seat[59]%>">
+          </div>
+          <div id="60" class="seat" data-x="4" data-y="4" value="<%=seat[0].seat[60]%>">
+          </div>
+          <div id="61" class="seat" data-x="5" data-y="4" value="<%=seat[0].seat[61]%>">
+          </div>
+          <div id="62" class="seat" data-x="6" data-y="4" value="<%=seat[0].seat[62]%>">
+          </div>
+          <div id="63" class="seat" data-x="7" data-y="4" value="<%=seat[0].seat[63]%>">
+          </div>
+          <div id="64" class="seat" data-x="8" data-y="4" value="<%=seat[0].seat[64]%>">
+          </div>
+          <div id="65" class="seat" data-x="9" data-y="4" value="<%=seat[0].seat[65]%>">
+          </div>
+          <div id="66" class="seat" data-x="10" data-y="4" value="<%=seat[0].seat[66]%>">
+          </div>
+          <div id="67" class="seat" data-x="11" data-y="4" value="<%=seat[0].seat[67]%>">
+          </div>
+          <div id="68" class="seat" data-x="12" data-y="4" value="<%=seat[0].seat[68]%>">
+          </div>
+          <div id="69" class="seat" data-x="13" data-y="4" value="<%=seat[0].seat[69]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>F&nbsp;&nbsp;</strong></div>
+          <div id="70" class="seat" data-x="0" data-y="5" value="<%=seat[0].seat[70]%>">
+          </div>
+          <div id="71" class="seat" data-x="1" data-y="5" value="<%=seat[0].seat[71]%>">
+          </div>
+          <div id="72" class="seat" data-x="2" data-y="5" value="<%=seat[0].seat[72]%>">
+          </div>
+          <div id="73" class="seat" data-x="3" data-y="5" value="<%=seat[0].seat[73]%>">
+          </div>
+          <div id="74" class="seat" data-x="4" data-y="5" value="<%=seat[0].seat[74]%>">
+          </div>
+          <div id="75" class="seat" data-x="5" data-y="5" value="<%=seat[0].seat[75]%>">
+          </div>
+          <div id="76" class="seat" data-x="6" data-y="5" value="<%=seat[0].seat[76]%>">
+          </div>
+          <div id="77" class="seat" data-x="7" data-y="5" value="<%=seat[0].seat[77]%>">
+          </div>
+          <div id="78" class="seat" data-x="8" data-y="5" value="<%=seat[0].seat[78]%>">
+          </div>
+          <div id="79" class="seat" data-x="9" data-y="5" value="<%=seat[0].seat[79]%>">
+          </div>
+          <div id="80" class="seat" data-x="10" data-y="5" value="<%=seat[0].seat[80]%>">
+          </div>
+          <div id="81" class="seat" data-x="11" data-y="5" value="<%=seat[0].seat[81]%>">
+          </div>
+          <div id="82" class="seat" data-x="12" data-y="5" value="<%=seat[0].seat[82]%>">
+          </div>
+          <div id="83" class="seat" data-x="13" data-y="5" value="<%=seat[0].seat[83]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>G&nbsp;&nbsp;</strong></div>
+          <div id="84" class="seat" data-x="0" data-y="6" value="<%=seat[0].seat[84]%>">
+          </div>
+          <div id="85" class="seat" data-x="1" data-y="6" value="<%=seat[0].seat[85]%>">
+          </div>
+          <div id="86" class="seat" data-x="2" data-y="6" value="<%=seat[0].seat[86]%>">
+          </div>
+          <div id="87" class="seat" data-x="3" data-y="6" value="<%=seat[0].seat[87]%>">
+          </div>
+          <div id="88" class="seat" data-x="4" data-y="6" value="<%=seat[0].seat[88]%>">
+          </div>
+          <div id="89" class="seat" data-x="5" data-y="6" value="<%=seat[0].seat[89]%>">
+          </div>
+          <div id="90" class="seat" data-x="6" data-y="6" value="<%=seat[0].seat[90]%>">
+          </div>
+          <div id="91" class="seat" data-x="7" data-y="6" value="<%=seat[0].seat[91]%>">
+          </div>
+          <div id="92" class="seat" data-x="8" data-y="6" value="<%=seat[0].seat[92]%>">
+          </div>
+          <div id="93" class="seat" data-x="9" data-y="6" value="<%=seat[0].seat[93]%>">
+          </div>
+          <div id="94" class="seat" data-x="10" data-y="6" value="<%=seat[0].seat[94]%>">
+          </div>
+          <div id="95" class="seat" data-x="11" data-y="6" value="<%=seat[0].seat[95]%>">
+          </div>
+          <div id="96" class="seat" data-x="12" data-y="6" value="<%=seat[0].seat[96]%>">
+          </div>
+          <div id="97" class="seat" data-x="13" data-y="6" value="<%=seat[0].seat[97]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>H&nbsp;&nbsp;</strong></div>
+          <div id="98" class="seat" data-x="0" data-y="7" value="<%=seat[0].seat[98]%>">
+          </div>
+          <div id="99" class="seat" data-x="1" data-y="7" value="<%=seat[0].seat[99]%>">
+          </div>
+          <div id="100" class="seat" data-x="2" data-y="7" value="<%=seat[0].seat[100]%>">
+          </div>
+          <div id="101" class="seat" data-x="3" data-y="7" value="<%=seat[0].seat[101]%>">
+          </div>
+          <div id="102" class="seat" data-x="4" data-y="7" value="<%=seat[0].seat[102]%>">
+          </div>
+          <div id="103" class="seat" data-x="5" data-y="7" value="<%=seat[0].seat[103]%>">
+          </div>
+          <div id="104" class="seat" data-x="6" data-y="7" value="<%=seat[0].seat[104]%>">
+          </div>
+          <div id="105" class="seat" data-x="7" data-y="7" value="<%=seat[0].seat[105]%>">
+          </div>
+          <div id="106" class="seat" data-x="8" data-y="7" value="<%=seat[0].seat[106]%>">
+          </div>
+          <div id="107" class="seat" data-x="9" data-y="7" value="<%=seat[0].seat[107]%>">
+          </div>
+          <div id="108" class="seat" data-x="10" data-y="7" value="<%=seat[0].seat[108]%>">
+          </div>
+          <div id="109" class="seat" data-x="11" data-y="7" value="<%=seat[0].seat[109]%>">
+          </div>
+          <div id="110" class="seat" data-x="12" data-y="7" value="<%=seat[0].seat[110]%>">
+          </div>
+          <div id="111" class="seat" data-x="13" data-y="7" value="<%=seat[0].seat[111]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>I&nbsp;&nbsp;</strong></div>
+          <div id="112" class="seat" data-x="0" data-y="8" value="<%=seat[0].seat[112]%>">
+          </div>
+          <div id="113" class="seat" data-x="1" data-y="8" value="<%=seat[0].seat[113]%>">
+          </div>
+          <div id="114" class="seat" data-x="2" data-y="8" value="<%=seat[0].seat[114]%>">
+          </div>
+          <div id="115" class="seat" data-x="3" data-y="8" value="<%=seat[0].seat[115]%>">
+          </div>
+          <div id="116" class="seat" data-x="4" data-y="8" value="<%=seat[0].seat[116]%>">
+          </div>
+          <div id="117" class="seat" data-x="5" data-y="8" value="<%=seat[0].seat[117]%>">
+          </div>
+          <div id="118" class="seat" data-x="6" data-y="8" value="<%=seat[0].seat[118]%>">
+          </div>
+          <div id="119" class="seat" data-x="7" data-y="8" value="<%=seat[0].seat[119]%>">
+          </div>
+          <div id="120" class="seat" data-x="8" data-y="8" value="<%=seat[0].seat[120]%>">
+          </div>
+          <div id="121" class="seat" data-x="9" data-y="8" value="<%=seat[0].seat[121]%>">
+          </div>
+          <div id="122" class="seat" data-x="10" data-y="8" value="<%=seat[0].seat[122]%>">
+          </div>
+          <div id="123" class="seat" data-x="11" data-y="8" value="<%=seat[0].seat[123]%>">
+          </div>
+          <div id="124" class="seat" data-x="12" data-y="8" value="<%=seat[0].seat[124]%>">
+          </div>
+          <div id="125" class="seat" data-x="13" data-y="8" value="<%=seat[0].seat[125]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>J&nbsp;&nbsp;</strong></div>
+          <div id="126" class="seat" data-x="0" data-y="9" value="<%=seat[0].seat[126]%>">
+          </div>
+          <div id="127" class="seat" data-x="1" data-y="9" value="<%=seat[0].seat[127]%>">
+          </div>
+          <div id="128" class="seat" data-x="2" data-y="9" value="<%=seat[0].seat[128]%>">
+          </div>
+          <div id="129" class="seat" data-x="3" data-y="9" value="<%=seat[0].seat[129]%>">
+          </div>
+          <div id="130" class="seat" data-x="4" data-y="9" value="<%=seat[0].seat[130]%>">
+          </div>
+          <div id="131" class="seat" data-x="5" data-y="9" value="<%=seat[0].seat[131]%>">
+          </div>
+          <div id="132" class="seat" data-x="6" data-y="9" value="<%=seat[0].seat[132]%>">
+          </div>
+          <div id="133" class="seat" data-x="7" data-y="9" value="<%=seat[0].seat[133]%>">
+          </div>
+          <div id="134" class="seat" data-x="8" data-y="9" value="<%=seat[0].seat[134]%>">
+          </div>
+          <div id="135" class="seat" data-x="9" data-y="9" value="<%=seat[0].seat[135]%>">
+          </div>
+          <div id="136" class="seat" data-x="10" data-y="9" value="<%=seat[0].seat[136]%>">
+          </div>
+          <div id="137" class="seat" data-x="11" data-y="9" value="<%=seat[0].seat[137]%>">
+          </div>
+          <div id="138" class="seat" data-x="12" data-y="9" value="<%=seat[0].seat[138]%>">
+          </div>
+          <div id="139" class="seat" data-x="13" data-y="9" value="<%=seat[0].seat[139]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>K&nbsp;&nbsp;</strong></div>
+          <div id="140" class="seat" data-x="0" data-y="10" value="<%=seat[0].seat[140]%>">
+          </div>
+          <div id="141" class="seat" data-x="1" data-y="10" value="<%=seat[0].seat[141]%>">
+          </div>
+          <div id="142" class="seat" data-x="2" data-y="10" value="<%=seat[0].seat[142]%>">
+          </div>
+          <div id="143" class="seat" data-x="3" data-y="10" value="<%=seat[0].seat[143]%>">
+          </div>
+          <div id="144" class="seat" data-x="4" data-y="10" value="<%=seat[0].seat[144]%>">
+          </div>
+          <div id="145" class="seat" data-x="5" data-y="10" value="<%=seat[0].seat[145]%>">
+          </div>
+          <div id="146" class="seat" data-x="6" data-y="10" value="<%=seat[0].seat[146]%>">
+          </div>
+          <div id="147" class="seat" data-x="7" data-y="10" value="<%=seat[0].seat[147]%>">
+          </div>
+          <div id="148" class="seat" data-x="8" data-y="10" value="<%=seat[0].seat[148]%>">
+          </div>
+          <div id="149" class="seat" data-x="9" data-y="10" value="<%=seat[0].seat[149]%>">
+          </div>
+          <div id="150" class="seat" data-x="10" data-y="10" value="<%=seat[0].seat[150]%>">
+          </div>
+          <div id="151" class="seat" data-x="11" data-y="10" value="<%=seat[0].seat[151]%>">
+          </div>
+          <div id="152" class="seat" data-x="12" data-y="10" value="<%=seat[0].seat[152]%>">
+          </div>
+          <div id="153" class="seat" data-x="13" data-y="10" value="<%=seat[0].seat[153]%>">
+          </div>
+        </div><br>
+
+        <div class="" style="display:inline-block;">
+          <div class="seat"><br><strong>L&nbsp;&nbsp;</strong></div>
+          <div id="154" class="seat" data-x="0" data-y="11" value="<%=seat[0].seat[154]%>">
+          </div>
+          <div id="155" class="seat" data-x="1" data-y="11" value="<%=seat[0].seat[155]%>">
+          </div>
+          <div id="156" class="seat" data-x="2" data-y="11" value="<%=seat[0].seat[156]%>">
+          </div>
+          <div id="157" class="seat" data-x="3" data-y="11" value="<%=seat[0].seat[157]%>">
+          </div>
+          <div id="158" class="seat" data-x="4" data-y="11" value="<%=seat[0].seat[158]%>">
+          </div>
+          <div id="159" class="seat" data-x="5" data-y="11" value="<%=seat[0].seat[159]%>">
+          </div>
+          <div id="160" class="seat" data-x="6" data-y="11" value="<%=seat[0].seat[160]%>">
+          </div>
+          <div id="161" class="seat" data-x="7" data-y="11" value="<%=seat[0].seat[161]%>">
+          </div>
+          <div id="162" class="seat" data-x="8" data-y="11" value="<%=seat[0].seat[162]%>">
+          </div>
+          <div id="163" class="seat" data-x="9" data-y="11" value="<%=seat[0].seat[163]%>">
+          </div>
+          <div id="164" class="seat" data-x="10" data-y="11" value="<%=seat[0].seat[164]%>">
+          </div>
+          <div id="165" class="seat" data-x="11" data-y="11" value="<%=seat[0].seat[165]%>">
+          </div>
+          <div id="166" class="seat" data-x="12" data-y="11" value="<%=seat[0].seat[166]%>">
+          </div>
+          <div id="167" class="seat" data-x="13" data-y="11" value="<%=seat[0].seat[167]%>">
+          </div>
+        </div><br>
+  </div>
+    <hr><hr><hr><hr>
+  <div class="container">
+
+  </div>
+</body>
+</html>

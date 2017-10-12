@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/current"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:background="#22FF33"
+                android:text="날짜"/>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <Button
+            android:id="@+id/button_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수입 내역"
+            android:layout_weight="1"
+            android:layout_gravity="left"/>
+        <Button
+            android:id="@+id/button_outcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지출 내역"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/button_memo"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/memo"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:scaleType="fitXY"
+            android:background="@color/color_red1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="11">
+    <EditText
+        android:id="@+id/delete_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:layout_gravity="center_horizontal"
+        />
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:layout_gravity="right"
+        android:background="#22bbaa"
+        android:text="삭제"/>
+
+</LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6">
+        <Button
+            android:id="@+id/result_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="#bbaadd"
+            android:textColor="#0000ff"
+            android:text="0원"/>
+        <Button
+            android:id="@+id/result_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="#bbaadd"
+            android:textColor="#ff0000"
+            android:text="0원"/>
+        <Button
+            android:id="@+id/result_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="#bbaadd"
+            android:textColor="#ff0000"
+            android:text="0원"/>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:background="@color/color_ffffff" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="금액"
+            android:textColor="#ff6677"
+            android:layout_weight="2"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="분류"
+            android:textColor="#ff6677"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="계산방법"
+            android:textColor="#ff6677"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="내용"
+            android:textColor="#ff6677"
+            android:layout_weight="3"/>
+
+    </LinearLayout >
+    <ScrollView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+</LinearLayout>
