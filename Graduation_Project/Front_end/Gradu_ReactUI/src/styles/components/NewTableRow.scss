@@ -1,0 +1,52 @@
+.header {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+
+.row {
+	height:53px;
+	box-sizing: border-box;
+	color: #212121;
+	
+	div{
+		float: left;
+		height:53px;
+		box-sizing: border-box;
+		line-height:53px;
+		padding-left: 30px;
+		font-size: 16px;
+	}
+	font-size: 16px;
+	background: #fff;
+	transition: background 0.3s ease;
+	
+}
+
+.not-header {
+	&:hover {
+		background: #58D3F7;
+	}
+}
+
+
+.text-1 {
+	width: 200px;
+	height: 53px;
+
+
+}
+
+.text-2 {
+	width: 180px;
+	height: 100%;
+	
+	padding-left: 15px;
+}
+
+.text-3 {
+	width: 190px;
+}
+
+.text-4 {
+
+}

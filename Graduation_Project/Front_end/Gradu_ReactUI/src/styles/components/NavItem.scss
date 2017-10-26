@@ -1,0 +1,19 @@
+.nav-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 3rem;
+	padding-right: 3rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	cursor: pointer;
+	font-family: 'HelveticaNeueLTPro';
+	text-decoration: none;
+	color: #808080;
+
+	&:hover {
+		background-color: #1C97FD;
+		color: #ffffff;
+	}
+
+}

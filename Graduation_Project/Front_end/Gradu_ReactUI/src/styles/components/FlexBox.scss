@@ -1,0 +1,7 @@
+.flex-box {
+	display: flex;
+
+	&.center {
+		justify-content: center;
+	}
+}
