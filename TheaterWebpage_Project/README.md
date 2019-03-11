@@ -10,3 +10,9 @@ Background
 -------------
 웹 기술을 배우는 프로젝트에서 진행한 영화관 웹페이지 구현 프로젝트였습니다. Back-end는 Node.js 및 MySQL을 이용하여 구성하였고, Front-end는 기본 베이스는 HTML(ejs)로 css나 디자인, 기능들은 bootstrap에 있는 class들을 사용하여 구성하였습니다.
 3명이서 진행한 프로젝트였으며 디자인, Back-end, Front-end 3가지 역할로 나눴고 저는 Back-end를 전적으로 맡았습니다.
+
+Documents
+-------------
+
+> - Developer_Page : 회원관리, 시간별로 영화등록, 영화관 등록, 상영예정작 등 영화관을 관리하기 위한 관리자 페이지 입니다. 
+> - Software_Page : 영화관을 이용하는 사용자쪽의 페이지 입니다.
