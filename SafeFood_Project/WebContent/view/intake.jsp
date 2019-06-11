@@ -1,63 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.ssafy.vo.Food"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>먹거리 프로젝트</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<style><%@ include file="basiclayout.css"%></style>
-<style type="text/css">
-.loginform {
-	text-align: center;
-}
-
-.col-md-3 {
-	text-align: left;
-}
-
-.row {
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-.button {
-	height: 25px; color : white;
-	background-color: #3c3c3c;
-	margin-left: 3px;
-	border: none;
-	color: white;
-}
-
-.col-md-2 {
-	text-align: right;
-}
-
-.loginform hr {
-	width: 600px; 
-	border : 0.5px solid #b4b4b4;
-	align-self: center;
-}
-
-
-</style>
+<style><%@include file="basiclayout.css"%></style>
 </head>
 <body>
-	<%
-		if(request.getAttribute("status") != null) {
-			String status = (String) request.getAttribute("status");
-			if(status.equals("fail")) {
-				out.println("<script>alert('아이디 혹은 패스워드가 일치하지 않습니다.');</script>");	
-			}
-		}
-	%>
-
-
 	<div class="container">
 		<header>
 			<!-- nav : 네비게이션 시작을 알려주는 태그 (div로 해도되긴하지만 알려주기위해 사용)
@@ -126,6 +83,14 @@
 				<div class="item active">
 					<img src="img/banner_img.png" alt="First slide">
 				</div>
+				<!-- 
+                <div class="item">
+                   <img src="./slide2.jpg" alt="Second slide">               
+                </div>
+                <div class="item">
+                   <img src="./slide3.jpg" alt="Third slide">                 
+                </div>
+                 -->
 			</div>
 			<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
@@ -134,42 +99,32 @@
 				data-slide="next"> <span class="icon-next"></span>
 			</a>
 		</div>
-		<div class="loginform">
-			<div class="row">
-				<div class="col-md-offset-3 col-md-3">
-					<h2>LOGIN</h2>
-				</div>
-				<div class="col-md-offset-6"></div>
-			</div>
-				<hr>
-			<form action="loginMember.mvc" role="login">
-				<div class="row">
-					<div class="col-md-offset-3 col-md-3">
-						<span>ID</span>
-					</div>
-					<div class="col-md-3">
-						<input type="text" name="id">
-					</div>
-					<div class="col-md-offset-3"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-3 col-md-3">
-						<span>PASSWORD</span>
-					</div>
-					<div class="col-md-3">
-						<input type="password" name="pass">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-6 col-md-3">
-						<input type="button" class="button" value="비밀번호 찾기" onclick="location.href='passfind.mvc'">
-						<input type="button" class="button" value="회원가입" onclick="location.href='join.mvc'">
-						<button type="submit" class="button">로그인</button>
-					</div>
-					<div class="col-md-offset-4"></div>
-				</div>
-			</form>
+
+		<hr>
+		<div class="container list">
+			<table>
+				<%
+					ArrayList<Food> li = (ArrayList<Food>) request.getAttribute("list");
+					ArrayList<Integer> li2 = (ArrayList<Integer>) request.getAttribute("list2");
+					for (int i = 0; i < li.size(); i++) {
+				%>
+				<tr>
+					<td><img src="img/<%=li.get(i).getName()%>.jpg" width="150px" height="150px"></td>
+					<td><a href="showDetail.mvc?code=<%=li.get(i).getCode()%>"><%=li.get(i).getName()%></a>
+						<p><%=li.get(i).getMaterials()%></p>
+						<span>섭취 갯수 : <%= li2.get(i) %></span>
+						<a href="intakeDelete.mvc?code=<%=li.get(i).getCode()%>">삭제</a>
+					</td>
+				</tr> 
+
+				<%
+					}
+				%>
+			</table>
 		</div>
+		<!-- end of container -->
+
+
 	</div>
 	<div class="container-fluid">
 		<footer>
@@ -190,5 +145,9 @@
 			</nav>
 		</footer>
 	</div>
+
+
+
+
 </body>
 </html>

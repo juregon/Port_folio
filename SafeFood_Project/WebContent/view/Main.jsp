@@ -1,63 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>먹거리 프로젝트</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<style><%@ include file="basiclayout.css"%></style>
-<style type="text/css">
-.loginform {
-	text-align: center;
-}
-
-.col-md-3 {
-	text-align: left;
-}
-
-.row {
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-.button {
-	height: 25px; color : white;
-	background-color: #3c3c3c;
-	margin-left: 3px;
-	border: none;
-	color: white;
-}
-
-.col-md-2 {
-	text-align: right;
-}
-
-.loginform hr {
-	width: 600px; 
-	border : 0.5px solid #b4b4b4;
-	align-self: center;
-}
-
-
-</style>
+<style><%@include file="basiclayout.css"%></style>
 </head>
 <body>
-	<%
+<%
 		if(request.getAttribute("status") != null) {
-			String status = (String) request.getAttribute("status");
-			if(status.equals("fail")) {
-				out.println("<script>alert('아이디 혹은 패스워드가 일치하지 않습니다.');</script>");	
-			}
+			String msg = (String) request.getAttribute("msg");
+			out.println("<script>alert('"+msg+"');</script>");	
 		}
 	%>
-
-
+	
 	<div class="container">
 		<header>
 			<!-- nav : 네비게이션 시작을 알려주는 태그 (div로 해도되긴하지만 알려주기위해 사용)
@@ -113,7 +77,8 @@
 	<!-- 본문 -->
 	<div class="container">
 		<!-- 배너 -->
-		<div id="carousel-example-generic" class="carousel slide">
+		<div class="banner">
+		<div id="carousel-example-generic" class="carousel slide banner">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
 				<li data-target="#carousel-example-generic" data-slide-to="0"
@@ -126,6 +91,14 @@
 				<div class="item active">
 					<img src="img/banner_img.png" alt="First slide">
 				</div>
+				<!-- 
+                <div class="item">
+                   <img src="./slide2.jpg" alt="Second slide">               
+                </div>
+                <div class="item">
+                   <img src="./slide3.jpg" alt="Third slide">                 
+                </div>
+                 -->
 			</div>
 			<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
@@ -134,42 +107,16 @@
 				data-slide="next"> <span class="icon-next"></span>
 			</a>
 		</div>
-		<div class="loginform">
-			<div class="row">
-				<div class="col-md-offset-3 col-md-3">
-					<h2>LOGIN</h2>
-				</div>
-				<div class="col-md-offset-6"></div>
-			</div>
-				<hr>
-			<form action="loginMember.mvc" role="login">
-				<div class="row">
-					<div class="col-md-offset-3 col-md-3">
-						<span>ID</span>
-					</div>
-					<div class="col-md-3">
-						<input type="text" name="id">
-					</div>
-					<div class="col-md-offset-3"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-3 col-md-3">
-						<span>PASSWORD</span>
-					</div>
-					<div class="col-md-3">
-						<input type="password" name="pass">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-6 col-md-3">
-						<input type="button" class="button" value="비밀번호 찾기" onclick="location.href='passfind.mvc'">
-						<input type="button" class="button" value="회원가입" onclick="location.href='join.mvc'">
-						<button type="submit" class="button">로그인</button>
-					</div>
-					<div class="col-md-offset-4"></div>
-				</div>
+		</div>
+		<!-- 검색창 -->
+		<div>
+			<form action="search.mvc" class="search" role="search" method="post">
+				<img alt="" src="img/search.png" width="40px" height="40px">
+				<input type="text" class="form-control" name="search" placeholder="검색어를 입력해 주세요">
+				<button type="submit" class="btn btn-default">검색</button>
 			</form>
 		</div>
+
 	</div>
 	<div class="container-fluid">
 		<footer>

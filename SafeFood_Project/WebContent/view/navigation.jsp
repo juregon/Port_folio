@@ -5,100 +5,69 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-    .container{
-        margin-top: 50px;
-    }
-    .btn-light{
-        padding: 10px 15px;
-        margin-top : 25px;
-        font-size: 15px;
-        font-weight: 300;
-    }
-    </style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<style><%@ include file="basiclayout.css"%></style>
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <!-- 네비게이션 바 -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-header">
-            <a class="navbar-brand" onclick=""></a>
-        </div>
-        <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-            <% if(session.getAttribute("id") == null) {%>
-                <li><a href="sign_up.mvc">Sign Up</a></li>
-                <li><a data-toggle="modal" data-target="#myModal">Login</a></li>
-            <%} else {%>
-                <li><a href="user_info.mvc">회원 정보</a></li>
-                <li><a href="logout.mvc">Logout</a></li>
-            <%} %>
-            </ul>
-        </div>
-    </nav>
-</body>
-    <header class="header">
-    <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                <a href="index.mvc"><img src="img/ssafy.png" alt="ssafy" width="100px" height="100px"></a>
-                </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-light"> 공지사항 </button>
-                </div>
-                <div class="col-md-1">
-                    <button type="button" class="btn btn-light"> 베스트 섭취 정보 </button>
-                </div>
-                <div class="col-md-1  col-md-offset-1">
-                    <button type="button" class="btn btn-light"> 내 섭취 정보 </button>
-                </div>
-                <div class="col-md-1 col-md-offset-1">
-                    <button type="button" class="btn btn-light"> 예상 섭취 정보 </button>
-                </div>
-            </div>
-        </div>
-        </header>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    			<form action="login_process.mvc" method="post">
-    			
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Login</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="user_id">아이디</label> <input class="form-control"
-                                        name="user_id" value='' id="user_id" placeholder="ID"
-                                        type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label for="user_password">비밀번호</label> <input
-                                        class="form-control" name="user_password" id="user_password"
-                                        value='' placeholder="Password" type="password">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit"
-                                        class="btn btn-default btn-login-submit btn-block m-t-md"
-                                        >Login
-                                        </button>
-                                </div>
-<!--                                 <span class="text-center"><a href="index.html" -->
-<!--                                     class="text-sm">비밀번호 찾기</a></span> -->
-                                <hr>
-                                <div class="form-group">
-                                    <a href="sign_up.mvc" class="btn btn-default btn-block m-t-md">회원가입</a>
-                                </div>
-                            </div>    
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                     </form>
-                </div>
-               
+	<div class="container">
+		<header>
+			<!-- nav : 네비게이션 시작을 알려주는 태그 (div로 해도되긴하지만 알려주기위해 사용)
+			 navbar navbar-default: 배경 색상과 테투리를 지정해 주는 역할
+			 navbar-fixed-top: 화면 상단에 고정 -->
+			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse"
+				role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<!-- 화면 사이즈가 크면 안보임, 모바일 정도로 작아지면 보임 -->
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-ex1-collapse">
+							<span class="sr-only">toggle navigation</span>
+							<!-- screen reader only  없어도 되는 코드임. 화면상 아무 일 없다-->
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="main.mvc"><img
+							src="https://edu.ssafy.com/asset/images/logo.png" height="50px"
+							width="70px"></a>
+					</div>
+					<!-- class="navbar-header" -->
+
+					<!-- navbar-collapse: 화면 사이즈가 작으면 안보임 -->
+					<div
+						class="collapse navbar-collapse navbar-left navbar-ex1-collapse">
+						<ul class="nav navbar-nav" id="menu">
+							<li><a href="#">공지 사항</a></li>
+							<li><a href="list.mvc">상품 정보</a></li>
+							<li><a href="#">베스트 섭취 정보</a></li>
+							<li><a href="#">내 섭취 정보</a></li>
+							<li><a href="#">예상 섭취 정보</a></li>
+						</ul>
+					</div>
+					<div
+						class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+						<ul class="nav navbar-nav" id="menuMember">
+							<% if(session.getAttribute("id") != null) {
+							String id = (String) session.getAttribute("id");
+							%>
+							<li><a href="logout.mvc">Logout</a></li>
+							<li><a href="memberInfo.mvc">회원정보</a></li>
+							<%}else{ %>
+							<li><a href="login.mvc">Login</a></li>
+							<li><a href="join.mvc">Join</a></li>
+							<%} %>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+	</div>
+	</body>
 </html>

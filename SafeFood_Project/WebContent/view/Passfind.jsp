@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
@@ -48,15 +48,6 @@
 </style>
 </head>
 <body>
-	<%
-		if(request.getAttribute("status") != null) {
-			String status = (String) request.getAttribute("status");
-			if(status.equals("fail")) {
-				out.println("<script>alert('아이디 혹은 패스워드가 일치하지 않습니다.');</script>");	
-			}
-		}
-	%>
-
 
 	<div class="container">
 		<header>
@@ -137,12 +128,12 @@
 		<div class="loginform">
 			<div class="row">
 				<div class="col-md-offset-3 col-md-3">
-					<h2>LOGIN</h2>
+					<h2>비밀번호 찾기</h2>
 				</div>
 				<div class="col-md-offset-6"></div>
 			</div>
 				<hr>
-			<form action="loginMember.mvc" role="login">
+			<form action="passfindMember.mvc" role="login">
 				<div class="row">
 					<div class="col-md-offset-3 col-md-3">
 						<span>ID</span>
@@ -154,17 +145,15 @@
 				</div>
 				<div class="row">
 					<div class="col-md-offset-3 col-md-3">
-						<span>PASSWORD</span>
+						<span>이름</span>
 					</div>
 					<div class="col-md-3">
-						<input type="password" name="pass">
+						<input type="text" name="name">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-offset-6 col-md-3">
-						<input type="button" class="button" value="비밀번호 찾기" onclick="location.href='passfind.mvc'">
-						<input type="button" class="button" value="회원가입" onclick="location.href='join.mvc'">
-						<button type="submit" class="button">로그인</button>
+						<button type="submit" class="button">비밀번호 찾기</button>
 					</div>
 					<div class="col-md-offset-4"></div>
 				</div>

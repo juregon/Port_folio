@@ -3,61 +3,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+<meta charset="EUC-KR">
+<title>회원탈퇴</title>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<style><%@ include file="basiclayout.css"%></style>
+<style><%@include file="basiclayout.css"%></style>
+
 <style type="text/css">
-.loginform {
-	text-align: center;
+#h2 {
+	margin-top: 50px;
+	margin-left: 20px;
+	color: black;
 }
 
-.col-md-3 {
-	text-align: left;
+#h3 {
+	margin-left: 20px;
+	color: red;
 }
 
-.row {
-	padding-top: 5px;
-	padding-bottom: 5px;
+#cancel{
+background-color: highlight;
 }
-
-.button {
-	height: 25px; color : white;
-	background-color: #3c3c3c;
-	margin-left: 3px;
-	border: none;
-	color: white;
-}
-
-.col-md-2 {
-	text-align: right;
-}
-
-.loginform hr {
-	width: 600px; 
-	border : 0.5px solid #b4b4b4;
-	align-self: center;
-}
-
-
 </style>
+
+
 </head>
 <body>
-	<%
-		if(request.getAttribute("status") != null) {
-			String status = (String) request.getAttribute("status");
-			if(status.equals("fail")) {
-				out.println("<script>alert('아이디 혹은 패스워드가 일치하지 않습니다.');</script>");	
-			}
-		}
-	%>
-
-
 	<div class="container">
 		<header>
 			<!-- nav : 네비게이션 시작을 알려주는 태그 (div로 해도되긴하지만 알려주기위해 사용)
@@ -126,6 +102,7 @@
 				<div class="item active">
 					<img src="img/banner_img.png" alt="First slide">
 				</div>
+				
 			</div>
 			<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
@@ -134,43 +111,95 @@
 				data-slide="next"> <span class="icon-next"></span>
 			</a>
 		</div>
-		<div class="loginform">
-			<div class="row">
-				<div class="col-md-offset-3 col-md-3">
-					<h2>LOGIN</h2>
+	<h2 id="h2">회원 탈퇴</h2>
+	<h3 id="h3">탈퇴 전 꼭 읽어주세요.</h3>
+	<hr>
+		<h4 class="text-primary">개인정보 취급안내</h4>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>구분</th>
+					<th>재가입기준(새로운ID)</th>
+					<th>재가입기준(동일ID)</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>거래내역이 없는 회원</td>
+				<td>가능</td>
+				<td>불가능</td>
+				<td>예전 사용했던 아이디로 재가입 불가능, 새로운 아이디로만 가입 가능</td>
+			</tr>
+
+			<tr>
+				<td>거래내역이 있는 회원</td>
+				<td>가능</td>
+				<td>불가능</td>
+				<td>개인구매회원의 경우 항상 새로운 아이디로만 가입 가능</td>
+			</tr>
+
+			<tr>
+				<td>영구정지 회원</td>
+				<td>불가능</td>
+				<td>불가능</td>
+				<td>영구정지회원은 재가입 자체가 불가능함</td>
+			</tr>
+		</table>
+		<hr>
+
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseOne"> 회원탈퇴 유의사항 전문보기 </a>
+					</h4>
 				</div>
-				<div class="col-md-offset-6"></div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body">회원탈퇴를 위해선 아래 5가지 조건 확인이 필요합니다. 판매 또는
+						구매가 진행중인 상품이 없어야 합니다. 마이너스 또는 현금성 판매예치금이 없어야 합니다.
+						(-) Smile Cash가 없어야 합니다. 가상계좌 잔액이 없어야 합니다. 회원탈퇴 시 보유하고 계신 쿠폰은 즉시 소멸되며, 동일한 아이디로
+						재가입 하더라도 복원되지 않습니다.</div>
+				</div>
 			</div>
-				<hr>
-			<form action="loginMember.mvc" role="login">
-				<div class="row">
-					<div class="col-md-offset-3 col-md-3">
-						<span>ID</span>
-					</div>
-					<div class="col-md-3">
-						<input type="text" name="id">
-					</div>
-					<div class="col-md-offset-3"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-3 col-md-3">
-						<span>PASSWORD</span>
-					</div>
-					<div class="col-md-3">
-						<input type="password" name="pass">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-6 col-md-3">
-						<input type="button" class="button" value="비밀번호 찾기" onclick="location.href='passfind.mvc'">
-						<input type="button" class="button" value="회원가입" onclick="location.href='join.mvc'">
-						<button type="submit" class="button">로그인</button>
-					</div>
-					<div class="col-md-offset-4"></div>
-				</div>
-			</form>
+
 		</div>
+		
+			<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseOne"> 고객센터 </a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body">Tel : 1588-0184 (평일 09:00~18:00)
+스마일클럽 & VVIP : 1522-8900 (365일 09:00~18:00)
+경기도 부천시 원미구 부일로 223 (상동) 투나빌딩 6층
+Fax : 02-589-8829Mail : information@corp.auction.co.kr
+					</div>
+			</div>
+
+		</div>
+		</div>
+	<br>
+	<br>
+	
+<div class="btn-toolbar">
+      <div class="btn-group">
+         <input type="button" class="btn btn-default" value="회원탈퇴 " onclick="location.href='withdrawlOk.mvc'"></button>
+      </div> 
+      <div class="btn-group">
+         <input type="button" id="cancel" value="취소" onclick="location.href='main.mvc'" class="btn btn-default"></button>      
+      </div>
+    </div>
+
+
+		<!-- end of container -->
 	</div>
+	
+	
 	<div class="container-fluid">
 		<footer>
 			<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse"
