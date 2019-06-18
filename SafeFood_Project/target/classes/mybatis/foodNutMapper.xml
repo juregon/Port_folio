@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.foodNutMapper">
+
+	<!-- FoodNutRepository -->
+	<select id="search" resultType="foodnut" parameterType="String">
+		SELECT *
+		FROM foodnut WHERE name=#{name}
+	</select>
+
+	<select id="insert" parameterType="foodnut">
+		INSERT INTO foodnut VALUES
+		(#{name}, #{weight}, #{cal}, #{car}, #{protein},
+		#{sugar}, #{glucose},
+		#{salt}, #{chole}, #{fat}, #{transfat})
+	</select>
+</mapper>

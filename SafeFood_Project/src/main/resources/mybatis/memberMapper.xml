@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.memberMapper">
+
+	<!-- MemberRepository -->
+	<insert id="add" parameterType="member">
+		INSERT INTO member VALUES
+		(#{id}, #{pw}, #{name}, #{address}, #{phone}, #{email})
+		<!-- INSERT INTO memalg VALUES (#{allergys}, #{id}) -->
+	</insert>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM member WHERE id=#{id}
+	</delete>
+	
+	<!-- 아이디와 비번이 일치하는지 체크하는 함수임, 여기서 비번을 받아서 체크는 따로 하기 -->
+	<select id="check_pw" resultType="String" parameterType="String">
+		SELECT pw FROM member WHERE id=#{id}
+	</select>
+	
+	<select id="search" resultType="member_alg" parameterType="String">
+		SELECT member.id, member.pw, member.name, member.ADDRESS, member.PHONE, member.EMAIL, memalg.ALLERGY 
+		FROM member LEFT JOIN memalg ON member.id = memalg.id 
+		WHERE member.id=#{id}
+	</select>
+	
+	<update id="update" parameterType="member">
+		UPDATE member SET pw=#{pw}, address=#{address}, phone=#{phone}, email=#{email} 
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete_alg" parameterType="String">
+		DELETE FROM memalg
+		WHERE id=#{id}
+	</delete>
+	
+	<insert id="insert_alg" parameterType="HashMap">
+		INSERT INTO memalg VALUES(#{alg}, #{id})
+	</insert>
+	
+	<select id="check" resultType="String" parameterType="Hashmap">
+		SELECT foodalg.allergy FROM foodalg INNER JOIN memalg
+		ON foodalg.allergy = memalg.allergy
+		WHERE code=#{code} AND id=#{id}
+	</select>
+	
+	<insert id="intake" parameterType="Hashmap">
+		INSERT INTO intake VALUES(#{code}, #{id}, 1) 
+		ON DUPLICATE KEY UPDATE count = count+1
+	</insert>
+	
+	<select id="passfind" resultType="String" parameterType="Hashmap">
+		SELECT pw FROM member where id=#{id} and name=#{name}
+	</select>
+</mapper>
+
+<!-- mapper 파일 : sql 문 작성 -->

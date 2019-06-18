@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mybatis.foodMapper">
+<!-- selectAll 을 부르려면 풀네임 mybatis.productMapper.selectAll 로 표현할 수 있다 -->
+	
+	<!-- FoodRepository -->
+	<insert id="insertAlg" parameterType="hashmap">
+		INSERT INTO foodAlg VALUES
+		(#{id}, #{allergy})
+	</insert>
+	
+	<insert id="insert" parameterType="food">
+		INSERT INTO food VALUES
+		(#{code}, #{name}, #{company}, #{materials})
+	</insert>
+	
+	<select id="searchAll" resultType="food">
+		SELECT * FROM food
+	</select>
+	
+	<select id="searchIntakeCnt" resultType="int" parameterType="String">
+		SELECT count FROM intake WHERE id=#{id}
+	</select>
+	
+	<select id="intakeDelete" parameterType="hashmap"> 
+		DELETE FROM intake WHERE id=#{id} AND code=#{code}
+	</select>
+	
+	<select id="searchIntake" resultType="food" parameterType="String">
+		SELECT * FROM food 
+		WHERE code = any(SELECT code FROM intake WHERE id=#{id})
+	</select>
+	
+	<select id="search" resultType="food" parameterType="int">
+		SELECT food.code, name, company, materials, allergy FROM food LEFT JOIN foodalg 
+		ON food.code = foodalg.code 
+		WHERE food.code=#{code}
+	</select>
+	
+ 	<select id="searchByName" resultType="food" parameterType="String">
+		SELECT * FROM food 
+		WHERE name like #{name}
+	</select> 
+
+</mapper>

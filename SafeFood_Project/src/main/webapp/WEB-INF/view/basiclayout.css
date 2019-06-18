@@ -1,0 +1,57 @@
+body {
+	padding-top: 80px;
+	padding-bottom: 100px;
+	background-color: #f2f2f2;
+}
+
+.container {
+	margin: 0 auto;
+/* 	overflow: auto; */
+/* 	background: blue; */
+}
+
+.container2 {
+	height : 700px;
+	margin: 0 auto;
+/* 	overflow: auto; */
+/* 	background: blue; */
+}
+#menu, #menuMember {
+	padding-top: 20px;
+}
+
+tr {
+  -ms-overflow-style: none; // IE에서 스크롤바 감춤
+  &::-webkit-scrollbar { 
+    display: none !important; // 윈도우 크롬 등
+  }
+}
+
+#menu {
+	font-weight: bold;
+	font-size: 11pt;
+}
+
+.form-control {
+	display: inline-block;
+	width: 600px;
+}
+.search {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+footer {
+	padding-top: 50px;
+	color: white;
+}
+
+.footerLink li{
+	list-style: none;
+}
+
+.footerlink a{
+	color: white;
+	text-decoration: none;
+}
