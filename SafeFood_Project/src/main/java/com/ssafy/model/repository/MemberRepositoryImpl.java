@@ -36,6 +36,10 @@ public class MemberRepositoryImpl implements MemberRepository{
 		return session.selectOne(namespace + "check_pw", id);
 	}
 
+	public int check_id(String id) {
+		return session.selectOne(namespace + "check_id", id);
+	}
+	
 	public Member search(String id) {
 		Member m = new Member();
 		Member_alg m_alg = new Member_alg();
@@ -59,6 +63,10 @@ public class MemberRepositoryImpl implements MemberRepository{
 		m.setAllergys(allergys);
 		return m;
 	}
+	
+	public List<Member> searchAll() {
+		return session.selectList(namespace + "searchAll");
+	}
 
 	public void update(Member member) {
 		String id = member.getId();
@@ -81,10 +89,11 @@ public class MemberRepositoryImpl implements MemberRepository{
 		return session.selectList(namespace + "check", hs);
 	}
 	
-	public void intake(int code, String id) {
+	public void intake(int code, String id, int count) {
 		HashMap<String, Object> hs = new HashMap<>();
 		hs.put("code", code);
 		hs.put("id", id);
+		hs.put("count", count);
 		session.insert(namespace + "intake", hs);
 	}
 
@@ -94,6 +103,11 @@ public class MemberRepositoryImpl implements MemberRepository{
 		hs.put("name", name);
 		
 		return session.selectOne(namespace + "passfind", hs);
+	}
+
+	public List<HashMap> bestIntake(String id) {
+		List<HashMap> list = session.selectList(namespace+"bestintake", id);
+		return list;
 	}
 
 

@@ -6,7 +6,7 @@ import com.ssafy.model.dto.Qna;
 
 public interface QnaService {
 	void add(Qna qna);
-	void delete(int num);
+	int delete(int num);
 	void update(Qna qna);
 	List<Qna> searchAll();
 	Qna selectOne(int num);

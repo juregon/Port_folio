@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.replyMapper">
+
+	<insert id="add" parameterType="reply">
+		INSERT INTO reply VALUES
+		(0, #{qNo}, #{rText}, #{replyer}, curdate())
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM reply WHERE rNo=#{num}
+	</delete>
+	
+	<!-- 목록 검색(최신순) -->
+	<select id="searchAll" resultType="reply" parameterType="int">
+		SELECT *
+		FROM reply
+		where qNo = #{num}
+		ORDER BY rno DESC
+	</select>
+	
+	<select id="selectOne" resultType="int" parameterType="int">
+		SELECT qNo
+		FROM reply
+		where rNo = #{num}
+	</select>
+
+</mapper>

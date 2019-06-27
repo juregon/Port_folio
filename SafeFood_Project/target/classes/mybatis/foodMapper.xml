@@ -21,17 +21,12 @@
 		SELECT * FROM food
 	</select>
 	
-	<select id="searchIntakeCnt" resultType="int" parameterType="String">
-		SELECT count FROM intake WHERE id=#{id}
+	<select id="searchByCompany" resultType="food">
+		SELECT * FROM food WHERE company LIKE #{company}
 	</select>
-	
-	<select id="intakeDelete" parameterType="hashmap"> 
-		DELETE FROM intake WHERE id=#{id} AND code=#{code}
-	</select>
-	
-	<select id="searchIntake" resultType="food" parameterType="String">
-		SELECT * FROM food 
-		WHERE code = any(SELECT code FROM intake WHERE id=#{id})
+		
+	<select id="searchByMaterials" resultType="food" parameterType="String">
+		SELECT * FROM food WHERE materials LIKE #{materials}
 	</select>
 	
 	<select id="search" resultType="food" parameterType="int">
@@ -44,5 +39,66 @@
 		SELECT * FROM food 
 		WHERE name like #{name}
 	</select> 
+	
+	<select id="searchIntakeCnt" resultType="int" parameterType="String">
+		SELECT count FROM intake WHERE id=#{id} AND date=curdate()
+	</select>
+	
+	<select id="searchIntake" resultType="food" parameterType="String">
+		SELECT * FROM food
+		WHERE code = any(SELECT code FROM intake
+		WHERE id=#{id} AND date = curdate())
+	</select>
+	
+	<delete id="intakeDelete" parameterType="hashmap"> 
+		DELETE FROM intake WHERE id=#{id} AND code=#{code} AND count = 1 AND date=curdate()
+	</delete>
+	
+	<update id="intakeUpdate" parameterType="hashmap">
+		UPDATE intake SET count = count-1 WHERE id=#{id} AND code=#{code} AND count > 1 AND date=curdate()
+	</update>
+	
+	<!-- 누적 섭취 정보 -->
+	<select id="searchIntakeTotal" resultType="food" parameterType="String">
+		SELECT * FROM food
+		WHERE code = any(SELECT code FROM intake WHERE id=#{id} GROUP BY code)
+	</select>
+	
+	<select id="searchIntakeCntTotal" resultType="int" parameterType="String">
+		SELECT SUM(count) as count FROM intake WHERE id=#{id} GROUP BY code
+	</select>
+	
+	<!-- 어제 섭취 정보 -->
+	<select id="searchIntakeYes" resultType="food" parameterType="String">
+		SELECT * FROM food
+		WHERE code = any(SELECT code FROM intake 
+		WHERE id=#{id} AND date = curdate()-1)
+	</select>
+	
+	<select id="searchIntakeCntYes" resultType="int" parameterType="String">
+		SELECT count FROM intake WHERE id=#{id} AND date=curdate()-1
+	</select>
 
+	<!-- 찜하기 -->
+	<insert id="insertFoodcart" parameterType="hashmap">
+		INSERT INTO foodcart VALUES (#{code}, #{id}, 1) 
+		ON DUPLICATE KEY UPDATE count = count+1
+	</insert>
+	
+	<select id="searchFoodcart" resultType="food" parameterType="String">
+		SELECT * FROM food WHERE code = any(SELECT code FROM foodcart WHERE id=#{id})
+	</select>
+	
+	<select id="searchFoodcartCnt" resultType="int" parameterType="String">
+		SELECT count FROM foodcart WHERE id=#{id}
+	</select>
+	
+	<delete id="deleteFoodcart" parameterType="hashmap">
+		DELETE FROM foodcart WHERE id=#{id} AND code=#{code} AND count = 1;
+	</delete>
+	
+	<update id="updateFoodcart" parameterType="hashmap">
+		UPDATE foodcart SET count = count-1 WHERE id=#{id} AND code=#{code} AND count > 1
+	</update>
+	
 </mapper>

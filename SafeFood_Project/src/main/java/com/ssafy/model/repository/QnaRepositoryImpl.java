@@ -19,8 +19,8 @@ public class QnaRepositoryImpl implements QnaRepository{
 		session.insert(namespace + "add", qna); 
 	}
 
-	public void delete(int num) {
-		session.delete(namespace + "delete", num);
+	public int delete(int num) {
+		return session.delete(namespace + "delete", num);
 	}
 
 	public void update(Qna qna) {

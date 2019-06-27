@@ -13,12 +13,18 @@
 		<typeAlias type="com.ssafy.model.dto.Food" alias="food"/>
 		<typeAlias type="com.ssafy.model.dto.FoodNutrition" alias="foodnut"/>
 		<typeAlias type="com.ssafy.model.dto.Qna" alias="qna"/>
+		<typeAlias type="com.ssafy.model.dto.Notice" alias="notice"/>
+		<typeAlias type="com.ssafy.model.dto.Reply" alias="reply"/>
+		<typeAlias type="com.ssafy.model.dto.Mail" alias="mail"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/memberMapper.xml"/>
 		<mapper resource="mybatis/foodMapper.xml"/>
 		<mapper resource="mybatis/foodNutMapper.xml"/>
 		<mapper resource="mybatis/qnaMapper.xml"/>
+		<mapper resource="mybatis/noticeMapper.xml"/>
+		<mapper resource="mybatis/replyMapper.xml"/>
+		<mapper resource="mybatis/mailMapper.xml"/>
 	</mappers>
 </configuration>
 <!--

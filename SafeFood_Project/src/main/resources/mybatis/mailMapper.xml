@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mailMapper">
+	<select id="searchAll" resultType="mail" parameterType="String">
+		SELECT *
+		FROM mail
+		WHERE receiver=#{id}
+		ORDER BY num DESC;
+	</select>
+	
+	<update id="update" parameterType="int">
+		UPDATE mail SET readFlag=1 WHERE num=#{num};
+	</update>
+	
+	<select id="searchCnt" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM mail
+		WHERE receiver=#{id} AND readFlag=0
+	</select>
+	
+	<insert id="insert" parameterType="mail">
+		INSERT INTO mail
+		VALUES(0, #{title}, #{url}, curdate(), #{sender}, #{receiver}, #{category}, false);
+	</insert>
+</mapper>

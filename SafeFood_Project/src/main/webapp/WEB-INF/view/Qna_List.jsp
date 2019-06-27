@@ -4,134 +4,170 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고객 문의</title>
 <script src="https://unpkg.com/vue"></script>
-<!-- Vue 최신버전 반영 cdn -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <style type="text/css">
-body {
-	font-size: 15pt;
+thead th{
+	text-align: center;
 }
-
 table {
-	width: 800px;
-	table-layout: fixed;
-}
-
-th {
-	width: 200px;
-}
-
-td {
-	width: 600px;
-}
-
-.content {
-	width: 800px;
-	font-size: 10pt;
-	padding: 20px;
-	overflow: hidden;
-	word-break: normal;
-}
-
-.button {
-	text-align: right;
-}
-
-button {
-	margin: 2px;
+	margin-top: 20px;
 }
 </style>
 </head>
 <body>
-	<div id='qna_list'>
-		{{info}}
-		<div class='headtitle'>
-			<h2>SSAFY HRM</h2>
-		</div>
-		<div class='search_box'>
-			<router-link to="/route1">글목록 보기</router-link>
-			<!-- 이동할 페이지 <a href 와 비슷한 느낌 -->
-			<!-- 			<router-link to="/route2">글 상세</router-link> -->
-			<!-- 			<router-link to="/route3">ㄱ</router-link> -->
-			<!-- 			<router-link to="/route4">모든사원 보기</router-link> -->
-		</div>
-		<router-view></router-view>
-		<!-- 갱신할 화면영역 -->
-
-	</div>
-	<script type="text/x-template" id="addhrmtemplate">
-	<div>
-		<h3>asdasd</h3>
-		<div>{{info}}
-		</div>
-		<h3>asdasaaaaaaaaaaaaaaad</h3>
-	</div>
-	</script>
-
-
-	<script type="text/javascript">
-	var addhrm = Vue.component('addhrm',{
-	    template: '#addhrmtemplate',
-	    props: ['info', 'loading']
-	});
-// 	var namehrm = Vue.component('namehrm',{
-// 	    template: '#namehrmtemplate'
-// 	});
-// 	var idhrm = Vue.component('idhrm',{
-// 	    template: '#idhrmtemplate'
-// 	});
-// 	var listhrm = Vue.component('listhrm',{
-// 	    template: '#listhrmtemplate'
-// 	});
-	
-	const Route1 = { template: addhrmtemplate} // 컴포넌트 정의
-// 	const Route2 = { template: namehrmtemplate }
-// 	const Route3 = { template: idhrmtemplate}
-// 	const Route4 = { template: listhrmtemplate }
-	
-	const routes = [
-	   { path: '/route1', component: Route1 }, // 각 URL 에 표시할 컴포넌트 연결
-// 	   { path: '/route2', component: Route2 },
-// 	   { path: '/route3', component: Route3 },
-// 	   { path: '/route4', component: Route4 }
-	];
-	const router = new VueRouter({ // vue router 정의
-	   routes	   
-	});
-	var App=new Vue({ // vue 인스턴스 생성, router 추가
-		el: '#qna_list',
-		router,
-		  data(){
-			return{
-				info : [],
-				loading : true,
-				errored : false
-			}
-	  	},
-	    created() {
-			this.fetchData()
-		},
-		methods: {
-			fetchData() {
-				axios.get('qna-list.json')
-				.then(response => {
-					this.info = response.data
-				})
-				.catch(error => {
-					console.log(error)
-					this.errored = true
-				})
-				.finally(() => this.loading = false)
-			}
-		},
-		components: {
-			'addhrm': 
+	<%
+		if (request.getAttribute("status") != null) {
+			String msg = (String) request.getAttribute("msg");
+			out.println("<script>alert('" + msg + "');</script>");
 		}
-	})
-
-	
- </script>
+	%>
+	<div class="container">
+		<header>
+			<jsp:include page="header.jsp" flush="false"/>
+		</header>
+		<!-- 본문 -->
+		<br>
+		<div id="qna_list">
+			<div class="form-inline">
+				<select class="form-control" v-model="find">
+					<option selected="selected" value="title">제목</option>
+					<option value="description">내용</option>
+					<option value="id">작성자</option>
+				</select>
+				<input class="form-control" type="text" placeholder="검색어를 입력해 주세요" name='name' v-model="cname" v-cloak />
+				<button style="border:none; background-color: transparent;"><img class="btn-img" alt="" src="img/search.png" style="border:none; width:30px; height:30px"></button>
+				<div style="float: right; display: inline-block;" v-if="id!=''">
+					<button class="btn btn-dark" onclick="location.href='qna-write.mvc'">글 작성</button>
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead class="thead-light">
+					<tr align="center">
+						<th width="100px" >번호</th>
+						<th width="800px" >제목</th>
+						<th width="100px" >작성자</th>
+						<th width="90px" >상태</th>
+						<th width="150px" >작성일</th>
+						
+					</tr>
+				</thead>
+				<tbody class="tbody-dark">
+					<template v-if="find == 'title'">
+						<template v-for="list in info" v-if="list.title.includes(cname)">
+							<tr align="center">
+								<td>{{list.num}}</td>
+								<td><a :href="url+list.num">{{list.title}}</a><span style="color:blue;">({{list.reCnt}})</span></td>
+								<td>{{list.id}}</td>
+								<td>
+									<div style="background: red; border-radius: 5%" v-if="list.reCheck > 0">
+										<span style="font-size:smaller; color:white;" >답변 완료</span>
+									</div>
+									<div style="background: blue; border-radius: 5%" v-if="list.reCheck == 0">
+										<span style="font-size:smaller; color:white;" >답변 대기</span>
+									</div>
+								</td>
+								<td>{{list.date}}</td>
+							</tr>
+						</template>
+					</template>
+					<template v-else-if="find == 'description'">
+						<template v-for="list in info" v-if="list.description.includes(cname)">
+							<tr align="center">
+								<td>{{list.num}}</td>
+								<td><a :href="url+list.num">{{list.title}}</a><span style="color:blue;">({{list.reCnt}})</span></td>
+								<td>{{list.id}}</td>
+								<td>
+									<div style="background: red; border-radius: 5%" v-if="list.reCheck > 0">
+										<span style="font-size:smaller; color:white;" >답변 완료</span>
+									</div>
+									<div style="background: blue; border-radius: 5%" v-if="list.reCheck == 0">
+										<span style="font-size:smaller; color:white;" >답변 대기</span>
+									</div>
+								</td>
+								<td>{{list.date}}</td>
+							</tr>
+						</template>
+					</template>
+					<template v-else-if="find == 'id'">
+						<template v-for="list in info" v-if="list.id.includes(cname)">
+							<tr align="center">
+								<td>{{list.num}}</td>
+								<td><a :href="url+list.num">{{list.title}}</a><span style="color:blue;">({{list.reCnt}})</span></td>
+								<td>{{list.id}}</td>
+								<td>
+									<div style="background: red; border-radius: 5%" v-if="list.reCheck > 0">
+										<span style="font-size:smaller; color:white;" >답변 완료</span>
+									</div>
+									<div style="background: blue; border-radius: 5%" v-if="list.reCheck == 0">
+										<span style="font-size:smaller; color:white;" >답변 대기</span>
+									</div>
+								</td>
+								<td>{{list.date}}</td>
+							</tr>
+						</template>
+					</template>
+				</tbody>
+			</table>
+		</div>
+		<footer>
+			<jsp:include page="footer.jsp" flush="false"/>
+		</footer>
+	</div>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : '#qna_list',
+			data(){
+				return{
+					info : [],
+					reply_admin : false,
+					loading : true,
+					errored : false,
+					cname : '',
+					find : 'title',
+					url : 'qna-detail.mvc?num=',
+					id: '${id}'
+				}
+			},
+			mounted() {
+				axios.get('qna-list.json')
+					.then(response => {
+						this.info = response.data
+					})
+					.catch(error => {
+						console.log(error)
+						this.errored = true
+					})
+					.finally(() => this.loading = false)
+			},
+// 			methods: {
+// 				isReply(qNo) {
+// 					axios.get('reply-list-check.json', {params : {num: qNo}})
+// 					.then(response => {
+// 						this.reply_admin = response.data;
+// // 						console.log(response.data);
+// // 						if(response.data)
+// // 							return true;
+// // 						else
+// // 							return false;
+// // 						for (var i = 0; i < response.data.length; i++) {
+// // 							if(response.data[i].replyer == 'admin'){
+// // 								console.log("관리자가 답변함" + response.data[i].qNo);
+// // 								this.reply_admin = true;
+// // 								break;
+// // 							}
+// // 						}
+// 					})
+// 					.catch(error => {
+// 						console.log(error)
+// 						this.errored = true
+// 					})
+// 					return this.reply_admin;
+					
+// 				}
+// 			}
+		})
+	</script>
 </body>
 </html>

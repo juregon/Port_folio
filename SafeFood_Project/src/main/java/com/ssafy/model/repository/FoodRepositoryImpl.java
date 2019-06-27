@@ -95,15 +95,39 @@ public class FoodRepositoryImpl implements FoodRepository {
 		return session.selectList(namespace + "searchIntakeCnt", id);
 	}
 
+	public List<Food> searchIntake(String id) {
+		return session.selectList(namespace + "searchIntake", id);
+	}
+
+	public List<Integer> searchIntakeCntTotal(String id) {
+		return session.selectList(namespace + "searchIntakeCntTotal", id);
+	}
+
+	public List<Food> searchIntakeTotal(String id) {
+		return session.selectList(namespace + "searchIntakeTotal", id);
+	}
+
+	public List<Integer> searchIntakeCntYes(String id) {
+		return session.selectList(namespace + "searchIntakeCntYes", id);
+	}
+
+	public List<Food> searchIntakeYes(String id) {
+		return session.selectList(namespace + "searchIntakeYes", id);
+	}
+
+
 	public int intakeDelete(String id, int code) {
 		HashMap<String, Object> hs = new HashMap<String, Object>();
 		hs.put("id", id);
 		hs.put("code", code);
 		return session.delete(namespace + "intakeDelete", hs);
 	};
-
-	public List<Food> searchIntake(String id) {
-		return session.selectList(namespace + "searchIntake", id);
+	
+	public int intakeUpdate(String id, int code) {
+		HashMap<String, Object> hs = new HashMap<String, Object>();
+		hs.put("id", id);
+		hs.put("code", code);
+		return session.delete(namespace + "intakeUpdate", hs);
 	}
 
 	// 알러지 있는 음식인가?
@@ -131,7 +155,45 @@ public class FoodRepositoryImpl implements FoodRepository {
 	}
 
 	public List<Food> searchByName(String name) {
-		return session.selectList(namespace + "searchByName", name);
+		return session.selectList(namespace + "searchByName", '%'+name+'%');
 	}
+
+	public List<Food> searchByCompany(String company) {
+		return session.selectList(namespace + "searchByCompany", '%'+company+'%');
+	}
+
+	public List<Food> searchByMaterials(String materials) {
+		return session.selectList(namespace + "searchByMaterials", '%'+materials+'%');
+	}
+
+	public int insertFoodcart(String id, int code) {
+		HashMap<String, Object> hs = new HashMap<>();
+		hs.put("id", id);
+		hs.put("code", code);
+		return session.insert(namespace + "insertFoodcart",hs);
+	}
+
+	public List<Food> searchFoodcart(String id) {
+		return session.selectList(namespace + "searchFoodcart", id);
+	}
+
+	public List<Integer> searchFoodcartCnt(String id) {
+		return session.selectList(namespace + "searchFoodcartCnt", id);
+	}
+
+	public int foodcartDelete(String id, int code) {
+		HashMap<String, Object> hs = new HashMap<>();
+		hs.put("id", id);
+		hs.put("code", code);
+		return session.delete(namespace + "deleteFoodcart", hs);
+	}
+
+	public int foodcartUpdate(String id, int code) {
+		HashMap<String, Object> hs = new HashMap<>();
+		hs.put("id", id);
+		hs.put("code", code);
+		return session.update(namespace + "updateFoodcart", hs);
+	}
+
 
 }

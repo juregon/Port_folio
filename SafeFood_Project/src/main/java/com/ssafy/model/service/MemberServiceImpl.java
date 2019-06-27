@@ -1,5 +1,6 @@
 package com.ssafy.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,32 +12,45 @@ import com.ssafy.model.repository.MemberRepositoryImpl;
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
-	private MemberRepositoryImpl memberDao;
+	private MemberRepositoryImpl mRepo;
 	
 	public void add(Member m) {
-		memberDao.add(m);
+		mRepo.add(m);
 	}
 
 	public boolean delete(String id) {
-		if(memberDao.delete(id) > 0) {
+		if(mRepo.delete(id) > 0) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean check_pw(String id, String pw) {
-		if(memberDao.check_pw(id).equals(pw)) {
+		if(mRepo.check_pw(id).equals(pw)) {
 			return true;
 		}
 		return false;
 	}
 
+	public String check_id(String id) {
+        int a = mRepo.check_id(id);
+        String msg = "";
+        if(a > 0) {
+            msg = "이미 존재하는 아이디 입니다.";
+        }
+        return msg;
+    }
+	
 	public Member search(String id) {
-		return memberDao.search(id);
+		return mRepo.search(id);
 	}
 
+	public List<Member> searchAll() {
+        return mRepo.searchAll();
+    }
+	
 	public void update(Member member) {
-		Member orgm = memberDao.search(member.getId());
+		Member orgm = mRepo.search(member.getId());
 		if(member.getEmail() == "") {
 			member.setEmail(orgm.getEmail());
 		}
@@ -49,11 +63,11 @@ public class MemberServiceImpl implements MemberService{
 		if(member.getAllergys() == null) {
 			member.setAllergys(orgm.getAllergys());
 		}
-		memberDao.update(member);
+		mRepo.update(member);
 	}
 
 	public String check(int code, String id) {
-		List<String> allergys = memberDao.check(code, id);
+		List<String> allergys = mRepo.check(code, id);
 		String msg = "";
 		if (allergys.size() > 0) {
 			for (int i = 0; i < allergys.size(); i++) {
@@ -69,12 +83,15 @@ public class MemberServiceImpl implements MemberService{
 		return msg;
 	}
 
-	public void intake(int code, String id) {
-		memberDao.intake(code, id);
+	public void intake(int code, String id, int count) {
+		mRepo.intake(code, id, count);
 	}
 
 	public String passFind(String id, String name) {
-		return memberDao.passFind(id, name);
+		return mRepo.passFind(id, name);
 	}
 
+	public List<HashMap> bestIntake(String id) {
+		return mRepo.bestIntake(id);
+	}
 }

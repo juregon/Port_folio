@@ -6,7 +6,9 @@ public class Qna {
 	private String id;
 	private String date;
 	private String description;
-	
+	private int reCnt;
+	private int reCheck;
+
 	public Qna() {
 	}
 
@@ -58,7 +60,20 @@ public class Qna {
 		this.description = description;
 	}
 
-	
-	
+	public int getReCnt() {
+		return reCnt;
+	}
+
+	public void setReCnt(int reCnt) {
+		this.reCnt = reCnt;
+	}
+
+	public int getReCheck() {
+		return reCheck;
+	}
+
+	public void setReCheck(int reCheck) {
+		this.reCheck = reCheck;
+	}
 	
 }

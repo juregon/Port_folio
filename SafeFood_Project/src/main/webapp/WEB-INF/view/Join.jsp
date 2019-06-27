@@ -4,24 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Join</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<style><%@ include file="basiclayout.css"%></style>
+<title>먹거리 프로젝트</title>
 <style type="text/css">
 .col-md-2, .col-md-3, .col-md-5, .col-md-6, .col-md-8 {
 	text-align: left;
 }
-
 .row {
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-
 .button {
 	height: 25px;
 	color: white;
@@ -30,30 +21,45 @@
 	border: none;
 	color: white;
 }
-
 .col-md-2 {
 	text-align: right;
 }
-
 .joinform hr {
 	width: 900px;
 	border: 0.5px solid #b4b4b4;
 	align-self: center;
 }
-
 .select {
 	height: 25px;
 }
-
 #passcheck {
 	display: none;
 }
 </style>
 <script type="text/javascript">
 	function inputCheck() {
+		if(id.value=="") {
+			$("#msg").show();
+			$("#msg").html("<strong>아이디</strong>를 입력해주세요.");
+			$("input[id='id']").focus();
+			return;
+		}
+		if(pw1.value=="") {
+			$("#msg").show();
+			$("#msg").html("<strong>비밀번호</strong>를 입력해주세요.");
+			$("input[id='pw1']").focus();
+			return;
+		}
 		if (pw1.value != pw2.value) {
-			alert("비밀번호와 비밀번호 확인이 일치하지않습니다.");
+			$("#msg").show();
+			$("#msg").html("<strong>비밀번호</strong>와 <strong>비밀번호 확인</strong>이 일치하지않습니다.");
 			$("input[id='pw2']").focus();
+			return;
+		}
+		if(fullname.value == "") {
+			$("#msg").show();
+			$("#msg").html("<strong>이름</strong>을 입력해주세요.");
+			$("input[id='fullname']").focus();
 			return;
 		}
 		var phone1 = $("input[name=phone1]").val();
@@ -86,87 +92,13 @@
 <body>
 	<div class="container">
 		<header>
-			<!-- nav : 네비게이션 시작을 알려주는 태그 (div로 해도되긴하지만 알려주기위해 사용)
-			 navbar navbar-default: 배경 색상과 테투리를 지정해 주는 역할
-			 navbar-fixed-top: 화면 상단에 고정 -->
-			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse"
-				role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<!-- 화면 사이즈가 크면 안보임, 모바일 정도로 작아지면 보임 -->
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target=".navbar-ex1-collapse">
-							<span class="sr-only">toggle navigation</span>
-							<!-- screen reader only  없어도 되는 코드임. 화면상 아무 일 없다-->
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="main.mvc"><img
-							src="https://edu.ssafy.com/asset/images/logo.png" height="50px"
-							width="70px"></a>
-					</div>
-					<!-- class="navbar-header" -->
-
-					<!-- navbar-collapse: 화면 사이즈가 작으면 안보임 -->
-					<div
-						class="collapse navbar-collapse navbar-left navbar-ex1-collapse">
-						<ul class="nav navbar-nav" id="menu">
-							<li><a href="#">공지 사항</a></li>
-							<li><a href="list.mvc">상품 정보</a></li>
-							<li><a href="#">베스트 섭취 정보</a></li>
-							<li><a href="intakeInfo.mvc">내 섭취 정보</a></li>
-							<li><a href="#">예상 섭취 정보</a></li>
-						</ul>
-					</div>
-					<div
-						class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
-						<ul class="nav navbar-nav" id="menuMember">
-							<%
-								if (session.getAttribute("id") != null) {
-									String id = (String) session.getAttribute("id");
-							%>
-							<li><a href="logout.mvc">Logout</a></li>
-							<li><a href="memberInfo.mvc">회원정보</a></li>
-							<%
-								} else {
-							%>
-							<li><a href="login.mvc">Login</a></li>
-							<li><a href="join.mvc">Join</a></li>
-							<%
-								}
-							%>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			<jsp:include page="header.jsp" flush="false"/>
 		</header>
-	</div>
-	<!-- 본문 -->
-	<div class="container">
-		<!-- 배너 -->
-		<div id="carousel-example-generic" class="carousel slide">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0"
-					class="active"></li>
-				<!-- <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
-			</ol>
-			<!-- Carousel items -->
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="img/banner_img.png" alt="First slide">
-				</div>
-			</div>
-			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic"
-				data-slide="prev"> <span class="icon-prev"></span>
-			</a> <a class="right carousel-control" href="#carousel-example-generic"
-				data-slide="next"> <span class="icon-next"></span>
-			</a>
-		</div>
+		<hr>
+		<div class="alert alert-danger alert-dismissible" id="msg" style="display: none;">
+  		</div>
 		<div class="joinform">
-			<div class="row">
+			<div class="row container">
 				<div class="col-md-offset-2 col-md-8">
 					<h2>Join</h2>
 				</div>
@@ -179,7 +111,7 @@
 						<span>ID</span>
 					</div>
 					<div class="col-md-5">
-						<input type="text" name="id">
+						<input type="text" name="id" id="id">
 					</div>
 					<div class="col-md-offset-2"></div>
 				</div>
@@ -189,7 +121,7 @@
 					</div>
 					<div class="col-md-5">
 						<input type="password" id="pw1" name="pw"
-							placeholder="8~16 characters" maxlength="16">
+							maxlength="16">
 					</div>
 				</div>
 				<div class="row">
@@ -197,7 +129,7 @@
 						<span>비밀번호 확인</span>
 					</div>
 					<div class="col-md-5">
-						<input type="password" id="pw2"> <img
+						<input type="password" id="pw2"  maxlength="16"> <img
 							src="img/check_ok.png" width="20px" height="20px" id="passcheck">
 					</div>
 				</div>
@@ -206,7 +138,7 @@
 						<span>이름</span>
 					</div>
 					<div class="col-md-5">
-						<input type="text" name="name">
+						<input type="text" name="name" id="fullname">
 					</div>
 				</div>
 				<div class="row">
@@ -281,24 +213,8 @@
 			</form>
 		</div>
 	</div>
-	<div class="container-fluid">
-		<footer>
-			<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse"
-				role="navigation">
-				<div class="container">
-					<div
-						class="collapse navbar-collapse navbar-left navbar-ex1-collapse">
-						<h4>findUs</h4>
-						<hr>
-						<ul class="footerLink">
-							<li><a href="#">(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어</a></li>
-							<li><a href="#">1544-9001</a></li>
-							<li><a href="#">admin@ssafy.com</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</footer>
-	</div>
+	<footer>
+		<jsp:include page="footer.jsp" flush="false"/>
+	</footer>
 </body>
 </html>

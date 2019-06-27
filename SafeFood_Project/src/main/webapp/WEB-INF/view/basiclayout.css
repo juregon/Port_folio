@@ -1,7 +1,9 @@
 body {
+	font-family: 'Open Sans','Noto Sans KR' !important;
 	padding-top: 80px;
 	padding-bottom: 100px;
-	background-color: #f2f2f2;
+	background-color: rgba(245, 237, 214, 0.8) !important;
+	overflow-y: scroll;
 }
 
 .container {
@@ -32,16 +34,6 @@ tr {
 	font-size: 11pt;
 }
 
-.form-control {
-	display: inline-block;
-	width: 600px;
-}
-.search {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: center;
-}
-
 footer {
 	padding-top: 50px;
 	color: white;
@@ -51,7 +43,14 @@ footer {
 	list-style: none;
 }
 
-.footerlink a{
+.footerlink li a{
 	color: white;
 	text-decoration: none;
+}
+
+.carousel-inner > .item{
+  width:auto;
+  height: 400px;
+  overflow: hidden;
+  vertical-align: center;
 }

@@ -1,0 +1,40 @@
+.location-listing {
+  position: relative;
+  text-align: center;
+}
+.location-image {
+  line-height: 0;
+}
+.location-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 160px;
+  width: 170px;
+  background: rgba(176, 18, 10, 0.4);
+   
+  /* typographic styles */
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+   
+  /* position the text centrally*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* hide the title by default */
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.location-listing:hover .location-title {
+  opacity: 1;
+}
+
+
+.title, .title:hover{
+	text-decoration: none;
+	color: white;
+}

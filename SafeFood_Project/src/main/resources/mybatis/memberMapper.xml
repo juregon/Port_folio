@@ -20,11 +20,22 @@
 		SELECT pw FROM member WHERE id=#{id}
 	</select>
 	
+	<select id="check_id" resultType="int" parameterType="String">
+        SELECT COUNT(*)
+        FROM member
+        WHERE id = #{id}
+    </select>
+	
 	<select id="search" resultType="member_alg" parameterType="String">
 		SELECT member.id, member.pw, member.name, member.ADDRESS, member.PHONE, member.EMAIL, memalg.ALLERGY 
 		FROM member LEFT JOIN memalg ON member.id = memalg.id 
 		WHERE member.id=#{id}
 	</select>
+	
+	<select id="searchAll" resultType="member">
+        SELECT id
+        FROM member
+    </select>
 	
 	<update id="update" parameterType="member">
 		UPDATE member SET pw=#{pw}, address=#{address}, phone=#{phone}, email=#{email} 
@@ -40,19 +51,27 @@
 		INSERT INTO memalg VALUES(#{alg}, #{id})
 	</insert>
 	
-	<select id="check" resultType="String" parameterType="Hashmap">
+	<select id="check" resultType="String" parameterType="HashMap">
 		SELECT foodalg.allergy FROM foodalg INNER JOIN memalg
 		ON foodalg.allergy = memalg.allergy
 		WHERE code=#{code} AND id=#{id}
 	</select>
 	
 	<insert id="intake" parameterType="Hashmap">
-		INSERT INTO intake VALUES(#{code}, #{id}, 1) 
-		ON DUPLICATE KEY UPDATE count = count+1
+		INSERT INTO intake VALUES(#{code}, #{id}, #{count}, curdate()) 
+		ON DUPLICATE KEY UPDATE count = count+#{count}
 	</insert>
 	
-	<select id="passfind" resultType="String" parameterType="Hashmap">
+	<select id="passfind" resultType="String" parameterType="HashMap">
 		SELECT pw FROM member where id=#{id} and name=#{name}
+	</select>
+	
+	<select id="bestintake" resultType="HashMap" parameterType="String">
+		SELECT code, id, SUM(count)as count
+		FROM intake
+		WHERE id=#{id}
+		GROUP BY code
+		ORDER BY COUNT DESC
 	</select>
 </mapper>
 

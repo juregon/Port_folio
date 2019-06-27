@@ -6,147 +6,111 @@
 <head>
 <meta charset="UTF-8">
 <title>먹거리 프로젝트</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<style><%@include file="basiclayout.css"%></style>
+<style><%@ include file="card.css"%></style>
 </head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+	
+	var data = google.visualization.arrayToDataTable([
+	<% ArrayList<FoodNutrition> fnlist = (ArrayList<FoodNutrition>) request.getAttribute("fnlist");
+	    			
+	   Double cal=0.0, car=0.0, protein=0.0, sugar=0.0, glucose=0.0
+			   , salt=0.0, chole=0.0, fat=0.0, transfat=0.0;
+	   for(FoodNutrition fn : fnlist) {
+	 	   cal += Double.parseDouble(fn.getCal());
+		   car += Double.parseDouble(fn.getCar());
+		   if(fn.getProtein().equals("N/A"))protein+=0.0;
+		   else protein+=Double.parseDouble(fn.getProtein());
+		   if(fn.getSugar().equals("N/A"))sugar+=0.0;
+		   else sugar+=Double.parseDouble(fn.getSugar());
+		   if(fn.getGlucose().equals("N/A"))glucose+=0.0;
+		   else glucose+=Double.parseDouble(fn.getGlucose());
+		   if(fn.getSalt().equals("N/A"))salt+=0.0;
+		   else salt+=Double.parseDouble(fn.getSalt());
+		   if(fn.getChole().equals("N/A"))chole+=0.0;
+		   else chole+=Double.parseDouble(fn.getChole());
+		   if(fn.getFat().equals("N/A"))fat+=0.0;
+		   else fat+=Double.parseDouble(fn.getFat());
+		   if(fn.getTransfat().equals("N/A"))transfat+=0.0;
+		   else transfat+=Double.parseDouble(fn.getTransfat());
+	   }%>
+		[ 'Nutrtion', '현재 섭취량', '권장 섭취량' ], [ '칼로리', <%=cal%>/2100 * 100, 100], [ '탄수화물', <%=car%>/330*100, 100], [ '단백질', <%=protein%>/50*100, 100], [ '지방', <%=sugar%>/105*100, 100 ], 
+		[ '당류', <%=glucose%>/25 * 100, 100], [ '나트륨', <%=salt%>/2000*100, 100 ], [ '콜레스테롤', <%=chole%>/300*100, 100  ], [ '포화지방산', <%=fat%>/15*100, 100 ], [ '트랜스지방', <%=transfat%>/2.2*100, 100 ] ]);
+
+  var options = {
+    title: "오늘 하루 섭취 통계",
+    bar: {groupWidth: "90%"},
+    legend: { position: "none" },
+    chartArea: {width: '100%'},
+    colors: ['#b0120a', '#ffab91'],
+    backgroundColor: { fill:'transparent' },
+    hAxis: {
+      title: '섭취량',
+      minValue: 0
+    },
+    vAxis: {
+      title: '영양소'
+    }
+  };
+  var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+  chart.draw(data, options);
+}
+</script>
 <body>
 	<div class="container">
 		<header>
-			<!-- nav : 네비게이션 시작을 알려주는 태그 (div로 해도되긴하지만 알려주기위해 사용)
-			 navbar navbar-default: 배경 색상과 테투리를 지정해 주는 역할
-			 navbar-fixed-top: 화면 상단에 고정 -->
-			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse"
-				role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<!-- 화면 사이즈가 크면 안보임, 모바일 정도로 작아지면 보임 -->
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target=".navbar-ex1-collapse">
-							<span class="sr-only">toggle navigation</span>
-							<!-- screen reader only  없어도 되는 코드임. 화면상 아무 일 없다-->
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="main.mvc"><img
-							src="https://edu.ssafy.com/asset/images/logo.png" height="50px"
-							width="70px"></a>
-					</div>
-					<!-- class="navbar-header" -->
-
-					<!-- navbar-collapse: 화면 사이즈가 작으면 안보임 -->
-					<div
-						class="collapse navbar-collapse navbar-left navbar-ex1-collapse">
-						<ul class="nav navbar-nav" id="menu">
-							<li><a href="#">공지 사항</a></li>
-							<li><a href="list.mvc">상품 정보</a></li>
-							<li><a href="#">베스트 섭취 정보</a></li>
-							<li><a href="intakeInfo.mvc">내 섭취 정보</a></li>
-							<li><a href="#">예상 섭취 정보</a></li>
-						</ul>
-					</div>
-					<div
-						class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
-						<ul class="nav navbar-nav" id="menuMember">
-							<% if(session.getAttribute("id") != null) {
-							String id = (String) session.getAttribute("id");
-							%>
-							<li><a href="logout.mvc">Logout</a></li>
-							<li><a href="memberInfo.mvc">회원정보</a></li>
-							<%}else{ %>
-							<li><a href="login.mvc">Login</a></li>
-							<li><a href="join.mvc">Join</a></li>
-							<%} %>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			<jsp:include page="header.jsp" flush="false"/>
 		</header>
-	</div>
-	<!-- 본문 -->
-	<div class="container">
-		<!-- 배너 -->
-		<div id="carousel-example-generic" class="carousel slide">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0"
-					class="active"></li>
-				<!-- <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
-			</ol>
-			<!-- Carousel items -->
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="img/banner_img.png" alt="First slide">
-				</div>
-				<!-- 
-                <div class="item">
-                   <img src="./slide2.jpg" alt="Second slide">               
-                </div>
-                <div class="item">
-                   <img src="./slide3.jpg" alt="Third slide">                 
-                </div>
-                 -->
-			</div>
-			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic"
-				data-slide="prev"> <span class="icon-prev"></span>
-			</a> <a class="right carousel-control" href="#carousel-example-generic"
-				data-slide="next"> <span class="icon-next"></span>
-			</a>
-		</div>
-
+		<!-- 본문 -->
 		<hr>
-		<div class="container list">
-			<table>
+		<ul class="nav nav-pills nav-fill">
+		  <li class="nav-item">
+		    <a class="nav-link active" href="intakeInfo.mvc">오늘 하루 섭취량</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="yesIntake.mvc">어제 섭취량</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link disabled" href="totalIntake.mvc">전체 섭취량</a>
+		  </li>
+		</ul>
+	
+		<div class="child-page-listing" style="white-space: nowrap; overflow-x: scroll;">
 				<%
-					ArrayList<Food> li = (ArrayList<Food>) request.getAttribute("list");
-					ArrayList<Integer> li2 = (ArrayList<Integer>) request.getAttribute("list2");
+					ArrayList<Food> li = (ArrayList<Food>) request.getAttribute("flist");
+					ArrayList<Integer> li2 = (ArrayList<Integer>) request.getAttribute("fclist");
 					for (int i = 0; i < li.size(); i++) {
 				%>
-				<tr>
-					<td><img src="img/<%=li.get(i).getName()%>.jpg" width="150px" height="150px"></td>
-					<td><a href="showDetail.mvc?code=<%=li.get(i).getCode()%>"><%=li.get(i).getName()%></a>
-						<p><%=li.get(i).getMaterials()%></p>
-						<span>섭취 갯수 : <%= li2.get(i) %></span>
-						<a href="intakeDelete.mvc?code=<%=li.get(i).getCode()%>">삭제</a>
-					</td>
-				</tr> 
-
+			 
+				<div class="card location-listing" style="margin: 10px 0; width: 18rem; display: inline-block;">
+					<img src="img/<%=li.get(i).getName()%>.png" class="card-img-top location-image" width="150px" height="150px">
+					<h5>
+					  <a href="showDetail.mvc?code=<%=li.get(i).getCode()%>"  class="card-title location-title title">
+					  <%=li.get(i).getName()%>
+					  </a>
+					  </h5>
+					<div class="card-body">
+					  <p class="card-text">섭취 갯수 : <%= li2.get(i) %></p>
+					  <a href="intakeDelete.mvc?code=<%=li.get(i).getCode()%>" class="btn btn-light">삭제</a>
+					</div>
+				</div>
 				<%
 					}
 				%>
-			</table>
 		</div>
-		<!-- end of container -->
-
-
-	</div>
-	<div class="container-fluid">
+		<% if(li.size() > 0) {%>
+		<div id="barchart_values" style="width: 900px; height: 300px; margin-bottom: 100px;"></div>
+		<%} %>
 		<footer>
-			<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse"
-				role="navigation">
-				<div class="container">
-					<div
-						class="collapse navbar-collapse navbar-left navbar-ex1-collapse">
-						<h4>findUs</h4>
-						<hr>
-						<ul class="footerLink">
-							<li><a href="#">(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어</a></li>
-							<li><a href="#">1544-9001</a></li>
-							<li><a href="#">admin@ssafy.com</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			<jsp:include page="footer.jsp" flush="false"/>
 		</footer>
+		<!-- end of container -->
 	</div>
-
-
-
 </body>
 </html>

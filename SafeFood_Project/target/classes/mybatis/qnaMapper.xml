@@ -21,7 +21,8 @@
 	
 	<!-- 목록 검색(최신순) -->
 	<select id="searchAll" resultType="qna">
-		SELECT *
+		SELECT *, (SELECT count(*) FROM reply WHERE qna.num = reply.qNo) AS reCnt,
+		(SELECT count(*) FROM reply WHERE qna.num = reply.qNo and reply.replyer = 'admin') AS reCheck
 		FROM qna
 		ORDER BY num DESC
 	</select>
@@ -53,4 +54,5 @@
 		FROM qna
 		WHERE num=#{num}
 	</select>
+
 </mapper>

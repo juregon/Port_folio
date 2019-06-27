@@ -17,8 +17,8 @@ public class QnaServiceImpl implements QnaService{
 		qRepo.add(qna);
 	}
 
-	public void delete(int num) {
-		qRepo.delete(num);
+	public int delete(int num) {
+		return qRepo.delete(num);
 	}
 
 	public void update(Qna qna) {
