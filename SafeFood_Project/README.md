@@ -13,12 +13,17 @@ Background
 
 Documents
 -------------
+
 > **Safe Food의 장점:**
 > - 바쁜 현대인들에게 좀 더 웰빙적인 식품섭취를 권장 해 줍니다.
 > - 섭취하려는 식품의 알러지 성분 검사를 쉽고 빠르게 할 수 있습니다.
 > - 어떤 식품을 섭취했을때 과영양 상태를 쉽고 빠르게 확인 할 수 있습니다.
 > - SNS로그인을 통해 페이지의 기능들을 따로 회원가입을 하지 않고 사용할 수 있습니다.
 > - 알림기능을 통해 공지사항이나 질문에 대한 답변, 댓글 등록 같은 피드백을 쉽고 빠르게 확인 할 수 있습니다.
+> **PPT 자료:**
+> - https://github.com/juregon/Port_folio/blob/master/SafeFood_Project/SafeFood_PPT%EC%9E%90%EB%A3%8C
+> **시연 영상:**
+> - https://www.youtube.com/watch?v=6aIPOxo8qRE
 
 Tech Stack
 -------------
@@ -35,9 +40,3 @@ What did i do
 > - SNS로그인(네이버 아이디로 로그인) 기능 구현
 > - 공지사항 및 QnA 게시판 기능 구현
 > - Vue-Router를 활용한 Routing 기능 구현
-
-Etc.
--------------
-Demonstration video : https://www.youtube.com/watch?v=6aIPOxo8qRE
-
-
