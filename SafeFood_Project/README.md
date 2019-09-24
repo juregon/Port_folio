@@ -12,7 +12,9 @@ Background
 
 Tech Stack
 -------------
-Spring Framework, HTML, CSS, JavaScript, JQuery, BootStrap, Tomcat, JSP, Vue.js, Vue-Router, MySQL, Mybatis, Github
+> - Backend : Spring Framework, MySQL, Mybatis, Github
+> - Frontend : Vue.js, Vue-Router, HTML, CSS, JavaScript, JQuery, BootStrap, JSP
+> - etc : Github, Tomcat
 
 Documents
 -------------
@@ -24,11 +26,11 @@ Documents
 
 What did i do
 -------------
-Backend 기술환경 구성 및 MVC 기반 기본 기능(Controller, DAO, DTO, Service) 구현
-공공 데이터를 불러와 데이터 파싱하는 부분 구현
-DB와 연동시키는 Mapper 클래스들 구현
-Frontend 기술환경 구성 및 기본 기능 구현
-SNS로그인(네이버 아이디로 로그인) 기능 구현
-공지사항 및 QnA 게시판 기능 구현
-Vue-Router를 활용한 Routing 기능 구현
+> - Backend 기술환경 구성 및 MVC 기반 기본 기능(Controller, DAO, DTO, Service) 구현
+> - 공공 데이터를 불러와 데이터 파싱하는 부분 구현
+> - DB와 연동시키는 Mapper 클래스들 구현
+> - Frontend 기술환경 구성 및 기본 기능 구현
+> - SNS로그인(네이버 아이디로 로그인) 기능 구현
+> - 공지사항 및 QnA 게시판 기능 구현
+> - Vue-Router를 활용한 Routing 기능 구현
 
