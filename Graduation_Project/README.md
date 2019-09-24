@@ -1,6 +1,7 @@
 
 분산처리 운영 시스템 RUNNER ! 
 ===================
+2017.02 - 2017.11
 
 Intro
 -------------
@@ -10,7 +11,7 @@ Background
 -------------
 빅데이터 분석에는 분산 컴퓨팅이 필수적입니다. 하지만 이러한 분산 컴퓨팅 시스템을 구축 및 운영하기는 매우 어렵습니다. 이러한 기술적 어려움을 해결하기 위해 분산 클러스터 구축 및 운영시스템을 개발하였습니다.
 
-Documents
+Description
 -------------
 
 > **RUNNER의 장점:**
@@ -19,14 +20,28 @@ Documents
 > - 작업을 실행하는 모든 컴퓨터에 환경설정이 되어 있지 않아도 Docker 컨테이너 기술을 사용하여 작업을 실행 할 수 있습니다.
 > - 사용자가 따로 경로 설정 및 기타 작업을 하지 않아도 웹 UI를 이용하여 작업에 필요한 데이터 및 파일 업로드를 손 쉽게 해 줄 수 있습니다.
 
+Tech Stack
+-------------
+> - Backend : Spring Framework, MongoDB
+> - Frontend : React.js, React-Router, Redux, Webpack, Babel, HTML, CSS, JavaScript
+> - etc : Tomcat, Naver Cloud, Docker
+
+What did i do
+-------------
+> - Backend 기술환경 구성 및 기본 기능 구현
+> - MongoDB 연동 및 각종(CRUD) 쿼리문 작성
+> - 멀티파티 업로드 및 다중 프로그레스바 동작 구현
+> - Docker Image Build 서버 동작 구현
+
+
 Usage
 -------------
-Front-end
+Frontend
 1. cd React_Project
 2. npm install
 3. npm start
 
-Back-end
+Backend
 
 - Server
 1. http://spring.io/tools/sts/all 접속 후 OS에 맞는 STS 설치 후 압축 해제
@@ -44,4 +59,3 @@ Back-end
 사용순서
 -------------
 ![flowchart](./flowchart.JPG)
-
