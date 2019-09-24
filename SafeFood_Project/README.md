@@ -36,8 +36,8 @@ What did i do
 > - 공지사항 및 QnA 게시판 기능 구현
 > - Vue-Router를 활용한 Routing 기능 구현
 
-Demonstration video
+Etc.
 -------------
-https://www.youtube.com/watch?v=6aIPOxo8qRE
+Demonstration video : https://www.youtube.com/watch?v=6aIPOxo8qRE
 
 
