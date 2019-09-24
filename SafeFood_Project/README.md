@@ -22,7 +22,7 @@ Description
 
 Tech Stack
 -------------
-> - Backend : Spring Framework, MySQL, Mybatis, Github
+> - Backend : Spring Framework, MySQL, Mybatis
 > - Frontend : Vue.js, Vue-Router, HTML, CSS, JavaScript, JQuery, BootStrap, JSP
 > - etc : Github, Tomcat
 
