@@ -36,7 +36,7 @@ What did i do
 
 Etc
 -------------
-PDF자료 : https://github.com/juregon/Port_folio/blob/master/SafeFood_Project/SafeFood_PPT%EC%9E%90%EB%A3%8C.ppt
+PDF자료 : https://github.com/juregon/Port_folio/blob/master/MaxMovie_Project/MaxMovie_PDF%EC%9E%90%EB%A3%8C.pdf
 
 
 시연 영상 : https://youtu.be/tXOrIlEjPCg
