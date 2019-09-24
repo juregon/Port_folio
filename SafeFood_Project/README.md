@@ -11,10 +11,8 @@ Background
 -------------
 웰빙을 트렌드로 저염식, 고지방, 저탄수화물 등의 식단을 추구하는 사회에서 바쁜 현대인들에게 바른 먹거리 습관을 제공하기 위해 웹앱을 구현하였습니다. 알러지, 칼로리, 영양소정보 등을 그래프를 이용해서 한눈에 확인 할 수 있을 뿐만 아니라 그 식품을 섭취했을 때 알러지 여부나 과영양 상태 등을 체크해주는 앱이 있다면 좀 더 건강한 삶을 누릴 수 있을것이라 생각했습니다.
 
-Documents
+Description
 -------------
-> PPT 자료 : https://github.com/juregon/Port_folio/blob/master/SafeFood_Project/SafeFood_PPT%EC%9E%90%EB%A3%8C
-> 시연 영상 : https://www.youtube.com/watch?v=6aIPOxo8qRE
 > **Safe Food의 장점:**
 > - 바쁜 현대인들에게 좀 더 웰빙적인 식품섭취를 권장 해 줍니다.
 > - 섭취하려는 식품의 알러지 성분 검사를 쉽고 빠르게 할 수 있습니다.
@@ -37,3 +35,10 @@ What did i do
 > - SNS로그인(네이버 아이디로 로그인) 기능 구현
 > - 공지사항 및 QnA 게시판 기능 구현
 > - Vue-Router를 활용한 Routing 기능 구현
+
+Etc
+-------------
+PPT 자료 : https://github.com/juregon/Port_folio/blob/master/SafeFood_Project/SafeFood_PPT%EC%9E%90%EB%A3%8C
+
+
+시연 영상 : https://www.youtube.com/watch?v=6aIPOxo8qRE
