@@ -38,7 +38,7 @@ What did i do
 
 Etc
 -------------
-PPT 자료 : https://github.com/juregon/Port_folio/blob/master/SafeFood_Project/SafeFood_PPT%EC%9E%90%EB%A3%8C
+PPT 자료 : https://github.com/juregon/Port_folio/blob/master/SafeFood_Project/SafeFood_PPT%EC%9E%90%EB%A3%8C.ppt
 
 
 시연 영상 : https://www.youtube.com/watch?v=6aIPOxo8qRE
